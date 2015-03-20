@@ -1,0 +1,153 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tituloEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="4"
+            android:gravity="left"
+            android:singleLine="true"
+            android:text="Titulo"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow32"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" >
+
+        <TextView
+            android:id="@+id/descripcionEvento"
+            android:layout_width="wrap_content"
+            android:layout_span="2"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="Descripcion"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/edificio" />
+
+        <TextView
+            android:id="@+id/lugarEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="Lugar"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/calendario" />
+
+        <TextView
+            android:id="@+id/fechaEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="fecha"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/mensaje" />
+
+        <TextView
+            android:id="@+id/emailEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="e-mail"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_web" />
+
+        <TextView
+            android:id="@+id/sitioWEBEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="Sitio Web"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/llamar" />
+
+        <TextView
+            android:id="@+id/telefonoEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="fill_horizontal"
+            android:singleLine="true"
+            android:text="Telefono"
+            android:textColor="@android:color/white" />
+    </TableRow>
+
+</TableLayout>

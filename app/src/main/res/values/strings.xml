@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iUN</string>
+    <string name="title_activity_directorio">Directorio</string>
+    <string name="title_activity_menu_web">Servicios en linea</string>
+    <string name="title_activity_web"></string>
+    <string name="title_activity_main">iUN</string>
+    <string name="menu_volver">Volver</string>
+    <string name="menu_URL">URL</string>
+    <string name="menu_adelante">Adelante</string>
+    <string name="menu_Recargar">Recargar</string>
+    <string name="title_activity_mapa"></string>
+    <string name="lugar"></string>
+    <string name="tipo_mapa">Cambiar Tipo</string>
+    <string name="title_activity_eventos">Eventos</string>
+    <string name="buscar">Buscar</string>
+    <string name="trafico">Trafico</string>
+    <string name="otros_sitios">Sitios Cercanos</string>
+    <string name="textSwitchON">Departamentos</string>
+    <string name="textSwitchOFF">Direccion</string>
+    <string name="menu_mapa">Ver en el mapa</string>
+    <string name="menu_irweb">Ir al Sitio</string>
+    <string name="title_dato_list">datos</string>
+    <string name="title_dato_detail">Directorio</string>
+    <string name="title_datos_list">datos</string>
+    <string name="title_datos_detail">Informacion</string>
+    <string name="title_activity_radio">Radio UN</string>
+    <string name="title_activity_servicios">Servicios en linea</string>
+    <string name="title_activity_colegios">Instituciones</string>
+    <string name="main_menu_item1">Servicios</string>
+    <string name="main_menu_item2">Admisiones</string>
+    <string name="main_menu_item3">Sedes</string>
+    <string name="main_menu_item4">Eventos</string>
+    <string name="title_activity_license">Licencia</string>
+    <string name="drawer_open">abierto</string>
+    <string name="drawer_close">cerrado</string>
+    <string name="title_activity_instituciones">Instituciones</string>
+    <string name="title_activity_activity_details">Información</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
