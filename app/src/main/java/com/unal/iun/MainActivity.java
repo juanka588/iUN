@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -27,8 +26,8 @@ import com.unal.iun.LN.Util;
 
 public class MainActivity extends Activity {
     public static String dataBaseName = "datastore.sqlite", tbName = "BaseM";
-    public Timer tim;
     public static String sede = "Bogotá";
+    public Timer tim;
     ImageView im;
     int screenWidth;
     int screenHeight;
@@ -36,7 +35,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
             sede = savedInstanceState.getString("sede");
@@ -47,9 +46,9 @@ public class MainActivity extends Activity {
         screenHeight = display.getHeight();
         Typeface fuente = Typeface
                 .createFromAsset(getAssets(), "Helvetica.ttf");
-        int ids[] = { R.id.SOnlineButton, R.id.admisionesButton,
+        int ids[] = {R.id.SOnlineButton, R.id.admisionesButton,
                 R.id.sedesButton, R.id.textLatitud, R.id.textLongitud,
-                R.id.textLugar, R.id.eventosButton };
+                R.id.textLugar, R.id.eventosButton};
         for (int i = 0; i < ids.length; i++) {
             TextView prueba = (TextView) findViewById(ids[i]);
             prueba.setTypeface(fuente);
@@ -138,7 +137,7 @@ public class MainActivity extends Activity {
     }
 
     public void admisiones(View v) {
-        final String[] items = { "Instituciones", "Información" };
+        final String[] items = {"Instituciones", "Información"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final Activity act = this;
         builder.setTitle("Admisiones").setItems(items,
@@ -194,6 +193,7 @@ public class MainActivity extends Activity {
         }
 
     }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("sede", sede);

@@ -18,8 +18,8 @@ import android.provider.CalendarContract;
 import android.util.Log;
 
 import com.unal.iun.MainActivity;
-import com.unal.iun.WebActivity;
 import com.unal.iun.R;
+import com.unal.iun.WebActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -159,8 +159,8 @@ public class Util {
             }
         });
         builder.create().show();
-		/*
-		 * AlertDialog.Builder dialog = new AlertDialog.Builder(
+        /*
+         * AlertDialog.Builder dialog = new AlertDialog.Builder(
 		 * getApplicationContext()); LayoutInflater inflater = (LayoutInflater)
 		 * getApplicationContext
 		 * ().getSystemService(Context.LAYOUT_INFLATER_SERVICE); LayoutInflater
@@ -220,7 +220,7 @@ public class Util {
 
     public static void enviar(Activity act, String to, String cc,
                               String asunto, String mensaje) {
-        enviar(act, new String[] { to }, new String[] { cc }, asunto, mensaje);
+        enviar(act, new String[]{to}, new String[]{cc}, asunto, mensaje);
     }
 
     public static void irA(String url, Activity act) {
@@ -274,6 +274,7 @@ public class Util {
         }
         return salida;
     }
+
     public static void addShortcut(Activity act) {
         // Creamos el Intent y apuntamos a nuestra classe principal
         // al hacer click al acceso directo

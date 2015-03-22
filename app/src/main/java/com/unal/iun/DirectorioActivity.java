@@ -1,5 +1,6 @@
 package com.unal.iun;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -39,7 +38,7 @@ import com.unal.iun.LN.Util;
 import java.util.ArrayList;
 
 
-public class DirectorioActivity extends ActionBarActivity {
+public class DirectorioActivity extends Activity {
     protected String seleccion = "";
     protected String condicion = "";
     protected String tableName = "BaseM";
@@ -58,17 +57,17 @@ public class DirectorioActivity extends ActionBarActivity {
     protected double lat[];
     protected double lon[];
     protected String titulos[], descripciones[];
-    protected String columnas[] = { "codigo", "NIVEL_ADMINISTRATIVO", "SEDE",
+    protected String columnas[] = {"codigo", "NIVEL_ADMINISTRATIVO", "SEDE",
             "DEPENDENCIAS", "DIVISIONES", "DEPARTAMENTOS", "SECCIONES",
             "CORREO_ELECTRONICO", "EXTENSION", "FAX", "DIRECTO",
-            "LUGAR_GEOGRAFICO", "EDIFICIO", "PISO_OFICINA", "CLASIFICACION" };
+            "LUGAR_GEOGRAFICO", "EDIFICIO", "PISO_OFICINA", "CLASIFICACION"};
     protected TableLayout tl;
     protected BitmapDrawable background;
     protected boolean buscando = false;
     protected ActionBar barra;
-    private DrawerLayout cajon;
     protected ActionBarDrawerToggle toggle;
     protected Activity act;
+    private DrawerLayout cajon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,11 +195,11 @@ public class DirectorioActivity extends ActionBarActivity {
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
         act = this;
-        //barra =this.getActionBar();
-        //barra.setBackgroundDrawable(background2);
+        barra = this.getActionBar();
+        barra.setBackgroundDrawable(background2);
         String[] valores = getResources().getStringArray(R.array.optionsArray);
-        String[] files = new String[] { "edificio.jpg", "enlacep.jpg",
-                "mapap.jpg" };
+        String[] files = new String[]{"edificio.jpg", "enlacep.jpg",
+                "mapap.jpg"};
         cajon = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView opciones = (ListView) findViewById(R.id.left_drawer);
         MiAdaptador adapter = new MiAdaptador(act, valores, files, 2);
@@ -247,8 +246,8 @@ public class DirectorioActivity extends ActionBarActivity {
         toggle = new ActionBarDrawerToggle(act, cajon,
                 android.R.drawable.ic_menu_sort_by_size, R.string.drawer_open,
                 R.string.drawer_close);
-        //barra.setDisplayHomeAsUpEnabled(true);
-        //barra.setHomeButtonEnabled(true);
+        barra.setDisplayHomeAsUpEnabled(true);
+        barra.setHomeButtonEnabled(true);
     }
 
     public void home() {
@@ -339,8 +338,8 @@ public class DirectorioActivity extends ActionBarActivity {
                 if (query.length() > 2) {
                     recargar(query);
                 } else {
-					/*
-					 * current = 2; recargar("select  distinct " + columnas[2] +
+                    /*
+                     * current = 2; recargar("select  distinct " + columnas[2] +
 					 * ", " + columnas[2] + " from " + tableName +
 					 * " natural join edificios order by (orden)", false,
 					 * false);
@@ -733,7 +732,7 @@ public class DirectorioActivity extends ActionBarActivity {
             for (int i = 0; i < mat.length; i++) {
                 String arr[];
                 if (mat[i].length == 1) {
-                    arr = new String[] { mat[i][0] };
+                    arr = new String[]{mat[i][0]};
                 } else {
                     arr = new String[mat[i].length - 1];
                     for (int j = 0; j < mat[i].length - 1; j++) {
@@ -821,7 +820,7 @@ public class DirectorioActivity extends ActionBarActivity {
             db.close();
             lv.setAdapter(null);
             MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                    Util.getcolumn(mat, 1),1);
+                    Util.getcolumn(mat, 1), 1);
             adapter.fuente = Typeface.createFromAsset(getAssets(),
                     "Helvetica.ttf");
             lv.setAdapter(adapter);

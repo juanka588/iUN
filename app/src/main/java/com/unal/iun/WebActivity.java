@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,7 @@ import android.webkit.WebViewClient;
 
 import com.unal.iun.LN.Util;
 
-public class WebActivity extends ActionBarActivity {
+public class WebActivity extends Activity {
 
     String URL = "";
     WebView browser;

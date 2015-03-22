@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -48,10 +47,10 @@ public class InstitucionesActivity extends Activity {
         BitmapDrawable background2 = new BitmapDrawable(
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
-       // barra=this.getActionBar();
-        //barra.setBackgroundDrawable(background2);
-        //barra.setDisplayHomeAsUpEnabled(true);
-        //barra.setHomeButtonEnabled(true);
+        barra = this.getActionBar();
+        barra.setBackgroundDrawable(background2);
+        barra.setDisplayHomeAsUpEnabled(true);
+        barra.setHomeButtonEnabled(true);
         lv = (ExpandableListView) findViewById(R.id.listViewInstituciones);
         Space sp = (Space) findViewById(R.id.SpaceColegios);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))

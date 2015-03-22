@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +24,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -38,12 +37,13 @@ import java.util.ArrayList;
 
 public class MapaActivity extends FragmentActivity {
 
+    static int tipo = 1, count = 0, zoom = 19;
+    static String cond = "";
     GoogleMap mapa;
     double lat[], lon[];
     ArrayList<LatLng> marcadores = new ArrayList<LatLng>();
     String titulos[];
     String descripciones[];
-    static int tipo = 1, count = 0, zoom = 19;
     boolean traffic = true;
     String urlRutas = "http://maps.googleapis.com/maps/api/directions/json?origin=4.6382023,-74.0840434&destination=6.26261,-75.57775&sensor=true";
     String urlClima = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=4.53&lon=-74.07&units=metric&mode=JSON&cnt=7";
@@ -52,7 +52,6 @@ public class MapaActivity extends FragmentActivity {
     String tableName = "BaseM";
     int nivel = 1;
     MenuItem item;
-    static String cond = "";
     int idFondoTras = R.drawable.ciudad_universitaria;
     private ActionBar bar;
 
@@ -68,6 +67,7 @@ public class MapaActivity extends FragmentActivity {
         super.onResume();
         setUpMapIfNeeded();
     }
+
     private void setUpMapIfNeeded() {
         int status = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getBaseContext());
@@ -82,14 +82,14 @@ public class MapaActivity extends FragmentActivity {
         }
         try {
             deta = new Intent(this, DetailsActivity.class);
+            bar = this.getActionBar();
             BitmapDrawable background2 = new BitmapDrawable(
                     BitmapFactory.decodeResource(getResources(),
                             R.drawable.fondoinf));
-           // bar = this.getActionBar();
-           // bar.setBackgroundDrawable(background2);
-            //bar.setDisplayHomeAsUpEnabled(true);
-            //bar.setHomeButtonEnabled(true);
-            //bar.setTitle("Cobertura Nacional");
+            bar.setBackgroundDrawable(background2);
+            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setHomeButtonEnabled(true);
+            bar.setTitle("Cobertura Nacional");
             Bundle b = getIntent().getExtras();
             lat = b.getDoubleArray("lat");
             lon = b.getDoubleArray("lon");
@@ -104,7 +104,7 @@ public class MapaActivity extends FragmentActivity {
             tableName = MainActivity.tbName;
             MapsInitializer.initialize(MapaActivity.this);
         } catch (Exception e) {
-            Log.e("error",e.toString());
+            Log.e("error", e.toString());
         }
     }
 
@@ -134,8 +134,8 @@ public class MapaActivity extends FragmentActivity {
                             + lon));
             startActivity(navigation);
         }
-		/*
-		 * Intent deta = new Intent(this, WebActivity.class); double lat2 =
+        /*
+         * Intent deta = new Intent(this, WebActivity.class); double lat2 =
 		 * 4.637275;// (float) MiLocationListener.lat; double lon2 = -74.082776;
 		 * // (float) MiLocationListener.longi; if (lat2 != 0 && lon2 != 0) {
 		 * lat2 = (double) MiLocationListener.lat; lon2 = (double)
@@ -351,7 +351,7 @@ public class MapaActivity extends FragmentActivity {
             @Override
             public void onInfoWindowClick(final Marker arg0) {
 
-                final String[] items = { "¿Cómo llegar?", "Información" };
+                final String[] items = {"¿Cómo llegar?", "Información"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         MapaActivity.this);
 
@@ -435,8 +435,8 @@ public class MapaActivity extends FragmentActivity {
         mapa.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             public boolean onMarkerClick(Marker marker) {
                 int len = marker.getTitle().length();
-                //bar.setTitle(marker.getTitle()
-                //        .substring(0, len > 20 ? 20 : len));
+                bar.setTitle(marker.getTitle()
+                        .substring(0, len > 20 ? 20 : len));
                 return false;
             }
         });
@@ -458,7 +458,7 @@ public class MapaActivity extends FragmentActivity {
             for (int i = 0; i < mat.length; i++) {
                 String arr[];
                 if (mat[i].length == 1) {
-                    arr = new String[] { mat[i][0] };
+                    arr = new String[]{mat[i][0]};
                 } else {
                     arr = new String[mat[i].length - 1];
                     for (int j = 0; j < mat[i].length - 1; j++) {

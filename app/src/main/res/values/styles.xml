@@ -8,12 +8,11 @@
     </style>
 
     <!-- ActionBar styles -->
-    <style name="MyActionBar"
-        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:background">@drawable/fondoinf</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:logo">@drawable/logo</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
+
     <style name="TextStyle" parent="@android:style/Widget.Holo.Light.TextView">
         <item name="android:textColor">@android:color/white</item>
     </style>

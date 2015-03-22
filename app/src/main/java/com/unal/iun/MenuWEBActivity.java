@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -40,6 +39,7 @@ public class MenuWEBActivity extends Activity {
     String titulos[], descripciones[];
     boolean colegios = false;
     private ActionBar barra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,12 @@ public class MenuWEBActivity extends Activity {
                 .getDefaultDisplay();
         int screenWidth, screenHeight, dpi;
         float density;
+        BitmapDrawable background2 = new BitmapDrawable(
+                BitmapFactory.decodeResource(getResources(),
+                        R.drawable.fondoinf));
+        this.getActionBar().setBackgroundDrawable(background2);
+        this.getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
         DisplayMetrics metrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenHeight = metrics.heightPixels;
@@ -71,7 +77,7 @@ public class MenuWEBActivity extends Activity {
         sc.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 (int) (screenHeight * (factor))));
-        int ids[] = new int[] { R.id.spaceMenuWeb01, R.id.spaceMenuWeb02,
+        int ids[] = new int[]{R.id.spaceMenuWeb01, R.id.spaceMenuWeb02,
                 R.id.spaceMenuWeb03, R.id.spaceMenuWeb10, R.id.spaceMenuWeb11,
                 R.id.spaceMenuWeb12, R.id.spaceMenuWeb20, R.id.spaceMenuWeb21,
                 R.id.spaceMenuWeb22, R.id.spaceMenuWeb30, R.id.spaceMenuWeb31,
@@ -90,7 +96,7 @@ public class MenuWEBActivity extends Activity {
                 R.id.spaceMenuWeb182, R.id.spaceMenuWeb200,
                 R.id.spaceMenuWeb201, R.id.spaceMenuWeb202,
                 R.id.spaceMenuWeb210, R.id.spaceMenuWeb211,
-                R.id.spaceMenuWeb212 };
+                R.id.spaceMenuWeb212};
         Log.e("densidadDPI", density + "");
         for (int i = 0; i < ids.length; i++) {
             Space im = (Space) findViewById(ids[i]);
@@ -100,14 +106,14 @@ public class MenuWEBActivity extends Activity {
                     / (10000.0 * density)));
             im.setLayoutParams(iv_params_b);
         }
-        int ids2[] = new int[] { R.id.textTituloMenuWeb, R.id.textMP,
+        int ids2[] = new int[]{R.id.textTituloMenuWeb, R.id.textMP,
                 R.id.textUNradio, R.id.textPrisma, R.id.textLeon,
                 R.id.textLibreria, R.id.textComunidad, R.id.textCorreo,
                 R.id.textComedor, R.id.textMedico, R.id.textTituloMenuWeb,
                 R.id.textUNIsalud, R.id.textServiciosACOM, R.id.textSIA,
                 R.id.textSINAB, R.id.textHermes, R.id.textDRE, R.id.textSARA,
-                R.id.textWD,R.id.textIPARM,R.id.textFODUN,R.id.textCooperativa,
-                R.id.textLaboratorios,R.id.textComsion};
+                R.id.textWD, R.id.textIPARM, R.id.textFODUN, R.id.textCooperativa,
+                R.id.textLaboratorios, R.id.textComsion};
         Typeface fuente = Typeface
                 .createFromAsset(getAssets(), "Helvetica.ttf");
         for (int i = 0; i < ids2.length; i++) {
@@ -196,8 +202,8 @@ public class MenuWEBActivity extends Activity {
                 cad = "http://livestream.com/prisma_tv";
                 break;
             case R.id.imageUNradio:
-			/*
-			 * cad = "http://www.unradio.unal.edu.co/nc/en-linea/bogota.html";
+            /*
+             * cad = "http://www.unradio.unal.edu.co/nc/en-linea/bogota.html";
 			 * break;
 			 */
 
@@ -264,7 +270,7 @@ public class MenuWEBActivity extends Activity {
     }
 
     private void preguntar(final Activity act) {
-        final String[] items = { "Instituciones", "Información" };
+        final String[] items = {"Instituciones", "Información"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Admisiones").setItems(items,

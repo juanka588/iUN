@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -29,11 +27,11 @@ public class RadioActivity extends Activity implements
         MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
     public static MediaPlayer mediaPlayer;
+    public static String path = "http://m.youtube.com/add_favorite?v=wIn-wIgWPXM";
     private VideoView surfaceView;
     private SurfaceHolder surfaceHolder;
     private Button bPlay, bPause;
     private boolean pause;
-    public static String path = "http://m.youtube.com/add_favorite?v=wIn-wIgWPXM";
     private int savePos = 0;
     private Spinner spin;
 
@@ -43,9 +41,9 @@ public class RadioActivity extends Activity implements
         BitmapDrawable background2 = new BitmapDrawable(
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
-        //this.getActionBar().setBackgroundDrawable(background2);
-        //this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        this.getActionBar().setBackgroundDrawable(background2);
+        this.getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
         spin = (Spinner) findViewById(R.id.spinnerSelector);
         List list = new ArrayList();
         list.add("UN Bogotá");
@@ -56,12 +54,12 @@ public class RadioActivity extends Activity implements
                 android.R.layout.simple_spinner_item, list);
         dataAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        TextView text=(TextView)findViewById(R.id.textRadioTEMP);
+        TextView text = (TextView) findViewById(R.id.textRadioTEMP);
         spin.setAdapter(dataAdapter);
         bPlay = (Button) findViewById(R.id.play);
         bPlay.setEnabled(false);
         bPause = (Button) findViewById(R.id.pause);
-        spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause,text));
+        spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause, text));
         try {
             // mediaPlayer = new MediaPlayer();
             // mediaPlayer.setDataSource(path);
@@ -109,8 +107,8 @@ public class RadioActivity extends Activity implements
             RadioActivity.mediaPlayer.prepare();
             RadioActivity.mediaPlayer.seekTo(savePos);
             RadioActivity.mediaPlayer.start();
-			/*
-			 * mediaPlayer.prepareAsync();// Para streaming
+            /*
+             * mediaPlayer.prepareAsync();// Para streaming
 			 * mediaPlayer.setOnBufferingUpdateListener(this);
 			 * mediaPlayer.setOnCompletionListener(this);
 			 * mediaPlayer.setOnPreparedListener(this);
@@ -165,11 +163,11 @@ public class RadioActivity extends Activity implements
     @Override
     public void onPause() {
         super.onPause();
-        try{
+        try {
             if (RadioActivity.mediaPlayer != null) {
                 RadioActivity.mediaPlayer.pause();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             log(e.toString());
         }
     }

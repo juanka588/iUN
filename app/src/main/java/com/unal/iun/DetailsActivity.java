@@ -1,18 +1,17 @@
 package com.unal.iun;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
@@ -26,7 +25,7 @@ import com.unal.iun.LN.MiAdaptadorExpandibleDetalles;
 import java.util.ArrayList;
 
 
-public class DetailsActivity extends ActionBarActivity {
+public class DetailsActivity extends Activity {
 
     public static double lat[];
     public static double lon[];
@@ -40,12 +39,8 @@ public class DetailsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_details);
-        BitmapDrawable background2 = new BitmapDrawable(
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
-        //this.getActionBar().setBackgroundDrawable(background2);
-        //this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        this.getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
         Bundle b = getIntent().getExtras();
         tl = (LinearLayout) findViewById(R.id.linearLayoutDetalles);
         ExpandableListView sc = (ExpandableListView) findViewById(R.id.expandableListDestails);
@@ -75,8 +70,8 @@ public class DetailsActivity extends ActionBarActivity {
         try {
             data = (ArrayList<String[]>) b.get("datos");
             TextView tx = (TextView) findViewById(R.id.tituloDetallesDtos);
-            String title=data.get(0)[0];
-            tx.setText(title==null?"":title.trim());
+            String title = data.get(0)[0];
+            tx.setText(title == null ? "" : title.trim());
             int id = R.drawable.ciudad_universitaria;
             if (b.getInt("fondo") != 0) {
                 id = b.getInt("fondo");
@@ -90,8 +85,8 @@ public class DetailsActivity extends ActionBarActivity {
             ArrayList<String> parentItems = new ArrayList<String>();
             ArrayList<Object> childItems = new ArrayList<Object>();
             for (int i = 0; i < data.size(); i++) {
-                String titlei=data.get(i)[1];
-                parentItems.add(titlei==null?"":titlei.trim());
+                String titlei = data.get(i)[1];
+                parentItems.add(titlei == null ? "" : titlei.trim());
             }
             lat = new double[data.size()];
             lon = new double[data.size()];
@@ -110,7 +105,7 @@ public class DetailsActivity extends ActionBarActivity {
                             lat[k] = Double.parseDouble(datos[8].split(" ")[0]);
                             lon[k] = Double.parseDouble(datos[8].split(" ")[1]);
                         } else {
-                            if (datos[i].trim().length()>4) {
+                            if (datos[i].trim().length() > 4) {
                                 child.add(datos[i]);
                             }
                         }
@@ -124,8 +119,9 @@ public class DetailsActivity extends ActionBarActivity {
             adapter.setInflater(
                     (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
                     this);
-            adapter.fuente= Typeface.createFromAsset(getAssets(),
-                    "Helvetica.ttf");;
+            adapter.fuente = Typeface.createFromAsset(getAssets(),
+                    "Helvetica.ttf");
+            ;
             sc.setAdapter(adapter);
             sc.expandGroup(0);
             // sc.setOnChildClickListener(this);

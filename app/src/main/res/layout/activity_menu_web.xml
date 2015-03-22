@@ -6,7 +6,7 @@
     android:background="@drawable/fondo"
     android:orientation="vertical"
     tools:context="com.unal.iun.MenuWEBActivity"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame">
 
     <Space
         android:id="@+id/spaceMenuWebGeneral"
@@ -17,19 +17,19 @@
     <ScrollView
         android:id="@+id/scrollViewMenuWeb"
         android:layout_width="match_parent"
-        android:layout_height="300px" >
+        android:layout_height="300px">
 
         <TableLayout
             android:id="@+id/TableLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TableRow
                 android:id="@+id/tableRow9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <TextView
                     android:id="@+id/textTituloMenuWeb"
@@ -47,7 +47,7 @@
                 android:id="@+id/tableRow10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb01"
@@ -102,7 +102,7 @@
                 android:id="@+id/tableRow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb10"
@@ -121,8 +121,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Pagina principal"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Pagina principal" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb11"
@@ -141,8 +140,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Leon de Greiff"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Leon de Greiff" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb12"
@@ -161,15 +159,14 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Libreria"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Libreria" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb20"
@@ -229,7 +226,7 @@
                 android:id="@+id/tableRow4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb30"
@@ -248,8 +245,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="UN Radio"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="UN Radio" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb31"
@@ -268,8 +264,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="UN periodico"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="UN periodico" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb32"
@@ -288,15 +283,14 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Prisma TV"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Prisma TV" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb200"
@@ -351,7 +345,7 @@
                 android:id="@+id/tableRow22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb210"
@@ -370,8 +364,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Sistema de Patrimonio y Museos"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Sistema de Patrimonio y Museos" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb211"
@@ -390,8 +383,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Admisiones"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Admisiones" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb212"
@@ -410,15 +402,14 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Direccion nacional de laboratorios"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Direccion nacional de laboratorios" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <TextView
                     android:id="@+id/textComunidad"
@@ -436,7 +427,7 @@
                 android:id="@+id/tableRow7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb60"
@@ -491,7 +482,7 @@
                 android:id="@+id/tableRow8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb70"
@@ -510,8 +501,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Correo Institucional"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Correo Institucional" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb71"
@@ -530,8 +520,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Comedores"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Comedores" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb72"
@@ -550,15 +539,14 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Servicio medico estudiantil"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Servicio medico estudiantil" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb150"
@@ -613,7 +601,7 @@
                 android:id="@+id/tableRow18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb160"
@@ -632,8 +620,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Unisalud"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Unisalud" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb161"
@@ -652,8 +639,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Comite de comsion de riesgo"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Comite de comsion de riesgo" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb162"
@@ -672,15 +658,14 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Colegio IPARM"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Colegio IPARM" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb170"
@@ -729,7 +714,7 @@
                 android:id="@+id/tableRow6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb180"
@@ -748,8 +733,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Fodun"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Fodun" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb181"
@@ -768,8 +752,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Cooperativa de profesores"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Cooperativa de profesores" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb182"
@@ -781,7 +764,7 @@
             <TableRow
                 android:id="@+id/tableRow11"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textServiciosACOM"
@@ -798,7 +781,7 @@
             <TableRow
                 android:id="@+id/tableRow12"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <Space
                     android:id="@+id/spaceMenuWeb110"
@@ -854,7 +837,7 @@
                 android:id="@+id/tableRow13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left" >
+                android:gravity="left">
 
                 <Space
                     android:id="@+id/spaceMenuWeb120"
@@ -873,8 +856,7 @@
                     android:maxLines="3"
                     android:maxWidth="3dp"
                     android:singleLine="false"
-                    android:text="Sistema de informacion academica"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Sistema de informacion academica" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb121"
@@ -893,8 +875,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Librerias UN"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Librerias UN" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb122"
@@ -913,14 +894,13 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="HERMES"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="HERMES" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow15"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <Space
                     android:id="@+id/spaceMenuWeb130"
@@ -974,7 +954,7 @@
             <TableRow
                 android:id="@+id/tableRow16"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <Space
                     android:id="@+id/spaceMenuWeb140"
@@ -993,8 +973,7 @@
                     android:maxLines="4"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Dirección de Relaciones Exteriores"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Dirección de Relaciones Exteriores" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb141"
@@ -1013,8 +992,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="SARA"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="SARA" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb142"
@@ -1033,8 +1011,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="Web Docentes"
-                    android:textAppearance="?android:attr/textAppearanceSmallPopupMenu" />
+                    android:text="Web Docentes" />
             </TableRow>
         </TableLayout>
     </ScrollView>
