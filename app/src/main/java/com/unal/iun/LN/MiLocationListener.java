@@ -74,7 +74,7 @@ public class MiLocationListener implements LocationListener {
         String[][] mat = Util.imprimirLista(c);
         Log.e("sede", query);
         Toast.makeText(appcont, Util.getcolumn(mat, 0)[0].trim(),
-                1).show();
+                Toast.LENGTH_SHORT).show();
         String a = Util.getcolumn(mat, 0)[0].trim();
         textSede.setText(a);
         MainActivity.sede = a;
@@ -87,7 +87,7 @@ public class MiLocationListener implements LocationListener {
     public void onProviderDisabled(String provider) {
         if (!provider.contains("gps")) {
             Toast.makeText(appcont,
-                    "Activa el Wi-Fi para Acceder a tu ubicacion", 1).show();
+                    "Activa el Wi-Fi para Acceder a tu ubicacion", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -95,7 +95,7 @@ public class MiLocationListener implements LocationListener {
     @Override
     public void onProviderEnabled(String provider) {
         if (!provider.contains("gps")) {
-            Toast.makeText(appcont, "Activado el " + provider, 1).show();
+            Toast.makeText(appcont, "Activado el " + provider, Toast.LENGTH_SHORT).show();
         }
 
     }

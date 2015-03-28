@@ -124,7 +124,7 @@ public class MiAdaptadorExpandibleInstituciones extends
             db.close();
             if (mat.length == 0) {
                 Toast.makeText(activity.getApplicationContext(),
-                        "No hemos podido ubicar los edificios", 1).show();
+                        activity.getText(R.string.data_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
             lat = Util.toDouble(Util.getcolumn(mat, 2));
@@ -141,7 +141,7 @@ public class MiAdaptadorExpandibleInstituciones extends
             activity.startActivity(mapa);
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } catch (Exception ex) {
-            Toast.makeText(activity.getApplicationContext(), ex.toString(), 1)
+            Toast.makeText(activity.getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT)
                     .show();
         }
     }

@@ -3,7 +3,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
     android:orientation="vertical"
     tools:context="com.unal.iun.MenuWEBActivity"
     tools:ignore="MergeRootFrame">
@@ -578,7 +577,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/selectorfondocir"
                     android:onClick="irA"
-                    android:src="@drawable/un" />
+                    android:src="@drawable/prevencion" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb152"
@@ -992,7 +991,7 @@
                     android:maxLines="3"
                     android:maxWidth="5dp"
                     android:singleLine="false"
-                    android:text="SARA" />
+                    android:text="Talento Humano" />
 
                 <Space
                     android:id="@+id/spaceMenuWeb142"

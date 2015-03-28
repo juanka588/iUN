@@ -140,16 +140,16 @@ public class Util {
     }
 
     public static void notificarRed(final Activity act) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(act);
-        builder.setMessage("No tiene una conexion a la red")
-                .setTitle("Información UNAL")
-                .setPositiveButton("Aceptar",
+        AlertDialog.Builder builder = new AlertDialog.Builder(act, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        builder.setMessage(act.getText(R.string.network_exception))
+                .setTitle(act.getText(R.string.expanded_app_name))
+                .setPositiveButton(act.getText(R.string.acept_dialog),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
                         });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(act.getText(R.string.cancel_dialog), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (act.getClass() != MainActivity.class) {
@@ -192,8 +192,8 @@ public class Util {
                 cal.getTimeInMillis() + 60 * 60 * 1000);
 
         intent.putExtra(CalendarContract.Events.ALL_DAY, false);
-		/*
-		 * case DAILY: event.put("rrule", "FREQ=DAILY"); break; case MONTHLY:
+        /*
+         * case DAILY: event.put("rrule", "FREQ=DAILY"); break; case MONTHLY:
 		 * event.put("rrule", "FREQ=MONTHLY"); break; case WEEKLY:
 		 * event.put("rrule", "FREQ=WEEKLY"); break; case FORTNIGHTLY:
 		 * event.put("rrule", "FREQ=YEARLY"); //CODE for Fortnight to be

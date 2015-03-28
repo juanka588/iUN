@@ -60,7 +60,7 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
             } catch (IOException e) {
                 throw new Error("Error copying database");
             }
-            Toast.makeText(context, "La Base de datos se ha actualizado",
+            Toast.makeText(context, context.getText(R.string.database),
                     Toast.LENGTH_LONG).show();
         }
     }

@@ -48,7 +48,8 @@
 
         <activity
             android:name=".MapaActivity"
-            android:label="@string/title_activity_mapa">
+            android:label="@string/title_activity_mapa"
+            android:logo="@drawable/home2">
             >
         </activity>
         <activity
@@ -63,31 +64,33 @@
         </activity>
         <activity
             android:name=".WebActivity"
-            android:label="@string/title_activity_web" />
+            android:label="@string/title_activity_web"
+            android:logo="@drawable/logo" />
         <activity
             android:name=".InstitucionesActivity"
             android:label="@string/title_activity_instituciones"
-            android:logo="@drawable/enlacep" />
+            android:logo="@drawable/home2" />
         <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_activity_details"
-            android:logo="@drawable/enlacep" />
+            android:logo="@drawable/home2" />
         <activity
             android:name=".RadioActivity"
             android:label="@string/title_activity_radio"
-            android:logo="@drawable/enlacep" />
+            android:logo="@drawable/home2" />
         <activity
             android:name=".MenuWEBActivity"
             android:label="@string/title_activity_menu_web"
-            android:logo="@drawable/enlacep" />
+            android:logo="@drawable/home2" />
         <activity
             android:name=".DirectorioActivity"
             android:label="@string/title_activity_directorio"
-            android:logo="@drawable/logo" />
+            android:logo="@drawable/logo"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".License"
             android:label="@string/title_activity_license"
-            android:logo="@drawable/enlacep"></activity>
+            android:logo="@drawable/home2"></activity>
     </application>
 
 </manifest>

@@ -161,7 +161,6 @@ public class MenuWEBActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_menu_web, menu);
         MenuItem menuItem = menu.getItem(0);
         sv = (SearchView) menuItem.getActionView();
-        sv.setQueryHint("Inicia una Busqueda...");
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -178,7 +177,6 @@ public class MenuWEBActivity extends Activity {
                 return false;
             }
         });
-        sv.setSoundEffectsEnabled(true);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -270,10 +268,10 @@ public class MenuWEBActivity extends Activity {
     }
 
     private void preguntar(final Activity act) {
-        final String[] items = {"Instituciones", "Información"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
-        builder.setTitle("Admisiones").setItems(items,
+        builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         if (item == 0) {
@@ -286,7 +284,7 @@ public class MenuWEBActivity extends Activity {
                                         R.anim.fade_out);
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Disponible proximamente", Toast.LENGTH_SHORT).show();
+                                        act.getString(R.string.disponible), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             String cad = "http://admisiones.unal.edu.co/";
@@ -295,7 +293,7 @@ public class MenuWEBActivity extends Activity {
                     }
                 });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(this.getString(R.string.cancel_dialog), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -328,7 +326,7 @@ public class MenuWEBActivity extends Activity {
             mapa.putExtra("titulos", titulos);
             mapa.putExtra("descripciones", descripciones);
             mapa.putExtra("nivel", 3);
-            mapa.putExtra("zoom", 14);
+            mapa.putExtra("zoom", 15);
             mapa.putExtra("tipo", 1);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

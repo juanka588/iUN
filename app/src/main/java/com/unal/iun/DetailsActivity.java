@@ -136,7 +136,6 @@ public class DetailsActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                item.setTitle("Detalles");
                 home();
                 break;
 

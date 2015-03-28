@@ -65,8 +65,7 @@ public class MainActivity extends Activity {
 
 
     protected void cambiarBD() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         builder.setMessage("¿Que Base de Datos Desea usar?")
                 .setTitle("Confirme:")
                 .setPositiveButton("Modo Básico",
@@ -137,10 +136,10 @@ public class MainActivity extends Activity {
     }
 
     public void admisiones(View v) {
-        final String[] items = {"Instituciones", "Información"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         final Activity act = this;
-        builder.setTitle("Admisiones").setItems(items,
+        builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         if (item == 0) {
@@ -153,7 +152,7 @@ public class MainActivity extends Activity {
                                         R.anim.fade_out);
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Disponible proximamente", Toast.LENGTH_SHORT).show();
+                                        act.getText(R.string.disponible), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             String cad = "http://admisiones.unal.edu.co/";
@@ -162,7 +161,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(this.getText(R.string.cancel_dialog), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -228,13 +227,7 @@ public class MainActivity extends Activity {
 
     public void servicios(View v) {
         try {
-            Class cls;
-            if (screenWidth > 600 && false) {
-                cls = null;
-            } else {
-                cls = MenuWEBActivity.class;
-            }
-            startActivity(new Intent(getApplicationContext(), cls));
+            startActivity(new Intent(getApplicationContext(), MenuWEBActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             // this.finish();
         } catch (Exception e) {

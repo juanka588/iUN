@@ -1,6 +1,7 @@
 package com.unal.iun;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -54,6 +55,7 @@ public class MapaActivity extends FragmentActivity {
     MenuItem item;
     int idFondoTras = R.drawable.ciudad_universitaria;
     private ActionBar bar;
+    private Activity act;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class MapaActivity extends FragmentActivity {
     }
 
     private void setUpMapIfNeeded() {
+        act = this;
         int status = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getBaseContext());
         if (status == ConnectionResult.SUCCESS) {
@@ -89,7 +92,7 @@ public class MapaActivity extends FragmentActivity {
             bar.setBackgroundDrawable(background2);
             bar.setDisplayHomeAsUpEnabled(true);
             bar.setHomeButtonEnabled(true);
-            bar.setTitle("Cobertura Nacional");
+            bar.setTitle(this.getText(R.string.cobertura_nacional));
             Bundle b = getIntent().getExtras();
             lat = b.getDoubleArray("lat");
             lon = b.getDoubleArray("lon");
@@ -147,8 +150,8 @@ public class MapaActivity extends FragmentActivity {
 
     private void mostrarMarcador(double lat, double lng, String title,
                                  String desc, int tipo) {
-		/*
-		 * float a = 0; switch (count) { case 0: a =
+        /*
+         * float a = 0; switch (count) { case 0: a =
 		 * BitmapDescriptorFactory.HUE_CYAN; break; case 1: a =
 		 * BitmapDescriptorFactory.HUE_ORANGE; break; case 2: a =
 		 * BitmapDescriptorFactory.HUE_VIOLET; break; case 3: a =
@@ -187,6 +190,7 @@ public class MapaActivity extends FragmentActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putDoubleArray("lat", lat);
@@ -210,7 +214,7 @@ public class MapaActivity extends FragmentActivity {
         nivel = b.getInt("nivel");
         super.onRestoreInstanceState(b);
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -334,7 +338,7 @@ public class MapaActivity extends FragmentActivity {
             public void onMapLongClick(LatLng arg0) {
                 focus = new MarkerOptions()
                         .position(arg0)
-                        .title("¿Que hay aqui?")
+                        .title(act.getString(R.string.markerEti))
                         .snippet(
                                 ("lat: " + arg0.latitude).substring(0, 15)
                                         + ("\nlong: " + arg0.longitude)
@@ -351,9 +355,9 @@ public class MapaActivity extends FragmentActivity {
             @Override
             public void onInfoWindowClick(final Marker arg0) {
 
-                final String[] items = {"¿Cómo llegar?", "Información"};
+                final String[] items = {act.getText(R.string.indications) + "", act.getText(R.string.informacion) + ""};
                 AlertDialog.Builder builder = new AlertDialog.Builder(
-                        MapaActivity.this);
+                        MapaActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
                 builder.setTitle(arg0.getTitle()).setItems(items,
                         new DialogInterface.OnClickListener() {
@@ -397,7 +401,7 @@ public class MapaActivity extends FragmentActivity {
                                             acercar(arg0);
                                             Toast.makeText(
                                                     getApplicationContext(),
-                                                    "No hay información disponible",
+                                                    act.getText(R.string.data_exception),
                                                     Toast.LENGTH_SHORT).show();
                                         } else {
                                             deta.putExtra("datos", datos);
@@ -412,7 +416,7 @@ public class MapaActivity extends FragmentActivity {
                                         } catch (Exception ex2) {
                                             Toast.makeText(
                                                     getApplicationContext(),
-                                                    "No hay información disponible",
+                                                    act.getText(R.string.data_exception),
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -420,7 +424,7 @@ public class MapaActivity extends FragmentActivity {
                             }
                         });
 
-                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(act.getText(R.string.cancel_dialog), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
@@ -474,7 +478,7 @@ public class MapaActivity extends FragmentActivity {
             }
         } catch (Exception e) {
             Log.e("Error Datos", e.toString());
-            Toast.makeText(getApplication(), "Aun no tenemos los Datos",
+            Toast.makeText(getApplication(), this.getText(R.string.data_exception),
                     Toast.LENGTH_LONG).show();
         }
         return datos;

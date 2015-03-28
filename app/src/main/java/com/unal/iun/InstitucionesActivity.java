@@ -86,7 +86,7 @@ public class InstitucionesActivity extends Activity {
                 table = "edificios";
                 query = "select distinct nombre_edificio,edificio,latitud,longitud,sede_edificio from "
                         + table;
-                barra.setTitle("Edificios");
+                barra.setTitle(this.getString(R.string.edificios));
             }
             Log.e("buscado", query);
             Cursor c = db.rawQuery(query, null);
@@ -131,7 +131,6 @@ public class InstitucionesActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_instituciones, menu);
         MenuItem menuItem = menu.getItem(0);
         sv = (SearchView) menuItem.getActionView();
-        sv.setQueryHint("Inicia una Busqueda...");
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override

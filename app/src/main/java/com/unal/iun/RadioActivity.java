@@ -12,7 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -30,7 +30,7 @@ public class RadioActivity extends Activity implements
     public static String path = "http://m.youtube.com/add_favorite?v=wIn-wIgWPXM";
     private VideoView surfaceView;
     private SurfaceHolder surfaceHolder;
-    private Button bPlay, bPause;
+    private ImageButton bPlay, bPause;
     private boolean pause;
     private int savePos = 0;
     private Spinner spin;
@@ -56,9 +56,9 @@ public class RadioActivity extends Activity implements
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         TextView text = (TextView) findViewById(R.id.textRadioTEMP);
         spin.setAdapter(dataAdapter);
-        bPlay = (Button) findViewById(R.id.play);
+        bPlay = (ImageButton) findViewById(R.id.play);
         bPlay.setEnabled(false);
-        bPause = (Button) findViewById(R.id.pause);
+        bPause = (ImageButton) findViewById(R.id.pause);
         spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause, text));
         try {
             // mediaPlayer = new MediaPlayer();

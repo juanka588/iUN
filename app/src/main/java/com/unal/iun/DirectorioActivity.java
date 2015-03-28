@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
@@ -244,7 +245,7 @@ public class DirectorioActivity extends Activity {
             }
         });
         toggle = new ActionBarDrawerToggle(act, cajon,
-                android.R.drawable.ic_menu_sort_by_size, R.string.drawer_open,
+                R.drawable.ic_options, R.string.drawer_open,
                 R.string.drawer_close);
         barra.setDisplayHomeAsUpEnabled(true);
         barra.setHomeButtonEnabled(true);
@@ -303,7 +304,7 @@ public class DirectorioActivity extends Activity {
             db.close();
             if (mat.length == 0) {
                 Toast.makeText(getApplicationContext(),
-                        "No hemos podido ubicar los edificios", Toast.LENGTH_SHORT).show();
+                        this.getText(R.string.alert_dialog1), Toast.LENGTH_SHORT).show();
                 return;
             }
             lat = Util.toDouble(Util.getcolumn(mat, 2));
@@ -315,7 +316,7 @@ public class DirectorioActivity extends Activity {
             mapa.putExtra("titulos", titulos);
             mapa.putExtra("descripciones", descripciones);
             mapa.putExtra("nivel", current - 1);
-            mapa.putExtra("zoom", current <= 2 ? current + 3 : current + 9);
+            mapa.putExtra("zoom", current <= 2 ? current + 5 : current + 9);
             mapa.putExtra("tipo", 0);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -330,13 +331,14 @@ public class DirectorioActivity extends Activity {
         // item = menu.getItem(0);
         MenuItem menuItem = menu.getItem(0);
         sv = (SearchView) menuItem.getActionView();
-        sv.setQueryHint("Inicia una Busqueda...");
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query.length() > 2) {
                     recargar(query);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(sv.getWindowToken(), 0);
                 } else {
                     /*
                      * current = 2; recargar("select  distinct " + columnas[2] +
@@ -353,8 +355,8 @@ public class DirectorioActivity extends Activity {
                 if (newText.length() > 2) {
                     recargar(newText);
                 } else {
-					/*
-					 * current = 2; recargar("select  distinct " + columnas[2] +
+                    /*
+                     * current = 2; recargar("select  distinct " + columnas[2] +
 					 * ", " + columnas[2] + " from " + tableName +
 					 * " natural join edificios order by (orden)", false,
 					 * false);
@@ -755,7 +757,7 @@ public class DirectorioActivity extends Activity {
 			 */
         } catch (Exception e) {
             Log.e("Error Datos", e.toString());
-            Toast.makeText(getApplication(), "Aun no tenemos los Datos",
+            Toast.makeText(getApplication(), this.getText(R.string.data_exception),
                     Toast.LENGTH_LONG).show();
         }
         return datos;
@@ -810,7 +812,7 @@ public class DirectorioActivity extends Activity {
             final String[][] mat = Util.imprimirLista(c);
             if (mat.length == 0) {
                 Toast.makeText(getApplicationContext(),
-                        "No hay " + (cond ? "Directorio" : "Departamentos"), Toast.LENGTH_SHORT)
+                        this.getString(R.string.no_hay) + (cond ? this.getString(R.string.textSwitchON) : this.getString(R.string.textSwitchOFF)), Toast.LENGTH_SHORT)
                         .show();
                 c.close();
                 db.close();

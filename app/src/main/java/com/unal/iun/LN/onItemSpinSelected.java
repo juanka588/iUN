@@ -4,7 +4,7 @@ import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,11 +13,11 @@ import com.unal.iun.RadioActivity;
 import java.io.IOException;
 
 public class onItemSpinSelected implements OnItemSelectedListener {
-    Button b;
-    Button b2;
+    ImageButton b;
+    ImageButton b2;
     TextView tx;
 
-    public onItemSpinSelected(Button play, Button pause, TextView text) {
+    public onItemSpinSelected(ImageButton play, ImageButton pause, TextView text) {
         b = play;
         b2 = pause;
         tx = text;
@@ -26,7 +26,7 @@ public class onItemSpinSelected implements OnItemSelectedListener {
     @Override
     public void onItemSelected(AdapterView<?> parent, View arg1, int arg2,
                                long arg3) {
-        Toast.makeText(parent.getContext(), "" + parent.getSelectedItem(), 1)
+        Toast.makeText(parent.getContext(), "" + parent.getSelectedItem(), Toast.LENGTH_SHORT)
                 .show();
         switch (parent.getSelectedItemPosition()) {
             case 0:

@@ -86,7 +86,7 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
                         break;
                     case 4:
                         draw = R.drawable.un;
-                        textView.setText("Sitio Web");
+                        textView.setText(activity.getText(R.string.web_site));
                         break;
 
                     default:
