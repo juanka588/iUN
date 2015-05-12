@@ -5,6 +5,13 @@
         <item>@string/web_site</item>
         <item>@string/serch_buildings</item>
     </string-array>
+    <string-array name="radio">
+        <item>UN Radio</item>
+        <item>UN Medellin</item>
+        <item>UN WEB</item>
+        <item>RFI</item>
+        <item>Himno Gaudeamus Igitur</item>
+    </string-array>
     <string name="see_on_map">Ver en el mapa</string>
     <string name="serch_buildings">Buscar por edificios</string>
 </resources>

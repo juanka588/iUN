@@ -2,8 +2,6 @@ package com.unal.iun;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +16,6 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.unal.iun.LN.onItemSpinSelected;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class RadioActivity extends Activity implements
@@ -38,18 +33,10 @@ public class RadioActivity extends Activity implements
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_radio);
-        BitmapDrawable background2 = new BitmapDrawable(
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
-        this.getActionBar().setBackgroundDrawable(background2);
         this.getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         spin = (Spinner) findViewById(R.id.spinnerSelector);
-        List list = new ArrayList();
-        list.add("UN Bogotá");
-        list.add("UN Medellin");
-        list.add("UN WEB");
-        list.add("RFI");
+        String[] list = this.getResources().getStringArray(R.array.radio);
         ArrayAdapter dataAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter
@@ -60,25 +47,6 @@ public class RadioActivity extends Activity implements
         bPlay.setEnabled(false);
         bPause = (ImageButton) findViewById(R.id.pause);
         spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause, text));
-        try {
-            // mediaPlayer = new MediaPlayer();
-            // mediaPlayer.setDataSource(path);
-            // mediaPlayer.prepare();
-            // mediaPlayer.start();
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
     }
 
     public void playVideo(View v) {
@@ -102,19 +70,16 @@ public class RadioActivity extends Activity implements
             RadioActivity.mediaPlayer.stop();
             RadioActivity.mediaPlayer.release();
             RadioActivity.mediaPlayer = null;
-            RadioActivity.mediaPlayer = new MediaPlayer();
-            RadioActivity.mediaPlayer.setDataSource(path);
-            RadioActivity.mediaPlayer.prepare();
+            if (path.equals("")) {
+                RadioActivity.mediaPlayer = MediaPlayer.create(getApplicationContext(),
+                        R.raw.himno);
+            } else {
+                RadioActivity.mediaPlayer = new MediaPlayer();
+                RadioActivity.mediaPlayer.setDataSource(path);
+                RadioActivity.mediaPlayer.prepare();
+            }
             RadioActivity.mediaPlayer.seekTo(savePos);
             RadioActivity.mediaPlayer.start();
-            /*
-             * mediaPlayer.prepareAsync();// Para streaming
-			 * mediaPlayer.setOnBufferingUpdateListener(this);
-			 * mediaPlayer.setOnCompletionListener(this);
-			 * mediaPlayer.setOnPreparedListener(this);
-			 * mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			 */
-
         } catch (Exception e) {
             log("ERROR: " + e.getMessage());
         }
@@ -161,8 +126,8 @@ public class RadioActivity extends Activity implements
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         try {
             if (RadioActivity.mediaPlayer != null) {
                 RadioActivity.mediaPlayer.pause();

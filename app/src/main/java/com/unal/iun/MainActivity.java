@@ -136,7 +136,7 @@ public class MainActivity extends Activity {
     }
 
     public void admisiones(View v) {
-        final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion)};
+        final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion), this.getString(R.string.edificios)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         final Activity act = this;
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
@@ -154,9 +154,15 @@ public class MainActivity extends Activity {
                                 Toast.makeText(getApplicationContext(),
                                         act.getText(R.string.disponible), Toast.LENGTH_SHORT).show();
                             }
-                        } else {
+                        }
+                        if (item == 1) {
                             String cad = "http://admisiones.unal.edu.co/";
                             Util.irA(cad, act);
+                        } else {
+                            Intent ca = new Intent(act, InstitucionesActivity.class);
+                            ca.putExtra("modo", false);
+                            startActivity(ca);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         }
                     }
                 });

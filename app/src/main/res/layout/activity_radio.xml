@@ -38,16 +38,23 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textRadioTEMP"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/ButonsLayout"
         android:layout_below="@+id/ButonsLayout"
         android:layout_marginTop="29dp"
-        android:background="#70000000"
-        android:gravity="center"
-        android:text="RADIO UNAL"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="#70000000">
+
+        <TextView
+            android:id="@+id/textRadioTEMP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/ButonsLayout"
+            android:gravity="center"
+            android:text="RADIO UNAL"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </ScrollView>
+
 
 </RelativeLayout>

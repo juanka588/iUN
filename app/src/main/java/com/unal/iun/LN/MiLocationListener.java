@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unal.iun.MainActivity;
+import com.unal.iun.R;
 
 public class MiLocationListener implements LocationListener {
     public static double lat = 0;
@@ -26,8 +27,8 @@ public class MiLocationListener implements LocationListener {
     public void onLocationChanged(Location loc) {
         lat = loc.getLatitude();
         longi = loc.getLongitude();
-        textLat.setText("Latitud: " + lat);
-        textLon.setText("Longitud: " + longi);
+        textLat.setText(appcont.getString(R.string.latitude) + ": " + lat);
+        textLon.setText(appcont.getString(R.string.longitude) + ": " + longi);
         try {
             if (!changed) {
                 buscarSede();

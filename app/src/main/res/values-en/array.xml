@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="optionsArray">
+        <item>@string/see_on_map</item>
+        <item>@string/web_site</item>
+        <item>@string/serch_buildings</item>
+    </string-array>
+    <string-array name="radio">
+        <item>UN Radio</item>
+        <item>UN Medellin</item>
+        <item>UN WEB</item>
+        <item>RFI</item>
+        <item>Himno Gaudeamus Igitur</item>
+    </string-array>
     <string name="see_on_map">See on map</string>
     <string name="serch_buildings">Search by buildings</string>
 </resources>

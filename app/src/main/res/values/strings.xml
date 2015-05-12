@@ -39,7 +39,7 @@
     <string name="title_activity_activity_details">Información</string>
     <string name="informacion">Información</string>
     <string name="instituciones">Instituciones</string>
-    <string name="admisiones">Admisiones</string>
+    <string name="admisiones">Dirección Nacional de Admisiones</string>
     <string name="markerEti">Sitios Cercanos</string>
     <string name="cancel_dialog">cancelar</string>
     <string name="disponible">Disponible Proximamente</string>
@@ -52,9 +52,13 @@
     <string name="network_exception">No tiene conexion a la red</string>
     <string name="acept_dialog">Aceptar</string>
     <string name="expanded_app_name">Información UNAL</string>
-    <string name="edificios">Edificios</string>
+    <string name="edificios">Edificios Universidad Nacional</string>
     <string name="opinion">Danos tu opinión</string>
     <string name="sede">Mi sede</string>
     <string name="no_hay">No hay</string>
+    <string name="radio_exception">No es posible cargar el streaming por el momento</string>
+    <string name="longitude">Longitud</string>
+    <string name="latitude">Latitud</string>
+    <string name="himno">Gaudeamus igitur  \nJuvenes dum sumus  \nPost jucundum juventutem  \nPost molestam senectutem  \nNos habebit humus.  \n \nUbi sunt qui ante nos  \nIn mundo fuere?  \nVadite ad superos  \nTransite in inferos  \nHos si vis videre.  \n \nVita nostra brevis est  \nBrevi finietur.  \nVenit mors velociter  \nRapit nos atrociter  \nNemini parcetur.  \n \nVivat academia  \nVivant professores  \nVivat membrum quodlibet  \nVivat membra quaelibet  \nSemper sint in flore.  \n \nVivant omnes virgines  \nFaciles, formosae.  \nVivant et mulieres  \nTenerae amabiles  \nBonae laboriosae.  \n \nVivant et republica  \net qui illam regit.  \nVivat nostra civitas,  \nMaecenatum caritas  \nQuae nos hic protegit.  \n \nAlma Mater floreat \nquae nos educavit, \ncaros et conmilitones \ndissitas in regiones \nsparsos congregavit. \n \n(ver. C. W. Kindeleben 1781) \n</string>
 
 </resources>

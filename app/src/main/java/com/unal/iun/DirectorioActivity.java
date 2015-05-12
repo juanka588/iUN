@@ -58,10 +58,10 @@ public class DirectorioActivity extends Activity {
     protected double lat[];
     protected double lon[];
     protected String titulos[], descripciones[];
-    protected String columnas[] = {"codigo", "NIVEL_ADMINISTRATIVO", "SEDE",
+    protected String columnas[] = {"_id", "NIVEL_ADMINISTRATIVO", "SEDE",
             "DEPENDENCIAS", "DIVISIONES", "DEPARTAMENTOS", "SECCIONES",
-            "CORREO_ELECTRONICO", "EXTENSION", "FAX", "DIRECTO",
-            "LUGAR_GEOGRAFICO", "EDIFICIO", "PISO_OFICINA", "CLASIFICACION"};
+            "CORREO_ELECTRONICO", "EXTENSION", "DIRECTO",
+            "EDIFICIO", "id_enlace"};
     protected TableLayout tl;
     protected BitmapDrawable background;
     protected boolean buscando = false;
@@ -110,7 +110,7 @@ public class DirectorioActivity extends Activity {
             c.close();
             db.close();
             MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                    Util.getcolumn(mat, 0));
+                    Util.getcolumn(mat, 0), MiAdaptador.TYPE_SIMPLE);
             adapter.fuente = Typeface.createFromAsset(getAssets(),
                     "Helvetica.ttf");
             lv.setAdapter(adapter);
@@ -203,7 +203,7 @@ public class DirectorioActivity extends Activity {
                 "mapap.jpg"};
         cajon = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView opciones = (ListView) findViewById(R.id.left_drawer);
-        MiAdaptador adapter = new MiAdaptador(act, valores, files, 2);
+        MiAdaptador adapter = new MiAdaptador(act, valores, files, MiAdaptador.TYPE_IMAGE);
         opciones.setAdapter(adapter);
         opciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -316,7 +316,7 @@ public class DirectorioActivity extends Activity {
             mapa.putExtra("titulos", titulos);
             mapa.putExtra("descripciones", descripciones);
             mapa.putExtra("nivel", current - 1);
-            mapa.putExtra("zoom", current <= 2 ? current + 5 : current + 9);
+            mapa.putExtra("zoom", current <= 2 ? current + 5 : current + 10);
             mapa.putExtra("tipo", 0);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -365,8 +365,8 @@ public class DirectorioActivity extends Activity {
                 return false;
             }
         });
-		/*
-		 * c.close(); db.close();
+        /*
+         * c.close(); db.close();
 		 */
         sv.setOnCloseListener(new SearchView.OnCloseListener() {
 
@@ -582,7 +582,6 @@ public class DirectorioActivity extends Activity {
 
     public void recargar(String query, final boolean cond, final boolean cond2,
                          int tipo) {
-
         try {
 
             lv.setAdapter(null);
@@ -635,7 +634,8 @@ public class DirectorioActivity extends Activity {
                     }
                     if (cond) {
                         if (cond2) {
-                            condicion = "secciones like('" + seleccion + "')";
+                            condicion = "secciones||departamentos like('" + seleccion + mat[posicion][1] + "')";
+                            Log.e("Condicion busqueda", condicion);
                             animarFondo(mat[posicion][1], false);
                             detalles();
                             return;
@@ -812,7 +812,7 @@ public class DirectorioActivity extends Activity {
             final String[][] mat = Util.imprimirLista(c);
             if (mat.length == 0) {
                 Toast.makeText(getApplicationContext(),
-                        this.getString(R.string.no_hay) + (cond ? this.getString(R.string.textSwitchON) : this.getString(R.string.textSwitchOFF)), Toast.LENGTH_SHORT)
+                        this.getString(R.string.no_hay) + " " + (cond ? this.getString(R.string.textSwitchON) : this.getString(R.string.textSwitchOFF)), Toast.LENGTH_SHORT)
                         .show();
                 c.close();
                 db.close();

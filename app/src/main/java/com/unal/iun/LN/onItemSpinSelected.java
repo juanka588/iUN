@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unal.iun.R;
 import com.unal.iun.RadioActivity;
 
 import java.io.IOException;
@@ -28,7 +29,8 @@ public class onItemSpinSelected implements OnItemSelectedListener {
                                long arg3) {
         Toast.makeText(parent.getContext(), "" + parent.getSelectedItem(), Toast.LENGTH_SHORT)
                 .show();
-        switch (parent.getSelectedItemPosition()) {
+        int selected = parent.getSelectedItemPosition();
+        switch (selected) {
             case 0:
                 RadioActivity.path = "http://streaming.unradio.unal.edu.co:8010/";
                 break;
@@ -41,6 +43,9 @@ public class onItemSpinSelected implements OnItemSelectedListener {
             case 3:
                 RadioActivity.path = "http://95.81.147.3/rfimonde/all/rfimonde-64k.mp3";
                 break;
+            case 4:
+                RadioActivity.path = "";
+                break;
             default:
                 break;
         }
@@ -51,32 +56,38 @@ public class onItemSpinSelected implements OnItemSelectedListener {
                     RadioActivity.mediaPlayer.stop();
                     RadioActivity.mediaPlayer.release();
                 }
-                RadioActivity.mediaPlayer = new MediaPlayer();
-                RadioActivity.mediaPlayer.setDataSource(RadioActivity.path);
-                RadioActivity.mediaPlayer.prepare();
-                RadioActivity.mediaPlayer.start();
+            }
+            if (selected == 4) {
+                RadioActivity.mediaPlayer = MediaPlayer.create(arg1.getContext(),
+                        R.raw.himno);
+                tx.setText(arg1.getContext().getString(R.string.himno));
             } else {
                 RadioActivity.mediaPlayer = new MediaPlayer();
                 RadioActivity.mediaPlayer.setDataSource(RadioActivity.path);
                 RadioActivity.mediaPlayer.prepare();
-                RadioActivity.mediaPlayer.start();
             }
+            RadioActivity.mediaPlayer.start();
             b.setEnabled(false);
             b2.setEnabled(true);
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
+            mensaje();
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
+            mensaje();
             e.printStackTrace();
         } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
+            mensaje();
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            mensaje();
             e.printStackTrace();
+        } catch (Exception e) {
+            mensaje();
         }
+    }
 
+    protected void mensaje() {
+        Toast.makeText(b.getContext(), b.getContext().getString(R.string.radio_exception), Toast.LENGTH_SHORT).show();
     }
 
     @Override

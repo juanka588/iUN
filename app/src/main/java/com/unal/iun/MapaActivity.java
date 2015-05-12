@@ -105,6 +105,9 @@ public class MapaActivity extends FragmentActivity {
             animarCamara(lat[0], lon[0], zoom);
             addNuevos(false);
             tableName = MainActivity.tbName;
+            mapa.setMyLocationEnabled(true);
+            mapa.getUiSettings().setZoomControlsEnabled(false);
+            mapa.getUiSettings().setCompassEnabled(true);
             MapsInitializer.initialize(MapaActivity.this);
         } catch (Exception e) {
             Log.e("error", e.toString());

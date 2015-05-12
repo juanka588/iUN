@@ -30,20 +30,84 @@ public class DetailsActivity extends Activity {
     public static double lat[];
     public static double lon[];
     public static String titulos[], descripciones[];
-    LinearLayout tl;
-    boolean evento = false;
-    ArrayList<String[]> data = new ArrayList<String[]>();
+    protected LinearLayout tl;
+    protected ArrayList<String[]> data = new ArrayList<String[]>();
+    protected ExpandableListView sc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_details);
+        Bundle b = getIntent().getExtras();
+        sc = (ExpandableListView) findViewById(R.id.expandableListDestails);
+        manejarDisplay();
+        try {
+            data = (ArrayList<String[]>) b.get("datos");
+            TextView tx = (TextView) findViewById(R.id.tituloDetallesDtos);
+            String title = data.get(0)[0];
+            tx.setText(title == null ? "" : title.trim());
+            int id = R.drawable.ciudad_universitaria;
+            if (b.getInt("fondo") != 0) {
+                id = b.getInt("fondo");
+            }
+            Drawable background = new BitmapDrawable(
+                    BitmapFactory.decodeResource(getResources(), id));
+
+            tl.setBackgroundDrawable(background);
+            sc.setDividerHeight(2);
+            // sc.setGroupIndicator(null);
+            sc.setClickable(true);
+            ArrayList<String> parentItems = new ArrayList<String>();
+            ArrayList<Object> childItems = new ArrayList<Object>();
+            for (int i = 0; i < data.size(); i++) {
+                String titlei = data.get(i)[1];
+                parentItems.add(titlei == null ? "" : titlei.trim());
+            }
+            lat = new double[data.size()];
+            lon = new double[data.size()];
+            titulos = new String[data.size()];
+            descripciones = new String[data.size()];
+            for (int k = 0; k < data.size(); k++) {
+                ArrayList<String> child = new ArrayList<String>();
+                String[] datos = data.get(k);
+                for (int i = 2; i < datos.length; i++) {
+                    if (datos[i] == null) {
+                    } else {
+                        if (i == datos.length - 1) {
+                            titulos[k] = datos[5];
+                            descripciones[k] = datos[6];
+                            lat[k] = Double.parseDouble(datos[8].split(" ")[0]);
+                            lon[k] = Double.parseDouble(datos[8].split(" ")[1]);
+                        } else {
+                            if (datos[i].trim().length() > 4) {
+                                child.add(datos[i]);
+                            }
+                        }
+                    }
+                }
+                childItems.add(child);
+            }
+            MiAdaptadorExpandibleDetalles adapter = new MiAdaptadorExpandibleDetalles(
+                    parentItems, childItems);
+            adapter.setInflater(
+                    (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
+                    this);
+            adapter.fuente = Typeface.createFromAsset(getAssets(),
+                    "Helvetica.ttf");
+            sc.setAdapter(adapter);
+            sc.expandGroup(0);
+        } catch (Exception e) {
+            Log.e("error de Detalles ", e.toString());
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void manejarDisplay() {
         this.getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        Bundle b = getIntent().getExtras();
         tl = (LinearLayout) findViewById(R.id.linearLayoutDetalles);
-        ExpandableListView sc = (ExpandableListView) findViewById(R.id.expandableListDestails);
         Space sp = (Space) findViewById(R.id.spaceDetalles1);
         Space sp2 = (Space) findViewById(R.id.spaceDetalles2);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
@@ -67,69 +131,6 @@ public class DetailsActivity extends Activity {
         sc.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 (int) (screenHeight * (factor))));
-        try {
-            data = (ArrayList<String[]>) b.get("datos");
-            TextView tx = (TextView) findViewById(R.id.tituloDetallesDtos);
-            String title = data.get(0)[0];
-            tx.setText(title == null ? "" : title.trim());
-            int id = R.drawable.ciudad_universitaria;
-            if (b.getInt("fondo") != 0) {
-                id = b.getInt("fondo");
-            }
-            Drawable background = new BitmapDrawable(
-                    BitmapFactory.decodeResource(getResources(), id));
-            tl.setBackgroundDrawable(background);
-            sc.setDividerHeight(2);
-            // sc.setGroupIndicator(null);
-            sc.setClickable(true);
-            ArrayList<String> parentItems = new ArrayList<String>();
-            ArrayList<Object> childItems = new ArrayList<Object>();
-            for (int i = 0; i < data.size(); i++) {
-                String titlei = data.get(i)[1];
-                parentItems.add(titlei == null ? "" : titlei.trim());
-            }
-            lat = new double[data.size()];
-            lon = new double[data.size()];
-            titulos = new String[data.size()];
-            descripciones = new String[data.size()];
-            for (int k = 0; k < data.size(); k++) {
-                ArrayList<String> child = new ArrayList<String>();
-                String[] datos = data.get(k);
-                for (int i = 2; i < datos.length; i++) {
-                    if (datos[i] == null) {
-                        // child.add("");
-                    } else {
-                        if (i == datos.length - 1) {
-                            titulos[k] = datos[5];
-                            descripciones[k] = datos[6];
-                            lat[k] = Double.parseDouble(datos[8].split(" ")[0]);
-                            lon[k] = Double.parseDouble(datos[8].split(" ")[1]);
-                        } else {
-                            if (datos[i].trim().length() > 4) {
-                                child.add(datos[i]);
-                            }
-                        }
-                    }
-                }
-                childItems.add(child);
-            }
-
-            MiAdaptadorExpandibleDetalles adapter = new MiAdaptadorExpandibleDetalles(
-                    parentItems, childItems);
-            adapter.setInflater(
-                    (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-                    this);
-            adapter.fuente = Typeface.createFromAsset(getAssets(),
-                    "Helvetica.ttf");
-            ;
-            sc.setAdapter(adapter);
-            sc.expandGroup(0);
-            // sc.setOnChildClickListener(this);
-        } catch (Exception e) {
-            Log.e("error de Detalles ", e.toString());
-            Toast.makeText(getApplicationContext(), e.toString(), 1).show();
-        }
-
     }
 
     @Override

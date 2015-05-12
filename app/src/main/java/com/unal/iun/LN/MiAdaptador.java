@@ -16,12 +16,18 @@ import com.unal.iun.R.layout;
 import java.util.ArrayList;
 
 public class MiAdaptador extends BaseAdapter {
+    /*TYPE_COMPLETE con imagen titulo y subtitulo*/
+    public static final int TYPE_COMPLETE = 0;
+    /*TYPE_SIMPLE solo el titulo*/
+    public static final int TYPE_SIMPLE = 1;
+    /*TYPE_IMAGE con imagen sin subtitulo*/
+    public static final int TYPE_IMAGE = 2;
+    /*TYPE_SUBTITLE sin imagen solo titulo y subtitulo*/
+    public static final int TYPE_SUBTITLE = 3;
     private final Activity actividad;
     private final String[] lista;
     private final String[] lista2;
     public Typeface fuente;
-    // 0 con todo 1 sin imagen ni subtitulo 2 con imagen y sin subtitulo
-    // 3 con titulo y subtitulo sin imagen
     public int tipo = 0;
 
     public MiAdaptador(Activity actividad, ArrayList<String> titulos,
