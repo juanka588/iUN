@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iUN</string>
+    <string name="title_activity_directorio">Directory</string>
+    <string name="title_activity_menu_web">Online Services</string>
+    <string name="title_activity_web"></string>
+    <string name="title_activity_main">iUN</string>
+    <string name="menu_volver">Back</string>
+    <string name="menu_URL">URL</string>
+    <string name="menu_adelante">Forward</string>
+    <string name="menu_Recargar">Refresh</string>
+    <string name="title_activity_mapa"></string>
+    <string name="lugar"></string>
+    <string name="tipo_mapa">Change type</string>
+    <string name="title_activity_eventos">Events</string>
+    <string name="buscar">Search</string>
+    <string name="trafico">Traffic</string>
+    <string name="otros_sitios">Nearby Sites</string>
+    <string name="textSwitchON">Direction</string>
+    <string name="textSwitchOFF">Departments</string>
+    <string name="menu_mapa">View on map</string>
+    <string name="menu_irweb">Go to site</string>
+    <string name="title_dato_list">data</string>
+    <string name="title_dato_detail">Directory</string>
+    <string name="title_datos_list">data</string>
+    <string name="title_datos_detail">Information</string>
+    <string name="title_activity_radio">Radio UN</string>
+    <string name="title_activity_servicios">Online Services</string>
+    <string name="title_activity_colegios">Institutions</string>
+    <string name="main_menu_item1">Services</string>
+    <string name="main_menu_item2">Admissions</string>
+    <string name="main_menu_item3">Locations</string>
+    <string name="main_menu_item4">Events</string>
+    <string name="title_activity_license">License</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="title_activity_instituciones">Institutions</string>
+    <string name="title_activity_activity_details">Information</string>
+    <string name="informacion">Information</string>
+    <string name="instituciones">Institutions</string>
+    <string name="admisiones">Admissions</string>
+    <string name="markerEti">Nearby Sites</string>
+    <string name="cancel_dialog">cancel</string>
+    <string name="disponible">Available soon</string>
+    <string name="alert_dialog1">We could not locate buildings</string>
+    <string name="data_exception">No data available</string>
+    <string name="cobertura_nacional">National coverage</string>
+    <string name="indications">Indications</string>
+    <string name="database">The database has been updated</string>
+    <string name="web_site">Web Site</string>
+    <string name="network_exception">No connection detected</string>
+    <string name="acept_dialog">Accept</string>
+    <string name="expanded_app_name">UNAL information</string>
+    <string name="edificios">Buildings</string>
+    <string name="opinion">Give us your opinion</string>
+    <string name="sede">My Location</string>
+    <string name="no_hay">it does not exist</string>
+    <string name="radio_exception">we can not load the streaming</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="himno">Gaudeamus igitur  \nJuvenes dum sumus  \nPost jucundum juventutem  \nPost molestam senectutem  \nNos habebit humus.  \n \nUbi sunt qui ante nos  \nIn mundo fuere?  \nVadite ad superos  \nTransite in inferos  \nHos si vis videre.  \n \nVita nostra brevis est  \nBrevi finietur.  \nVenit mors velociter  \nRapit nos atrociter  \nNemini parcetur.  \n \nVivat academia  \nVivant professores  \nVivat membrum quodlibet  \nVivat membra quaelibet  \nSemper sint in flore.  \n \nVivant omnes virgines  \nFaciles, formosae.  \nVivant et mulieres  \nTenerae amabiles  \nBonae laboriosae.  \n \nVivant et republica  \net qui illam regit.  \nVivat nostra civitas,  \nMaecenatum caritas  \nQuae nos hic protegit.  \n \nAlma Mater floreat \nquae nos educavit, \ncaros et conmilitones \ndissitas in regiones \nsparsos congregavit. \n \n(ver. C. W. Kindeleben 1781) \n</string>
+
+</resources>
