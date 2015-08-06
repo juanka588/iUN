@@ -1,6 +1,5 @@
 package com.unal.iun;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -8,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -25,7 +25,7 @@ import com.unal.iun.LN.MiAdaptadorExpandibleDetalles;
 import java.util.ArrayList;
 
 
-public class DetailsActivity extends Activity {
+public class DetailsActivity extends AppCompatActivity {
 
     public static double lat[];
     public static double lon[];
@@ -43,13 +43,13 @@ public class DetailsActivity extends Activity {
         sc = (ExpandableListView) findViewById(R.id.expandableListDestails);
         manejarDisplay();
         try {
-            data = (ArrayList<String[]>) b.get("datos");
+            data = (ArrayList<String[]>) b.get(getString(R.string.details_data));
             TextView tx = (TextView) findViewById(R.id.tituloDetallesDtos);
             String title = data.get(0)[0];
             tx.setText(title == null ? "" : title.trim());
             int id = R.drawable.ciudad_universitaria;
-            if (b.getInt("fondo") != 0) {
-                id = b.getInt("fondo");
+            if (b.getInt(getString(R.string.details_background)) != 0) {
+                id = b.getInt(getString(R.string.details_background));
             }
             Drawable background = new BitmapDrawable(
                     BitmapFactory.decodeResource(getResources(), id));
@@ -97,6 +97,9 @@ public class DetailsActivity extends Activity {
                     "Helvetica.ttf");
             sc.setAdapter(adapter);
             sc.expandGroup(0);
+            if (Runtime.getRuntime().freeMemory() < 1024 * 1024 * 1) {
+                Runtime.getRuntime().gc();
+            }
         } catch (Exception e) {
             Log.e("error de Detalles ", e.toString());
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -105,8 +108,12 @@ public class DetailsActivity extends Activity {
     }
 
     public void manejarDisplay() {
-        this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        BitmapDrawable background2 = new BitmapDrawable(
+                BitmapFactory.decodeResource(getResources(),
+                        R.drawable.fondoinf));
+        getSupportActionBar().setBackgroundDrawable(background2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         tl = (LinearLayout) findViewById(R.id.linearLayoutDetalles);
         Space sp = (Space) findViewById(R.id.spaceDetalles1);
         Space sp2 = (Space) findViewById(R.id.spaceDetalles2);

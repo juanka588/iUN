@@ -1,6 +1,5 @@
 package com.unal.iun;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,7 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +35,7 @@ import com.unal.iun.LN.Util;
 
 import java.util.ArrayList;
 
-public class MapaActivity extends FragmentActivity {
+public class MapaActivity extends AppCompatActivity {
 
     static int tipo = 1, count = 0, zoom = 19;
     static String cond = "";
@@ -54,7 +53,7 @@ public class MapaActivity extends FragmentActivity {
     int nivel = 1;
     MenuItem item;
     int idFondoTras = R.drawable.ciudad_universitaria;
-    private ActionBar bar;
+    private android.support.v7.app.ActionBar bar;
     private Activity act;
 
     @Override
@@ -85,7 +84,7 @@ public class MapaActivity extends FragmentActivity {
         }
         try {
             deta = new Intent(this, DetailsActivity.class);
-            bar = this.getActionBar();
+            bar = this.getSupportActionBar();
             BitmapDrawable background2 = new BitmapDrawable(
                     BitmapFactory.decodeResource(getResources(),
                             R.drawable.fondoinf));
@@ -259,7 +258,7 @@ public class MapaActivity extends FragmentActivity {
 
     public void acercar(Marker arg0) {
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-        SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                 MODE_WORLD_READABLE, null);
         double lat = arg0.getPosition().latitude;
         double lon = arg0.getPosition().longitude;
@@ -297,11 +296,11 @@ public class MapaActivity extends FragmentActivity {
 
     public void acercar() {
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-        SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                 MODE_WORLD_READABLE, null);
         double lat = focus.getPosition().latitude;
         double lon = focus.getPosition().longitude;
-        String query = "select latitud, longitud,nombre_edificio, edificio  from edificios where latitud between "
+        String query = "select latitud, longitud,nombre_edificio, _id_edificio  from edificios where latitud between "
                 + (lat - 0.001)
                 + " and "
                 + (lat + 0.001)
@@ -454,7 +453,7 @@ public class MapaActivity extends FragmentActivity {
         String consulta = baseConsult + criteria;
         Log.e("consulta mapa", consulta);
         ArrayList<String[]> datos = new ArrayList<String[]>();
-        SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                 MODE_WORLD_READABLE, null);
         Cursor c = db.rawQuery(consulta, null);
         String[][] mat = Util.imprimirLista(c);

@@ -1,14 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.unal.iun.MainActivity">
     <item
         android:id="@+id/menu_tipo_mapa"
         android:icon="@drawable/ic_tipomapa"
-        android:showAsAction="always"
-        android:title="@string/tipo_mapa" />
+        android:title="@string/tipo_mapa"
+        app:showAsAction="always" />
     <item
         android:id="@+id/menu_trafico"
         android:icon="@drawable/ic_trafico"
-        android:showAsAction="always"
-        android:title="@string/trafico" />
+        android:title="@string/trafico"
+        app:showAsAction="always" />
 </menu>

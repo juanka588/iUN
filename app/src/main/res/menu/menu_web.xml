@@ -1,28 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.unal.iun.WebActivity">
     <item
         android:id="@+id/ItemVolver"
         android:icon="@drawable/ic_volver"
-        android:showAsAction="always"
         android:title="@string/menu_volver"
-        android:visible="true"></item>
+        android:visible="true"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/ItemRefresh"
         android:icon="@drawable/ic_refresh"
-        android:showAsAction="always"
         android:title="@string/menu_Recargar"
-        android:visible="true"></item>
+        android:visible="true"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/ItemForward"
         android:icon="@drawable/ic_forward"
-        android:showAsAction="always"
         android:title="@string/menu_adelante"
-        android:visible="true"></item>
+        android:visible="true"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/itemURL"
-        android:showAsAction="always"
         android:title="@string/menu_URL"
-        android:visible="true"></item>
+        android:visible="true"
+        app:showAsAction="always"></item>
 
 </menu>

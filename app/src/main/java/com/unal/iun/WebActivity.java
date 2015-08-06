@@ -1,9 +1,9 @@
 package com.unal.iun;
 
-import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +13,9 @@ import android.webkit.WebViewClient;
 
 import com.unal.iun.LN.Util;
 
-public class WebActivity extends Activity {
+public class WebActivity extends AppCompatActivity {
 
+    public static final String ARG_TAG = "paginaWeb";
     String URL = "";
     WebView browser;
 
@@ -35,14 +36,14 @@ public class WebActivity extends Activity {
             }
 
         });
+        BitmapDrawable background2 = new BitmapDrawable(
+                BitmapFactory.decodeResource(getResources(),
+                        R.drawable.fondoinf));
+        getSupportActionBar().setBackgroundDrawable(background2);
         if (savedInstanceState == null) {
             Bundle b = getIntent().getExtras();
-            URL = b.getString("paginaWeb");
+            URL = b.getString(ARG_TAG);
             browser.loadUrl(URL);
-            BitmapDrawable background = new BitmapDrawable(
-                    BitmapFactory.decodeResource(getResources(),
-                            R.drawable.fondoinf));
-            //this.getActionBar().setBackgroundDrawable(background);
             if (!Util.isOnline(this)) {
                 Util.notificarRed(this);
             }
@@ -60,10 +61,6 @@ public class WebActivity extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         URL = savedInstanceState.getString("URL");
         browser.loadUrl(URL);
-        BitmapDrawable background = new BitmapDrawable(
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
-        //this.getActionBar().setBackgroundDrawable(background);
         super.onRestoreInstanceState(savedInstanceState);
     }
 

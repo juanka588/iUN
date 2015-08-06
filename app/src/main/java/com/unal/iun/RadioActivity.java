@@ -1,9 +1,9 @@
 package com.unal.iun;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
@@ -18,7 +18,7 @@ import android.widget.VideoView;
 import com.unal.iun.LN.onItemSpinSelected;
 
 
-public class RadioActivity extends Activity implements
+public class RadioActivity extends ActionBarActivity implements
         MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
     public static MediaPlayer mediaPlayer;

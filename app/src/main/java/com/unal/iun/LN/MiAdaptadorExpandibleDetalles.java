@@ -33,11 +33,11 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
     private ArrayList<String> parentItems, child;
 
     public MiAdaptadorExpandibleDetalles(ArrayList<String> parents,
-                                         ArrayList<Object> childern) {
+                                         ArrayList<Object> children) {
 
         this.parentItems = parents;
 
-        this.childtems = childern;
+        this.childtems = children;
 
     }
 
@@ -51,17 +51,16 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
 
     @SuppressWarnings("unchecked")
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
+    public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         child = (ArrayList<String>) childtems.get(groupPosition);
-
         TextView textView = null;
         ImageView im = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.detalles, null);
         }
-        String text = child.get(childPosition);
+        final String text = child.get(childPosition);
         if (text != null) {
             if (!text.equals("")) {
                 int type = comprobar(text);
@@ -74,19 +73,49 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
                 switch (type) {
                     case 0:
                         draw = R.drawable.llamar;
+                        convertView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                llamar(text);
+                            }
+                        });
                         break;
                     case 1:
                         draw = R.drawable.llamar;
+                        convertView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                llamar("3165000;" + text);
+                            }
+                        });
                         break;
                     case 2:
                         draw = R.drawable.email;
+                        convertView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                correo(text);
+                            }
+                        });
                         break;
                     case 3:
                         draw = R.drawable.edificio;
+                        convertView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ubicar(text);
+                            }
+                        });
                         break;
                     case 4:
                         draw = R.drawable.un;
                         textView.setText(activity.getText(R.string.web_site));
+                        convertView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Util.irA(text, activity);
+                            }
+                        });
                         break;
 
                     default:
@@ -95,41 +124,14 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
                 BitmapDrawable icono = new BitmapDrawable(
                         BitmapFactory.decodeResource(activity.getResources(),
                                 draw));
+                //Log.e("icono cargado", type + "");
                 im.setImageDrawable(icono);
-                convertView.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        int type = comprobar(child.get(childPosition));
-                        switch (type) {
-                            case 0:
-                                llamar(child.get(childPosition));
-                                break;
-                            case 1:
-                                llamar("3165000;" + child.get(childPosition));
-                                break;
-                            case 2:
-                                correo(child.get(childPosition));
-                                break;
-                            case 3:
-                                ubicar(child.get(childPosition));
-                                break;
-                            case 4:
-                                Util.irA(child.get(childPosition), activity);
-                                break;
-
-                            default:
-                                break;
-                        }
-
-                    }
-
-                });
             }
         }
         return convertView;
 
     }
+
 
     private int comprobar(String cad) {
         int ret = 3;
@@ -156,6 +158,7 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
         }
         return ret;
     }
+
 
     public void llamar(String number) {
         Uri numero = Uri.parse("tel: +571" + number);
@@ -196,12 +199,11 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
         if (convertView == null) {
 
             convertView = inflater.inflate(R.layout.grupo, null);
+            ((CheckedTextView) convertView).setText(parentItems.get(groupPosition));
+            ((CheckedTextView) convertView).setChecked(isExpanded);
+            ((CheckedTextView) convertView).setGravity(Gravity.CENTER);
         }
 
-        ((CheckedTextView) convertView).setText(parentItems.get(groupPosition));
-
-        ((CheckedTextView) convertView).setChecked(isExpanded);
-        ((CheckedTextView) convertView).setGravity(Gravity.CENTER);
 
         return convertView;
 
@@ -209,7 +211,7 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        return ((ArrayList<String>) childtems.get(groupPosition)).get(childPosition);
 
     }
 
@@ -247,7 +249,7 @@ public class MiAdaptadorExpandibleDetalles extends BaseExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
-        return 0;
+        return groupPosition;
     }
 
     @Override

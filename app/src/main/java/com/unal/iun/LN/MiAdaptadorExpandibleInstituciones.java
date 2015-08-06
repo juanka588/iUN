@@ -15,7 +15,6 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unal.iun.MainActivity;
 import com.unal.iun.MapaActivity;
 import com.unal.iun.R;
 
@@ -73,12 +72,7 @@ public class MiAdaptadorExpandibleInstituciones extends
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.itemsub, null);
         }
-
-        int totalGroupPosition = 0;
-        for (int i = 0; i < groupPosition; i++) {
-            totalGroupPosition += childtems.get(i).size();
-        }
-        final int posicion = totalGroupPosition + childPosition;
+        final int posicion = (int) getChildId(groupPosition, childPosition);
         textView = (TextView) convertView.findViewById(R.id.textItem);
         textView.setText(Util.toCammelCase(mat[posicion][0].trim()
                 .toLowerCase()));
@@ -105,7 +99,7 @@ public class MiAdaptadorExpandibleInstituciones extends
             LinnaeusDatabase lb = new LinnaeusDatabase(
                     activity.getApplicationContext());
             SQLiteDatabase db = activity.openOrCreateDatabase(
-                    MainActivity.dataBaseName, activity.MODE_WORLD_READABLE,
+                    LinnaeusDatabase.DATABASE_NAME, activity.MODE_WORLD_READABLE,
                     null);
             String condicion = "latitud between " + (lt - 0.0001) + " and "
                     + (lt + 0.0001) + " and longitud between" + (lg - 0.0001)
@@ -114,7 +108,7 @@ public class MiAdaptadorExpandibleInstituciones extends
                 query = "select distinct direccion_edificio,nombre_edificio,latitud,longitud,departamento from"
                         + " colegios" + " where " + condicion;
             } else {
-                query = "select distinct edificio,nombre_edificio,latitud,longitud from edificios "
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios "
                         + "where " + condicion;
             }
             Log.e("buscado", query);
@@ -152,6 +146,7 @@ public class MiAdaptadorExpandibleInstituciones extends
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.grupo, null);
+
         }
         String cad = parentItems.get(groupPosition).toUpperCase(
                 Locale.getDefault());
@@ -170,9 +165,11 @@ public class MiAdaptadorExpandibleInstituciones extends
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-
-        return 0;
-
+        int totalGroupPosition = 0;
+        for (int i = 0; i < groupPosition; i++) {
+            totalGroupPosition += childtems.get(i).size();
+        }
+        return totalGroupPosition + childPosition;
     }
 
     @Override
@@ -182,7 +179,7 @@ public class MiAdaptadorExpandibleInstituciones extends
 
     @Override
     public Object getGroup(int groupPosition) {
-        return null;
+        return (ArrayList<String>) child;
     }
 
     @Override

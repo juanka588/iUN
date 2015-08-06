@@ -1,12 +1,12 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/TableLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <TableRow
         android:id="@+id/tableRow31"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tituloEvento"
@@ -23,7 +23,7 @@
     <TableRow
         android:id="@+id/tableRow32"
         android:layout_width="wrap_content"
-        android:layout_height="30dp" >
+        android:layout_height="30dp">
 
         <TextView
             android:id="@+id/descripcionEvento"
@@ -38,7 +38,7 @@
     <TableRow
         android:id="@+id/tableRow33"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -61,7 +61,7 @@
     <TableRow
         android:id="@+id/tableRow34"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -84,7 +84,7 @@
     <TableRow
         android:id="@+id/tableRow35"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -107,7 +107,7 @@
     <TableRow
         android:id="@+id/tableRow36"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -130,7 +130,7 @@
     <TableRow
         android:id="@+id/tableRow37"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView7"

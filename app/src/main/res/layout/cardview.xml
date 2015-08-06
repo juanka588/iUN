@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/webItemImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:background="@drawable/selectorfondocir"
+        android:padding="2dp"
+        android:src="@drawable/un" />
+
+    <TextView
+        android:id="@+id/webItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="5"
+        android:maxWidth="5dp"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:text="@string/abc_action_mode_done" />
+
+
+</LinearLayout>

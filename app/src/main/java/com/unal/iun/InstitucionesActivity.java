@@ -1,15 +1,15 @@
 package com.unal.iun;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.Space;
 import android.widget.Toast;
 
@@ -30,25 +29,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class InstitucionesActivity extends Activity {
+public class InstitucionesActivity extends AppCompatActivity {
 
     private ExpandableListView lv;
     private Activity act;
     private SearchView sv;
     private boolean mode;
     private String table = "colegios";
-    private ActionBar barra;
+    private android.support.v7.app.ActionBar barra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instituciones);
         act = this;
-        BitmapDrawable background2 = new BitmapDrawable(
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
-        barra = this.getActionBar();
-        barra.setBackgroundDrawable(background2);
+        barra = this.getSupportActionBar();
         barra.setDisplayHomeAsUpEnabled(true);
         barra.setHomeButtonEnabled(true);
         lv = (ExpandableListView) findViewById(R.id.listViewInstituciones);
@@ -73,18 +68,18 @@ public class InstitucionesActivity extends Activity {
                 (int) (screenHeight * (factor2))));
         try {
             LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-            SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+            SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                     MODE_WORLD_READABLE, null);
             Bundle b = getIntent().getExtras();
             String query = "";
             mode = b.getBoolean("modo");
             if (mode) {
                 table = "colegios";
-                query = "select nombre_edificio,direccion_edificio,latitud,longitud,departamento from "
+                query = "select NOMBRE_EDIFICIO,direccion_edificio,latitud,longitud,departamento from "
                         + table;
             } else {
                 table = "edificios";
-                query = "select distinct nombre_edificio,edificio,latitud,longitud,sede_edificio from "
+                query = "select distinct nombre_edificio,_id_edificio,latitud,longitud,sede_edificio from "
                         + table;
                 barra.setTitle(this.getString(R.string.edificios));
             }
@@ -130,7 +125,8 @@ public class InstitucionesActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_instituciones, menu);
         MenuItem menuItem = menu.getItem(0);
-        sv = (SearchView) menuItem.getActionView();
+        sv = (android.support.v7.widget.SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_busqueda_instituciones));
+
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -188,13 +184,13 @@ public class InstitucionesActivity extends Activity {
                     + table + " where nombre_edificio like('%" + cad + "%')";
         } else {
             table = "edificios";
-            cad2 = "select nombre_edificio,edificio,latitud,longitud,sede_edificio,"
-                    + "nombre_edificio||edificio as busqueda from "
+            cad2 = "select nombre_edificio,_id_edificio,latitud,longitud,sede_edificio,"
+                    + "nombre_edificio||_id_edificio as busqueda from "
                     + table
                     + " where busqueda like('%" + cad + "%')";
         }
         Log.e("busqueda", cad2);
-        SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                 MODE_WORLD_READABLE, null);
         Cursor c = db.rawQuery(cad2, null);
         final String[][] mat = Util.imprimirLista(c);

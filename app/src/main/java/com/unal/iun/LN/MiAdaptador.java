@@ -58,9 +58,12 @@ public class MiAdaptador extends BaseAdapter {
         this.tipo = tipo;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = actividad.getLayoutInflater();
-        View view = inflater.inflate(layout.elemento_lista, null, true);
+    public View getView(int position, View view, ViewGroup parent) {
+        if (view == null) {
+
+            LayoutInflater inflater = actividad.getLayoutInflater();
+            view = inflater.inflate(layout.elemento_lista, null, true);
+        }
         TextView textView = (TextView) view.findViewById(id.titulo);
         TextView textView2 = (TextView) view.findViewById(id.subtitulo);
         ImageView imageView = (ImageView) view.findViewById(id.icono);
@@ -127,6 +130,7 @@ public class MiAdaptador extends BaseAdapter {
                 imageView.setVisibility(View.GONE);
             }
         }
+
         return view;
     }
 

@@ -66,10 +66,7 @@ public class Util {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null) {
-            if (netInfo.isConnectedOrConnecting()) {
-                return true;
-            }
-            return false;
+            return netInfo.isConnectedOrConnecting();
         }
 
         return false;
@@ -124,11 +121,13 @@ public class Util {
     }
 
     public static String toString(String[] getcolumn) {
-        String cad = "";
-        for (int i = 0; i < getcolumn.length; i++) {
-            cad += getcolumn[i] + " ";
+        StringBuilder cad = new StringBuilder();
+        for (int i = 0; i < getcolumn.length - 1; i++) {
+            cad.append(getcolumn[i]);
+            cad.append(",");
         }
-        return cad;
+        cad.append(getcolumn[getcolumn.length - 1]);
+        return cad.toString();
     }
 
     public static String toString(double[] getcolumn) {
@@ -172,7 +171,7 @@ public class Util {
 		 */
     }
 
-    public static void addEventToCalendar(Activity activity, String date,
+    public static void addEventToCalendar(Activity activity, String date, int hour, int minute,
                                           String title, String description, String location) {
         Calendar cal = Calendar.getInstance();
         String cad[] = date.split("-");
@@ -180,8 +179,8 @@ public class Util {
         cal.set(Calendar.MONTH, Integer.parseInt(cad[1]));
         cal.set(Calendar.YEAR, Integer.parseInt(cad[0]));
 
-        cal.set(Calendar.HOUR_OF_DAY, 22);
-        cal.set(Calendar.MINUTE, 45);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
 
         Intent intent = new Intent(Intent.ACTION_EDIT);
         intent.setType("vnd.android.cursor.item/event");
@@ -202,7 +201,42 @@ public class Util {
         intent.putExtra(CalendarContract.Events.TITLE, title);
         intent.putExtra(CalendarContract.Events.DESCRIPTION, description);
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
+        activity.startActivity(intent);
+    }
 
+    public static void addEventToCalendar(Activity activity, String date, int begin_hour,
+                                          int begin_minute, int end_hour, int end_minute,
+                                          String title, String description, String location) {
+        Calendar cal = Calendar.getInstance();
+        String cad[] = date.split("-");
+        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cad[2]));
+        cal.set(Calendar.MONTH, Integer.parseInt(cad[1]));
+        cal.set(Calendar.YEAR, Integer.parseInt(cad[0]));
+
+        cal.set(Calendar.HOUR_OF_DAY, begin_hour);
+        cal.set(Calendar.MINUTE, begin_minute);
+
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                cal.getTimeInMillis());
+        cal.add(Calendar.HOUR, end_hour - begin_hour);
+        cal.add(Calendar.MINUTE, end_minute - end_minute);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                cal.getTimeInMillis());
+
+        intent.putExtra(CalendarContract.Events.ALL_DAY, false);
+        /*
+         * case DAILY: event.put("rrule", "FREQ=DAILY"); break; case MONTHLY:
+		 * event.put("rrule", "FREQ=MONTHLY"); break; case WEEKLY:
+		 * event.put("rrule", "FREQ=WEEKLY"); break; case FORTNIGHTLY:
+		 * event.put("rrule", "FREQ=YEARLY"); //CODE for Fortnight to be
+		 */
+        intent.putExtra("rrule", "FREQ=DAILY;COUNT=1");
+        intent.putExtra(CalendarContract.Events.TITLE, title);
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, description);
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
         activity.startActivity(intent);
     }
 
@@ -299,5 +333,12 @@ public class Util {
         addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         // Enviamos petición
         act.getApplicationContext().sendBroadcast(addIntent);
+    }
+
+    public static void log(String tag, String msg) {
+        if (MainActivity.DEBUG) {
+            Log.e(tag, msg);
+        }
+
     }
 }

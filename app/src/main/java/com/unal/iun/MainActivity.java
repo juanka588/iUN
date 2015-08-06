@@ -25,7 +25,8 @@ import com.unal.iun.LN.Util;
 
 
 public class MainActivity extends Activity {
-    public static String dataBaseName = "datastore.sqlite", tbName = "BaseM";
+    public static final boolean DEBUG = true;
+    public static String tbName = "BaseM";
     public static String sede = "Bogotá";
     public Timer tim;
     ImageView im;
@@ -38,7 +39,7 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
-            sede = savedInstanceState.getString("sede");
+            sede = savedInstanceState.getString(getString(R.string.main_activity_sede));
         }
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
@@ -63,6 +64,11 @@ public class MainActivity extends Activity {
         // addShortcut();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
 
     protected void cambiarBD() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
@@ -137,7 +143,7 @@ public class MainActivity extends Activity {
 
     public void admisiones(View v) {
         final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion), this.getString(R.string.edificios)};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final Activity act = this;
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
@@ -184,10 +190,8 @@ public class MainActivity extends Activity {
         MiLocationListener.textLon = (TextView) findViewById(R.id.textLongitud);
         MiLocationListener.textSede = (TextView) findViewById(R.id.textSede);
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-        MiLocationListener.db = openOrCreateDatabase(dataBaseName,
-                MODE_WORLD_READABLE, null);
+        MiLocationListener.db = lb.dataBase;
         try {
-
             milocManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, 0, 0, milocListener);
         } catch (Exception e) {
@@ -201,7 +205,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("sede", sede);
+        outState.putString(getString(R.string.main_activity_sede), sede);
         super.onSaveInstanceState(outState);
     }
 
@@ -233,7 +237,7 @@ public class MainActivity extends Activity {
 
     public void servicios(View v) {
         try {
-            startActivity(new Intent(getApplicationContext(), MenuWEBActivity.class));
+            startActivity(new Intent(getApplicationContext(), MenuWebTabActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             // this.finish();
         } catch (Exception e) {

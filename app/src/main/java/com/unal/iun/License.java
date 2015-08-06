@@ -1,28 +1,20 @@
 package com.unal.iun;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class License extends Activity {
+public class License extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
         initText();
-        BitmapDrawable background2 = new BitmapDrawable(
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
-        this.getActionBar().setBackgroundDrawable(background2);
-        this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
     }
 
     @Override

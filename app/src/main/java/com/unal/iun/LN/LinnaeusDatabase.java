@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.unal.iun.MainActivity;
 import com.unal.iun.R;
 
 import java.io.File;
@@ -20,20 +19,20 @@ import java.io.OutputStream;
 public class LinnaeusDatabase extends SQLiteOpenHelper {
 
     public final static String DATABASE_PATH = "/data/data/com.unal.iun/databases/";
-    private static final int DATABASE_VERSION = 1;
-    private static String DATABASE_NAME = "datastore.sqlite";
+    private static final int DATABASE_VERSION = 2;
+    public static String DATABASE_NAME = "datastore" + DATABASE_VERSION + ".sqlite";
     private final Context dbContext;
-    private SQLiteDatabase dataBase;
+    public SQLiteDatabase dataBase;
 
     public LinnaeusDatabase(Context context) {
-        super(context, MainActivity.dataBaseName, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         /*
          * desde carpetas externas File f=new File(path) if extits f.mkdir();
 		 */
         File f = null;
         try {
             if (DATABASE_VERSION == 1) {
-                f = new File(DATABASE_PATH + "DataStore.sqlite");
+                f = new File(DATABASE_PATH + "datastore" + DATABASE_VERSION + ".sqlite");
                 if (f.exists()) {
                     f.delete();
                 }
@@ -47,7 +46,6 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
             Log.e("Base de datos", e.toString());
         }
         this.dbContext = context;
-        DATABASE_NAME = MainActivity.dataBaseName;
         // checking database and open it if exists
         if (checkDataBase()) {
             openDataBase();
@@ -66,9 +64,11 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
     }
 
     private void copyDataBase() throws IOException {
-        InputStream myInput = dbContext.getResources().openRawResource(
-                R.raw.datastore);
-        ;// dbContext.getAssets().open(DATABASE_NAME);
+        InputStream myInput = dbContext.getResources().openRawResource(R.raw.datastore2);
+        /*.getResources().
+        getIdentifier("com.unal.iun:raw/" + DATABASE_NAME, null, null));
+        dbContext.getAssets().open(DATABASE_NAME);
+        */
         String outFileName = DATABASE_PATH + DATABASE_NAME;
         OutputStream myOutput = new FileOutputStream(outFileName);
         byte[] buffer = new byte[1024];

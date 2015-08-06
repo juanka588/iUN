@@ -9,16 +9,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.view.Display;
+import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.SearchView;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unal.iun.LN.DirectoryContract;
@@ -29,67 +34,34 @@ import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-
-public class MenuWEBActivity extends ActionBarActivity {
+public class MenuWebTabActivity extends AppCompatActivity {
 
     private static String GENERAL_INTEREST = "0";
     private static String UN_COMMUNITY = "1";
     private static String COMMUNITY_SERVICES = "2";
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    SectionsPagerAdapter mSectionsPagerAdapter;
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    ViewPager mViewPager;
     private SearchView sv;
-    private RecyclerView list_general_interest;
-    private RecyclerView list_communityUN;
-    private RecyclerView list_community_services;
     private double lat[];
     private double lon[];
     private String titulos[], descripciones[];
-    private boolean colegios = false;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_menu_web);
-        list_general_interest = (RecyclerView) findViewById(R.id.list_general_interest);
-        list_communityUN = (RecyclerView) findViewById(R.id.list_un_community);
-        list_community_services = (RecyclerView) findViewById(R.id.list_community_services);
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                .getDefaultDisplay();
-        int screenWidth, screenHeight, dpi;
-        float density;
-        DisplayMetrics metrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        screenHeight = metrics.heightPixels;
-        screenWidth = metrics.widthPixels;
-        density = metrics.density;
-        dpi = metrics.densityDpi;
-        int spaces = (int) ((screenWidth) / (300));
-        Util.log("spaces ", screenWidth + " " + density + " " + spaces);
-        LinnaeusDatabase ln = new LinnaeusDatabase(getApplicationContext());
-        SQLiteDatabase db = ln.dataBase;
-        Typeface font = Typeface
-                .createFromAsset(getAssets(), "Helvetica.ttf");
-        WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(initData(db,
-                GENERAL_INTEREST), this, font);
-        GridLayoutManager gridLayoutManager =
-                new GridLayoutManager(getApplicationContext(), spaces);
-        GridLayoutManager gridLayoutManager2 =
-                new GridLayoutManager(getApplicationContext(), spaces);
-        GridLayoutManager gridLayoutManager3 =
-                new GridLayoutManager(getApplicationContext(), spaces);
-        list_general_interest.setLayoutManager(gridLayoutManager);
-        list_general_interest.setAdapter(adapter);
-        WebMenuRecyclerViewAdapter adapter2 = new WebMenuRecyclerViewAdapter(initData(db,
-                UN_COMMUNITY), this, font);
-        WebMenuRecyclerViewAdapter adapter3 = new WebMenuRecyclerViewAdapter(initData(db,
-                COMMUNITY_SERVICES), this, font);
-        list_communityUN.setLayoutManager(gridLayoutManager2);
-        list_community_services.setLayoutManager(gridLayoutManager3);
-        list_communityUN.setAdapter(adapter2);
-        list_community_services.setAdapter(adapter3);
-        this.getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
-    private List<WebItem> initData(SQLiteDatabase db, String filter) {
+    public static List<WebItem> initData(Context context, String filter) {
+        LinnaeusDatabase ln = new LinnaeusDatabase(context);
+        SQLiteDatabase db = ln.dataBase;
         List<WebItem> items = new ArrayList<>();
         Cursor cursor = db.query(DirectoryContract.EnlacesProvider.TABLE_NAME,
                 DirectoryContract.EnlacesProvider.COLUMN_NAMES,
@@ -110,13 +82,30 @@ public class MenuWEBActivity extends ActionBarActivity {
                     Util.log("error data base", e.toString());
                 }
             }
-            int icon = this.getResources().getIdentifier("drawable/" + cad, null,
-                    this.getPackageName());
+            int icon = context.getResources().getIdentifier("drawable/" + cad, null,
+                    context.getPackageName());
             items.add(new WebItem(mat[i][0], icon, mat[i][2], false));
         }
         cursor.close();
         Util.log("Cambio", filter);
+        db.close();
         return items;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu_web_tab);
+
+
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
     }
 
     @Override
@@ -154,9 +143,8 @@ public class MenuWEBActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_menu_web, menu);
-        MenuItem menuItem = menu.getItem(0);
-        sv = (SearchView) menuItem.getActionView();
+        getMenuInflater().inflate(R.menu.menu_menu_web_tab, menu);
+        sv = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_busqueda));
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -176,15 +164,9 @@ public class MenuWEBActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void irA(View v) {
-        Intent radio = new Intent(this, RadioActivity.class);
-        startActivity(radio);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        return;
-    }
-
     private void preguntar(final Activity act) {
-        final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion), this.getString(R.string.edificios)};
+        final String[] items = {this.getString(R.string.instituciones),
+                this.getString(R.string.informacion), this.getString(R.string.edificios)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
@@ -253,4 +235,109 @@ public class MenuWEBActivity extends ActionBarActivity {
         } catch (Exception ex) {
         }
     }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+        private RecyclerView list;
+        private TextView title;
+
+        public PlaceholderFragment() {
+        }
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_menu_web_tab, container, false);
+            list = (RecyclerView) rootView.findViewById(R.id.list);
+            title = (TextView) rootView.findViewById(R.id.fragment_title);
+            int spaces = 3;
+            //Util.log("spaces ", screenWidth + " " + density + " " + spaces);
+            int selected = getArguments().getInt(ARG_SECTION_NUMBER);
+            String filter = "";
+            String fragmentTitle = "";
+            switch (selected) {
+                case 1:
+                    filter = GENERAL_INTEREST;
+                    fragmentTitle = rootView.getContext().getString(R.string.general_interest);
+                    break;
+                case 2:
+                    filter = UN_COMMUNITY;
+                    fragmentTitle = rootView.getContext().getString(R.string.community_un);
+                    break;
+                case 3:
+                    filter = COMMUNITY_SERVICES;
+                    fragmentTitle = rootView.getContext().getString(R.string.community_services);
+                    break;
+            }
+            title.setText(fragmentTitle);
+            Typeface font = Typeface
+                    .createFromAsset(rootView.getContext().getAssets(), "Helvetica.ttf");
+            WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(
+                    initData(rootView.getContext(), filter),
+                    rootView.getContext(), font);
+            GridLayoutManager gridLayoutManager =
+                    new GridLayoutManager(rootView.getContext(), spaces);
+            list.setLayoutManager(gridLayoutManager);
+            list.setAdapter(adapter);
+            return rootView;
+        }
+    }
+
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return getString(R.string.general_interest).toUpperCase(l);
+                case 1:
+                    return getString(R.string.community_un).toUpperCase(l);
+                case 2:
+                    return getString(R.string.community_services).toUpperCase(l);
+            }
+            return null;
+        }
+    }
 }
+

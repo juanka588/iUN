@@ -1,6 +1,5 @@
 package com.unal.iun;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +10,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -26,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -39,7 +39,7 @@ import com.unal.iun.LN.Util;
 import java.util.ArrayList;
 
 
-public class DirectorioActivity extends Activity {
+public class DirectorioActivity extends AppCompatActivity {
     protected String seleccion = "";
     protected String condicion = "";
     protected String tableName = "BaseM";
@@ -61,11 +61,11 @@ public class DirectorioActivity extends Activity {
     protected String columnas[] = {"_id", "NIVEL_ADMINISTRATIVO", "SEDE",
             "DEPENDENCIAS", "DIVISIONES", "DEPARTAMENTOS", "SECCIONES",
             "CORREO_ELECTRONICO", "EXTENSION", "DIRECTO",
-            "EDIFICIO", "id_enlace"};
+            "_id_edificio", "_id_enlace"};
     protected TableLayout tl;
     protected BitmapDrawable background;
     protected boolean buscando = false;
-    protected ActionBar barra;
+    protected android.support.v7.app.ActionBar barra;
     protected ActionBarDrawerToggle toggle;
     protected Activity act;
     private DrawerLayout cajon;
@@ -84,7 +84,7 @@ public class DirectorioActivity extends Activity {
     private void adaptadorInicial(Bundle b) {
         try {
             LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-            SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+            SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                     MODE_WORLD_READABLE, null);
             if (b.getBoolean("salto")) {
                 current = b.getInt("current");
@@ -192,11 +192,11 @@ public class DirectorioActivity extends Activity {
     }
 
     private void crearBarra() {
+        act = this;
+        barra = this.getSupportActionBar();
         BitmapDrawable background2 = new BitmapDrawable(
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
-        act = this;
-        barra = this.getActionBar();
         barra.setBackgroundDrawable(background2);
         String[] valores = getResources().getStringArray(R.array.optionsArray);
         String[] files = new String[]{"edificio.jpg", "enlacep.jpg",
@@ -244,9 +244,7 @@ public class DirectorioActivity extends Activity {
                 cajon.closeDrawer(opciones);
             }
         });
-        toggle = new ActionBarDrawerToggle(act, cajon,
-                R.drawable.ic_options, R.string.drawer_open,
-                R.string.drawer_close);
+        toggle = new ActionBarDrawerToggle(act, cajon, R.string.drawer_open, R.string.drawer_close);
         barra.setDisplayHomeAsUpEnabled(true);
         barra.setHomeButtonEnabled(true);
     }
@@ -278,7 +276,7 @@ public class DirectorioActivity extends Activity {
         try {
             Intent mapa = new Intent(this, MapaActivity.class);
             LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-            SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+            SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                     MODE_WORLD_READABLE, null);
             String query;
             int nivel = current - 1;
@@ -286,14 +284,14 @@ public class DirectorioActivity extends Activity {
                 nivel = 3;
             }
             if (condicion != "") {
-                query = "select distinct edificio,nombre_edificio,latitud,longitud from edificios natural join "
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios natural join "
                         + tableName + " where " + condicion;
                 // chambonazo mapa
                 if (path.contains("Bogotá")) {
                     query = query + " and nivel=" + nivel;
                 }
             } else {
-                query = "select distinct edificio,nombre_edificio,latitud,longitud from edificios ";
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios ";
                 query += " where nivel=" + nivel;
             }
             Log.e("query mapa", query);
@@ -316,7 +314,7 @@ public class DirectorioActivity extends Activity {
             mapa.putExtra("titulos", titulos);
             mapa.putExtra("descripciones", descripciones);
             mapa.putExtra("nivel", current - 1);
-            mapa.putExtra("zoom", current <= 2 ? current + 5 : current + 10);
+            mapa.putExtra("zoom", current <= 2 ? current + 3 : current + 10);
             mapa.putExtra("tipo", 0);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -452,6 +450,7 @@ public class DirectorioActivity extends Activity {
             startActivity(deta);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             // this.finish();
+            datos = null;
             if (current == 5) {
                 erase(condicion, false);
             }
@@ -583,9 +582,8 @@ public class DirectorioActivity extends Activity {
     public void recargar(String query, final boolean cond, final boolean cond2,
                          int tipo) {
         try {
-
             lv.setAdapter(null);
-            SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+            SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                     MODE_WORLD_READABLE, null);
             Cursor c = db.rawQuery(query, null);
             if (current == 3) {
@@ -669,10 +667,12 @@ public class DirectorioActivity extends Activity {
                     }
                 }
             });
+            Runtime.getRuntime().gc();
         } catch (Exception e) {
             Log.e("error al recargar ", e.toString());
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     protected boolean saltar(String seleccion2) {
@@ -715,7 +715,7 @@ public class DirectorioActivity extends Activity {
                                         boolean cond) {
         String consulta = baseConsult + criteria;
         ArrayList<String[]> datos = new ArrayList<String[]>();
-        SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                 MODE_WORLD_READABLE, null);
 
         Log.e("SQL ORIGINAL", consulta);
@@ -805,7 +805,7 @@ public class DirectorioActivity extends Activity {
         try {
             String query = "select distinct departamentos,sede from "
                     + tableName + " where " + condicion;
-            SQLiteDatabase db = openOrCreateDatabase(MainActivity.dataBaseName,
+            SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
                     MODE_WORLD_READABLE, null);
             Cursor c = db.rawQuery(query + auxCond, null);
             Log.e("consulta recarga", query + auxCond);
