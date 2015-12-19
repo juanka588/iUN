@@ -8,17 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.unal.iun.InstitucionesActivity">
 
-    <Space
-        android:id="@+id/SpaceColegios"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp" />
-
     <ExpandableListView
         android:id="@+id/listViewInstituciones"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ExpandableListView>
+        android:layout_height="wrap_content"/>
+
 
 </TableLayout>

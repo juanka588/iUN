@@ -1,9 +1,6 @@
 package com.unal.iun;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,13 +21,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.unal.iun.LN.DirectoryContract;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
+import com.unal.iun.Data.MapMarker;
+import com.unal.iun.Data.WebItem;
+import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
-import com.unal.iun.LN.WebMenuRecyclerViewAdapter;
-import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,46 +163,7 @@ public class MenuWebTabActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void preguntar(final Activity act) {
-        final String[] items = {this.getString(R.string.instituciones),
-                this.getString(R.string.informacion), this.getString(R.string.edificios)};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
-        builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        if (item == 0) {
-                            try {
-                                Intent ca = new Intent(act,
-                                        InstitucionesActivity.class);
-                                ca.putExtra("modo", true);
-                                startActivity(ca);
-                                overridePendingTransition(R.anim.fade_in,
-                                        R.anim.fade_out);
-                            } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(),
-                                        act.getText(R.string.disponible), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        if (item == 1) {
-                            String cad = "http://admisiones.unal.edu.co/";
-                            Util.irA(cad, act);
-                        } else {
-                            Intent ca = new Intent(act, InstitucionesActivity.class);
-                            ca.putExtra("modo", false);
-                            startActivity(ca);
-                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        }
-                    }
-                });
 
-        builder.setNegativeButton(this.getText(R.string.cancel_dialog), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
-    }
 
     public void ubicar() {
         try {
@@ -212,24 +172,29 @@ public class MenuWebTabActivity extends AppCompatActivity {
             SQLiteDatabase db = lb.dataBase;
             String query;
 
-            query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios "
+            query = "select distinct edificio._id,nombre_edificio,latitud,longitud from edificios "
                     + " where nivel=" + 5;
 
             Cursor c = db.rawQuery(query, null);
             String[][] mat = Util.imprimirLista(c);
             c.close();
             db.close();
-            lat = Util.toDouble(Util.getcolumn(mat, 2));
-            lon = Util.toDouble(Util.getcolumn(mat, 3));
-            titulos = Util.getcolumn(mat, 1);
-            descripciones = Util.getcolumn(mat, 0);
-            mapa.putExtra("lat", lat);
-            mapa.putExtra("lon", lon);
-            mapa.putExtra("titulos", titulos);
-            mapa.putExtra("descripciones", descripciones);
-            mapa.putExtra("nivel", 3);
-            mapa.putExtra("zoom", 15);
-            mapa.putExtra("tipo", 1);
+            double lat, lon;
+            ArrayList<MapMarker> markers = new ArrayList<>();
+            for (int i = 0; i < mat.length; i++) {
+                lat = Double.parseDouble(mat[i][0]);
+                lon = Double.parseDouble(mat[i][1]);
+
+                markers.add(new MapMarker(new LatLng(lat, lon)
+                        , mat[i][2]
+                        , mat[i][3]
+                        , 0
+                        , (int) BitmapDescriptorFactory.HUE_VIOLET));
+            }
+            mapa.putExtra(MapaActivity.ARG_MARKERS, markers);
+            mapa.putExtra(MapaActivity.ARG_LEVEL, 3);
+            mapa.putExtra(MapaActivity.ARG_ZOOM, 18);
+            mapa.putExtra(MapaActivity.ARG_TYPE, 1);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } catch (Exception ex) {
@@ -293,7 +258,7 @@ public class MenuWebTabActivity extends AppCompatActivity {
                     .createFromAsset(rootView.getContext().getAssets(), "Helvetica.ttf");
             WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(
                     initData(rootView.getContext(), filter),
-                    rootView.getContext(), font);
+                    getActivity(), font);
             GridLayoutManager gridLayoutManager =
                     new GridLayoutManager(rootView.getContext(), spaces);
             list.setLayoutManager(gridLayoutManager);

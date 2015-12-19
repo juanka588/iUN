@@ -1,4 +1,4 @@
-package com.unal.iun.LN;
+package com.unal.iun.DataSource;
 
 import android.provider.BaseColumns;
 
@@ -7,7 +7,8 @@ import android.provider.BaseColumns;
  */
 public class DirectoryContract {
     public static final class BaseProvider implements BaseColumns {
-        public static final String TABLE_NAME = "BaseM";
+        public static final String TABLE_NAME_BASE = "BaseM";
+        public static final String TABLE_NAME_LINKS = "BaseM";
         // Column with the foreign key into the location table.
         public static final String COLUMN_NIVEL_ADM = "NIVEL_ADMINISTRATIVO";
         // Date, stored as long in milliseconds since the epoch
@@ -24,7 +25,7 @@ public class DirectoryContract {
         public static final String COLUMN_EXTENSION = "EXTENSION";
         public static final String COLUMN_DIRECTO = "DIRECTO";
         public static final String COLUMN_EDIFICIO = "_id_edificio";
-        public static final String COLUMN_ID_ENLACE = "_id_enlace";
+        public static final String COLUMN_ID_ENLACE = TABLE_NAME_LINKS + "._id";
 
 
     }

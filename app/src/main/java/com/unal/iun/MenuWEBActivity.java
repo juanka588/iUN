@@ -9,23 +9,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.unal.iun.LN.DirectoryContract;
+import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
+import com.unal.iun.Data.WebItem;
+import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
-import com.unal.iun.LN.WebMenuRecyclerViewAdapter;
-import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class MenuWEBActivity extends ActionBarActivity {
         list_community_services.setLayoutManager(gridLayoutManager3);
         list_communityUN.setAdapter(adapter2);
         list_community_services.setAdapter(adapter3);
-        this.getActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private List<WebItem> initData(SQLiteDatabase db, String filter) {
@@ -156,7 +157,7 @@ public class MenuWEBActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_menu_web, menu);
         MenuItem menuItem = menu.getItem(0);
-        sv = (SearchView) menuItem.getActionView();
+        sv = (SearchView) MenuItemCompat.getActionView(menuItem);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -185,7 +186,7 @@ public class MenuWEBActivity extends ActionBarActivity {
 
     private void preguntar(final Activity act) {
         final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion), this.getString(R.string.edificios)};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -230,7 +231,7 @@ public class MenuWEBActivity extends ActionBarActivity {
             SQLiteDatabase db = lb.dataBase;
             String query;
 
-            query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios "
+            query = "select distinct edificio._id,nombre_edificio,latitud,longitud from edificios "
                     + " where nivel=" + 5;
 
             Cursor c = db.rawQuery(query, null);
@@ -247,7 +248,7 @@ public class MenuWEBActivity extends ActionBarActivity {
             mapa.putExtra("descripciones", descripciones);
             mapa.putExtra("nivel", 3);
             mapa.putExtra("zoom", 15);
-            mapa.putExtra("tipo", 1);
+            mapa.putExtra("type", 1);
             startActivity(mapa);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } catch (Exception ex) {

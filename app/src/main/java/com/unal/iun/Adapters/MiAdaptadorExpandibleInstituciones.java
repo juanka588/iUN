@@ -1,4 +1,4 @@
-package com.unal.iun.LN;
+package com.unal.iun.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,11 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.unal.iun.Data.MapMarker;
+import com.unal.iun.LN.LinnaeusDatabase;
+import com.unal.iun.LN.Util;
 import com.unal.iun.MapaActivity;
 import com.unal.iun.R;
 
@@ -29,9 +34,6 @@ public class MiAdaptadorExpandibleInstituciones extends
     public String mat[][];
     public int parentsSize;
     public boolean mode;
-    double lat[];
-    double lon[];
-    String titulos[], descripciones[];
     private Activity activity;
     private ArrayList<List> childtems;
     private LayoutInflater inflater;
@@ -98,9 +100,7 @@ public class MiAdaptadorExpandibleInstituciones extends
             String query;
             LinnaeusDatabase lb = new LinnaeusDatabase(
                     activity.getApplicationContext());
-            SQLiteDatabase db = activity.openOrCreateDatabase(
-                    LinnaeusDatabase.DATABASE_NAME, activity.MODE_WORLD_READABLE,
-                    null);
+            SQLiteDatabase db = lb.getReadableDatabase();
             String condicion = "latitud between " + (lt - 0.0001) + " and "
                     + (lt + 0.0001) + " and longitud between" + (lg - 0.0001)
                     + " and " + (lg + 0.0001);
@@ -108,7 +108,7 @@ public class MiAdaptadorExpandibleInstituciones extends
                 query = "select distinct direccion_edificio,nombre_edificio,latitud,longitud,departamento from"
                         + " colegios" + " where " + condicion;
             } else {
-                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios "
+                query = "select distinct edificios._id,nombre_edificio,latitud,longitud from edificios "
                         + "where " + condicion;
             }
             Log.e("buscado", query);
@@ -121,17 +121,21 @@ public class MiAdaptadorExpandibleInstituciones extends
                         activity.getText(R.string.data_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
-            lat = Util.toDouble(Util.getcolumn(mat, 2));
-            lon = Util.toDouble(Util.getcolumn(mat, 3));
-            titulos = Util.getcolumn(mat, 1);
-            descripciones = Util.getcolumn(mat, 0);
-            mapa.putExtra("lat", lat);
-            mapa.putExtra("lon", lon);
-            mapa.putExtra("titulos", titulos);
-            mapa.putExtra("descripciones", descripciones);
-            mapa.putExtra("nivel", 3);
-            mapa.putExtra("zoom", 18);
-            mapa.putExtra("tipo", 1);
+            double lat, lon;
+            ArrayList<MapMarker> markers = new ArrayList<>();
+            for (int i = 0; i < mat.length; i++) {
+                lat = Double.parseDouble(mat[i][2]);
+                lon = Double.parseDouble(mat[i][3]);
+                markers.add(new MapMarker(new LatLng(lat, lon)
+                        , mat[i][0]
+                        , mat[i][1]
+                        , 0
+                        , BitmapDescriptorFactory.HUE_VIOLET));
+            }
+            mapa.putExtra(MapaActivity.ARG_MARKERS, markers);
+            mapa.putExtra(MapaActivity.ARG_LEVEL, 3);
+            mapa.putExtra(MapaActivity.ARG_ZOOM, 18);
+            mapa.putExtra(MapaActivity.ARG_TYPE, 1);
             activity.startActivity(mapa);
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } catch (Exception ex) {

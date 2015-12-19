@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.unal.iun">
+<manifest package="com.unal.iun"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -75,7 +75,12 @@
         <activity
             android:name=".RadioActivity"
             android:label="@string/title_activity_radio"
-            android:logo="@drawable/home2" />
+            android:logo="@drawable/home2"
+            android:parentActivityName=".MenuWebTabActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unal.iun.MainActivity"/>
+        </activity>
         <activity
             android:name=".MenuWEBActivity"
             android:label="@string/title_activity_menu_web"
@@ -93,6 +98,15 @@
             android:name=".MenuWebTabActivity"
             android:label="@string/title_activity_menu_web_tab"
             android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unal.iun.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".DirectoryActivity"
+            android:label="@string/title_activity_directory"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.unal.iun.MainActivity" />

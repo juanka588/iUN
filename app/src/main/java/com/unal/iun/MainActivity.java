@@ -1,5 +1,6 @@
 package com.unal.iun;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -143,7 +145,7 @@ public class MainActivity extends Activity {
 
     public void admisiones(View v) {
         final String[] items = {this.getString(R.string.instituciones), this.getString(R.string.informacion), this.getString(R.string.edificios)};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = getBuilderApi();
         final Activity act = this;
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
@@ -180,6 +182,16 @@ public class MainActivity extends Activity {
             }
         });
         builder.show();
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private AlertDialog.Builder getBuilderApi() {
+        int currentVersion = android.os.Build.VERSION.SDK_INT;
+        Log.e("version", currentVersion + "");
+        if (currentVersion <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            return new AlertDialog.Builder(this);
+        }
+        return new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
     }
 
     private void iniciarLocalService() {
@@ -220,7 +232,7 @@ public class MainActivity extends Activity {
     private void directorio(boolean cond) {
         try {
             Intent directorio = new Intent(getApplicationContext(),
-                    DirectorioActivity.class);
+                    DirectoryActivity.class);
             if (cond) {
                 directorio.putExtra("current", 3);
                 directorio.putExtra("sede", sede);

@@ -1,6 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:id="@+id/linearLayoutDetalles"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,34 +12,29 @@
     tools:context=".DetailsActivity"
     tools:ignore="MergeRootFrame">
 
-    <Space
-        android:id="@+id/spaceDetalles1"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp" />
 
     <TextView
         android:id="@+id/tituloDetallesDtos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
-        android:layout_span="2"
         android:gravity="right"
         android:maxLines="3"
         android:maxWidth="200dp"
         android:text="Un Titulo muy largo larguisimo de prueba para mirar la efectividad"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
-    <Space
-        android:id="@+id/spaceDetalles2"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp" />
 
     <ExpandableListView
         android:id="@+id/expandableListDestails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tituloDetallesDtos"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="60dp"></ExpandableListView>
+        android:layout_marginTop="60dp"/>
 
-</LinearLayout>
+</RelativeLayout>

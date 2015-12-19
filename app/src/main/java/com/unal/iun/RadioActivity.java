@@ -23,6 +23,7 @@ public class RadioActivity extends ActionBarActivity implements
         MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
     public static MediaPlayer mediaPlayer;
     public static String path = "http://m.youtube.com/add_favorite?v=wIn-wIgWPXM";
+    TextView text;
     private VideoView surfaceView;
     private SurfaceHolder surfaceHolder;
     private ImageButton bPlay, bPause;
@@ -33,20 +34,19 @@ public class RadioActivity extends ActionBarActivity implements
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_radio);
-        this.getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         spin = (Spinner) findViewById(R.id.spinnerSelector);
         String[] list = this.getResources().getStringArray(R.array.radio);
         ArrayAdapter dataAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        TextView text = (TextView) findViewById(R.id.textRadioTEMP);
+        text = (TextView) findViewById(R.id.textRadioTEMP);
         spin.setAdapter(dataAdapter);
         bPlay = (ImageButton) findViewById(R.id.play);
-        bPlay.setEnabled(false);
         bPause = (ImageButton) findViewById(R.id.pause);
-        spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause, text));
+        bPause.setEnabled(false);
     }
 
     public void playVideo(View v) {
@@ -65,6 +65,7 @@ public class RadioActivity extends ActionBarActivity implements
 
     private void playVideo() {
         try {
+            spin.setOnItemSelectedListener(new onItemSpinSelected(bPlay, bPause, text));
             pause = false;
             bPause.setEnabled(true);
             RadioActivity.mediaPlayer.stop();
@@ -173,7 +174,7 @@ public class RadioActivity extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                home();
+                onBackPressed();
                 break;
 
             default:

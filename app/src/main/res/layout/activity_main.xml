@@ -46,33 +46,23 @@
 
                     <TextView
                         android:id="@+id/SOnlineButton"
+                        style="@style/TextMenuStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
-                        android:gravity="center"
                         android:onClick="servicios"
-                        android:padding="5dp"
-                        android:singleLine="true"
-                        android:text="@string/main_menu_item1"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@android:color/white" />
+                        android:text="@string/main_menu_item1"/>
 
                     <TextView
                         android:id="@+id/sedesButton"
+                        style="@style/TextMenuStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
-                        android:gravity="center"
                         android:onClick="directorio"
-                        android:padding="5dp"
-                        android:singleLine="true"
                         android:text="@string/main_menu_item3"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@android:color/white" />
+
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,33 +73,21 @@
 
                     <TextView
                         android:id="@+id/admisionesButton"
+                        style="@style/TextMenuStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
-                        android:gravity="center"
                         android:onClick="admisiones"
-                        android:padding="5dp"
-                        android:singleLine="true"
-                        android:text="@string/main_menu_item2"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@android:color/white" />
+                        android:text="@string/main_menu_item2"/>
 
                     <TextView
                         android:id="@+id/eventosButton"
+                        style="@style/TextMenuStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
-                        android:gravity="center"
                         android:onClick="eventos"
-                        android:padding="5dp"
-                        android:singleLine="true"
-                        android:text="@string/main_menu_item4"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@android:color/white" />
+                        android:text="@string/main_menu_item4"/>
                 </LinearLayout>
 
                 <LinearLayout

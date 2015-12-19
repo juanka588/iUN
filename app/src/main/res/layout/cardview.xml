@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <ImageView
@@ -12,7 +14,7 @@
         android:layout_gravity="center"
         android:background="@drawable/selectorfondocir"
         android:padding="2dp"
-        android:src="@drawable/un" />
+        android:src="@drawable/un"/>
 
     <TextView
         android:id="@+id/webItemDescription"
@@ -23,7 +25,6 @@
         android:maxWidth="5dp"
         android:padding="10dp"
         android:singleLine="false"
-        android:text="@string/abc_action_mode_done" />
-
+        android:text="@string/abc_action_mode_done"/>
 
 </LinearLayout>

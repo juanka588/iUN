@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="iUNTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@drawable/fondo</item>
+        <item name="actionBarStyle">@style/iUNActionBar</item>
+        <item name="android:textViewStyle">@style/TextStyle</item>
+        <item name="alertDialogTheme">@style/AlertDialog</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/primary_dark_material_dark</item>
+        <item name="colorAccent">@color/accent_blue</item>
+    </style>
+</resources>

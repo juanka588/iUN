@@ -1,8 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:layout_height="?android:attr/listPreferredItemHeight">
 
     <ImageView
         android:id="@+id/icono"

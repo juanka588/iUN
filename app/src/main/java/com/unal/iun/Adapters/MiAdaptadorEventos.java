@@ -1,4 +1,4 @@
-package com.unal.iun.LN;
+package com.unal.iun.Adapters;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.unal.iun.LN.Util;
 import com.unal.iun.R.id;
 import com.unal.iun.R.layout;
 

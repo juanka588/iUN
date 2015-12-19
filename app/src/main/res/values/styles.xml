@@ -3,18 +3,31 @@
     <!-- Base application theme. -->
     <style name="iUNTheme" parent="Theme.AppCompat">
         <item name="android:windowBackground">@drawable/fondo</item>
-        <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarStyle">@style/iUNActionBar</item>
         <item name="android:textViewStyle">@style/TextStyle</item>
+        <item name="alertDialogTheme">@style/AlertDialog</item>
     </style>
 
     <!-- ActionBar styles -->
-    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+    <style name="iUNActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
         <item name="android:background">@drawable/fondoinf</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
-    <style name="TextStyle" parent="@android:style/Widget.Holo.Light.TextView">
+    <style name="TextStyle" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="TextMenuStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/selectorwhite</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/selectorfondo</item>
+    </style>
+    <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+
     </style>
 
 
