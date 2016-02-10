@@ -1,4 +1,4 @@
-package com.unal.iun;
+package com.unal.iun.GUI;
 
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.unal.iun.LN.Util;
+import com.unal.iun.R;
 
 public class WebActivity extends AppCompatActivity {
 

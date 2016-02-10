@@ -45,13 +45,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapaActivity"
+            android:name=".GUI.MapaActivity"
             android:label="@string/title_activity_mapa"
             android:logo="@drawable/home2">
             >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".GUI.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleInstance">
             <intent-filter>
@@ -61,55 +61,55 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WebActivity"
+            android:name=".GUI.WebActivity"
             android:label="@string/title_activity_web"
             android:logo="@drawable/logo" />
         <activity
-            android:name=".InstitucionesActivity"
+            android:name=".GUI.InstitucionesActivity"
             android:label="@string/title_activity_instituciones"
             android:logo="@drawable/home2" />
         <activity
-            android:name=".DetailsActivity"
+            android:name=".GUI.DetailsActivity"
             android:label="@string/title_activity_activity_details"
             android:logo="@drawable/home2" />
         <activity
-            android:name=".RadioActivity"
+            android:name=".GUI.RadioActivity"
             android:label="@string/title_activity_radio"
             android:logo="@drawable/home2"
-            android:parentActivityName=".MenuWebTabActivity">
+            android:parentActivityName=".GUI.MenuWebTabActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unal.iun.MainActivity"/>
+                android:value=".GUI.MainActivity"/>
         </activity>
         <activity
-            android:name=".MenuWEBActivity"
+            android:name=".GUI.MenuWEBActivity"
             android:label="@string/title_activity_menu_web"
             android:logo="@drawable/home2" />
         <activity
-            android:name=".DirectorioActivity"
+            android:name=".GUI.DirectorioActivity"
             android:label="@string/title_activity_directorio"
             android:logo="@drawable/logo"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".License"
+            android:name=".GUI.License"
             android:label="@string/title_activity_license"
             android:logo="@drawable/home2" />
         <activity
-            android:name=".MenuWebTabActivity"
+            android:name=".GUI.MenuWebTabActivity"
             android:label="@string/title_activity_menu_web_tab"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".GUI.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unal.iun.MainActivity"/>
+                android:value=".GUI.MainActivity"/>
         </activity>
         <activity
-            android:name=".DirectoryActivity"
+            android:name=".GUI.DirectoryActivity"
             android:label="@string/title_activity_directory"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".GUI.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unal.iun.MainActivity" />
+                android:value=".GUI.MainActivity"/>
         </activity>
     </application>
 

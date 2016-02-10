@@ -17,9 +17,9 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
 
-import com.unal.iun.MainActivity;
+import com.unal.iun.GUI.MainActivity;
+import com.unal.iun.GUI.WebActivity;
 import com.unal.iun.R;
-import com.unal.iun.WebActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -2,15 +2,16 @@
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DirectoryActivity">
+    android:fitsSystemWindows="true" tools:context=".GUI.DirectoryActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/iUNActionBar">
     </android.support.v7.widget.Toolbar>
@@ -25,10 +26,15 @@
 
     <!-- The drawer is given a fixed width in dp and extends the full height of
          the container. -->
-    <fragment android:id="@+id/navigation_drawer"
-              android:name="com.unal.iun.LN.NavigationDrawerFragment"
-              android:layout_width="@dimen/navigation_drawer_width"
-              android:layout_height="match_parent"
-              android:layout_gravity="start"
-              tools:layout="@layout/drawer_directory"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:foreground="@android:drawable/list_selector_background"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"/>
+
 </android.support.v4.widget.DrawerLayout>

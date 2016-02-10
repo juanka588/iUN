@@ -1,4 +1,4 @@
-package com.unal.iun;
+package com.unal.iun.GUI;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.unal.iun.Adapters.MiAdaptador;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
+import com.unal.iun.R;
 
 import java.util.ArrayList;
 

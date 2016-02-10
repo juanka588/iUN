@@ -18,8 +18,9 @@ import android.widget.TextView;
 
 import com.unal.iun.Data.DetailedInformation;
 import com.unal.iun.Data.InformationElement;
+import com.unal.iun.Data.MapMarker;
+import com.unal.iun.GUI.MapaActivity;
 import com.unal.iun.LN.Util;
-import com.unal.iun.MapaActivity;
 import com.unal.iun.R;
 
 import java.util.ArrayList;
@@ -42,36 +43,39 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        DetailedInformation detail = items.get(groupPosition);
-        InformationElement child = detail.getInformationElements().get(childPosition);
-        TextView textView = (TextView) convertView.findViewById(R.id.textDetalle);
-        ImageView im = (ImageView) convertView.findViewById(R.id.imageDetalle);
         if (convertView == null) {
             convertView = activity.getLayoutInflater().inflate(R.layout.detalles, null);
         }
+        DetailedInformation detail = items.get(groupPosition);
+        final InformationElement child = detail.getInformationElements().get(childPosition);
+        TextView textView = (TextView) convertView.findViewById(R.id.textDetalle);
+        ImageView im = (ImageView) convertView.findViewById(R.id.imageDetalle);
         textView.setTypeface(font);
         textView.setText(child.getInformationDescription());
         int type = child.getType();
-        int draw = 0;
+        int draw = R.drawable.llamar;
         final String text = child.getInformationDescription();
         switch (type) {
             case 0:
+                draw = R.drawable.llamar;
                 convertView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        llamar(text);
+                        call(text);
                     }
                 });
                 break;
             case 1:
+                draw = R.drawable.llamar_ext;
                 convertView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        llamar("3165000;" + text);
+                        call("3165000;" + text);
                     }
                 });
                 break;
             case 2:
+                draw = R.drawable.email;
                 convertView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,14 +84,16 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
                 });
                 break;
             case 3:
+                draw = R.drawable.edificio;
                 convertView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ubicar(text);
+                        ubicar(child);
                     }
                 });
                 break;
             case 4:
+                draw = R.drawable.un;
                 textView.setText(activity.getText(R.string.web_site));
                 convertView.setOnClickListener(new OnClickListener() {
                     @Override
@@ -105,9 +111,9 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
     }
 
 
-    public void llamar(String number) {
-        Uri numero = Uri.parse("tel: +571" + number);
-        Intent intent = new Intent(Intent.ACTION_CALL, numero);
+    public void call(String numberSTR) {
+        Uri number = Uri.parse("tel: +571" + numberSTR);
+        Intent intent = new Intent(Intent.ACTION_CALL, number);
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -121,19 +127,17 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         activity.startActivity(intent);
     }
 
-    public void ubicar(String cad) {
-        try {
-            if (cad.equals("Edificio")) {
-                return;
-            }
-            Intent mapa = new Intent(activity, MapaActivity.class);
-            mapa.putExtra("zoom", 18);
-            mapa.putExtra("tipo", 1);
-            mapa.putExtra("nivel", 3);
-            activity.startActivity(mapa);
-            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } catch (Exception ex) {
-        }
+    public void ubicar(InformationElement element) {
+        Intent mapa = new Intent(activity, MapaActivity.class);
+        mapa.putExtra(MapaActivity.ARG_ZOOM, 18);
+        mapa.putExtra(MapaActivity.ARG_TYPE, 1);
+        mapa.putExtra(MapaActivity.ARG_LEVEL, 3);
+        ArrayList<MapMarker> data = new ArrayList<>();
+        data.add(element.getMapMarker());
+        mapa.putExtra(MapaActivity.ARG_MARKERS, data);
+        activity.startActivity(mapa);
+        activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
     public void correo(String email) {
@@ -148,17 +152,17 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            ((CheckedTextView) convertView).setText(items.get(groupPosition).getInformationTitle());
-            ((CheckedTextView) convertView).setChecked(isExpanded);
-            ((CheckedTextView) convertView).setGravity(Gravity.CENTER);
+            convertView = activity.getLayoutInflater().inflate(R.layout.grupo, null);
         }
+        ((CheckedTextView) convertView).setText(items.get(groupPosition).getInformationTitle());
+        ((CheckedTextView) convertView).setChecked(isExpanded);
+        ((CheckedTextView) convertView).setGravity(Gravity.CENTER);
         return convertView;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return (InformationElement) (items.get(groupPosition).getInformationElements()
-                .get(childPosition));
+        return (items.get(groupPosition).getInformationElements().get(childPosition));
     }
 
     @Override
@@ -173,7 +177,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return (DetailedInformation) items.get(groupPosition);
+        return items.get(groupPosition);
     }
 
     @Override

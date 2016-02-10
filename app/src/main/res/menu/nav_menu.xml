@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@drawable/ic_bogota"
+            android:title="@string/buscar"/>
+        <item
+            android:id="@+id/nav_productos"
+            android:icon="@drawable/ic_amazonia"
+            android:title="@string/app_name"/>
+        <item
+            android:id="@+id/nav_carrito"
+            android:icon="@drawable/ic_caribe"
+            android:title="@string/accept"/>
+        <item
+            android:id="@+id/otra_section"
+            android:title="@string/app_name">
+            <menu>
+                <item
+                    android:id="@+id/nav_otro_item"
+                    android:icon="@drawable/ic_manizales"
+                    android:title="@string/informacion"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>

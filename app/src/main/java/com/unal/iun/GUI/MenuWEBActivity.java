@@ -1,4 +1,4 @@
-package com.unal.iun;
+package com.unal.iun.GUI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +27,7 @@ import com.unal.iun.Data.WebItem;
 import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
+import com.unal.iun.R;
 
 import java.util.ArrayList;
 import java.util.List;

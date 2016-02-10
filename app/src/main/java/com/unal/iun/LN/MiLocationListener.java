@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unal.iun.MainActivity;
+import com.unal.iun.GUI.MainActivity;
 import com.unal.iun.R;
 
 public class MiLocationListener implements LocationListener {

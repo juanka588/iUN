@@ -18,9 +18,9 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.Data.MapMarker;
+import com.unal.iun.GUI.MapaActivity;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
-import com.unal.iun.MapaActivity;
 import com.unal.iun.R;
 
 import java.util.ArrayList;
@@ -127,8 +127,8 @@ public class MiAdaptadorExpandibleInstituciones extends
                 lat = Double.parseDouble(mat[i][2]);
                 lon = Double.parseDouble(mat[i][3]);
                 markers.add(new MapMarker(new LatLng(lat, lon)
-                        , mat[i][0]
                         , mat[i][1]
+                        , mat[i][0]
                         , 0
                         , BitmapDescriptorFactory.HUE_VIOLET));
             }

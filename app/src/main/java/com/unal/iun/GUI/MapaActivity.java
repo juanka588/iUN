@@ -1,4 +1,4 @@
-package com.unal.iun;
+package com.unal.iun.GUI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,6 +35,7 @@ import com.unal.iun.Data.MapMarker;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.MiLocationListener;
 import com.unal.iun.LN.Util;
+import com.unal.iun.R;
 
 import java.util.ArrayList;
 
@@ -66,18 +67,22 @@ public class MapaActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             handleBundle();
         }
+        handleToolBar();
     }
 
-    private void handleBundle() {
-        deta = new Intent(this, DetailsActivity.class);
+    private void handleToolBar() {
         bar = this.getSupportActionBar();
-        BitmapDrawable background2 = new BitmapDrawable(
+        BitmapDrawable background2 = new BitmapDrawable(getApplicationContext().getResources(),
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
         bar.setBackgroundDrawable(background2);
         bar.setDisplayHomeAsUpEnabled(true);
         bar.setHomeButtonEnabled(true);
         bar.setTitle(this.getText(R.string.cobertura_nacional));
+    }
+
+    private void handleBundle() {
+        deta = new Intent(this, DetailsActivity.class);
         Bundle b = getIntent().getExtras();
         markers = b.getParcelableArrayList(ARG_MARKERS);
         zoom = b.getInt(ARG_ZOOM);
@@ -163,6 +168,9 @@ public class MapaActivity extends AppCompatActivity {
         zoom = b.getInt(ARG_ZOOM);
         type = b.getInt(ARG_TYPE);
         nivel = b.getInt(ARG_LEVEL);
+        animarCamara(markers.get(0).getPosition(), zoom);
+        tableName = MainActivity.tbName;
+        addNewMarkers(false, new ArrayList<MapMarker>());
         super.onRestoreInstanceState(b);
     }
 
@@ -361,41 +369,32 @@ public class MapaActivity extends AppCompatActivity {
                                             break;
                                     }
                                     animarCamara(arg0.getPosition(), zoom);
-                                    try {
-                                        String consulta = "SELECT departamentos,secciones,"
-                                                + "directo,extension,correo_electronico,NOMBRE_EDIFICIO,"
-                                                + "url,piso_oficina, LATITUD,LONGITUD FROM "
-                                                + tableName
-                                                + " natural join edificios"
-                                                + " join enlace"
-                                                + " where " + tableName + "._id_enlace=enlace._id and ";
 
-                                        ArrayList<DetailedInformation> data = getData(
-                                                consulta, "NOMBRE_EDIFICIO='"
-                                                        + arg0.getTitle() + "'");
-                                        if (data.isEmpty() || nivel < 3) {
-                                            zoomIn(arg0);
-                                            Toast.makeText(
-                                                    getApplicationContext(),
-                                                    act.getText(R.string.data_exception),
-                                                    Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            deta.putExtra(DetailsActivity.ARG_TITLE, data.get(0).getInformationTitle());
-                                            deta.putExtra(DetailsActivity.ARG_DATA, data);
-                                            animarFondo(cond);
-                                            deta.putExtra(DetailsActivity.ARG_BACKGROUND, idFondoTras);
-                                            startActivity(deta);
-                                            changeMapType();
-                                        }
-                                    } catch (Exception e) {
-                                        try {
-                                            zoomIn(arg0);
-                                        } catch (Exception ex2) {
-                                            Toast.makeText(
-                                                    getApplicationContext(),
-                                                    act.getText(R.string.data_exception),
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
+                                    String consulta = "SELECT secciones,"
+                                            + "directo,extension,correo_electronico,"
+                                            + "url,piso_oficina,NOMBRE_EDIFICIO,edificios._id, LATITUD,LONGITUD FROM "
+                                            + tableName
+                                            + " inner join edificios"
+                                            + " on BaseM._id_edificio=edificios._id"
+                                            + " inner join enlace"
+                                            + " on " + tableName + "._id_enlace=enlace._id where ";
+
+                                    ArrayList<DetailedInformation> data = getData(
+                                            consulta, "NOMBRE_EDIFICIO='"
+                                                    + arg0.getTitle() + "'");
+                                    if (data.isEmpty() || nivel < 3) {
+                                        zoomIn(arg0);
+                                        Toast.makeText(
+                                                getApplicationContext(),
+                                                act.getText(R.string.data_exception),
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        deta.putExtra(DetailsFragment.ARG_TITLE, getString(R.string.build) + arg0.getTitle());
+                                        deta.putExtra(DetailsFragment.ARG_DATA, data);
+                                        animarFondo(cond);
+                                        deta.putExtra(DetailsFragment.ARG_BACKGROUND, idFondoTras);
+                                        startActivity(deta);
+                                        changeMapType();
                                     }
                                 }
                             }
@@ -433,8 +432,8 @@ public class MapaActivity extends AppCompatActivity {
     public ArrayList<DetailedInformation> getData(String baseConsult, String criteria) {
         String consulta = baseConsult + criteria;
         Log.e("consulta mMap", consulta);
-        SQLiteDatabase db = openOrCreateDatabase(LinnaeusDatabase.DATABASE_NAME,
-                MODE_WORLD_READABLE, null);
+        LinnaeusDatabase lin = new LinnaeusDatabase(getApplicationContext());
+        SQLiteDatabase db = lin.getReadableDatabase();
         Cursor c = db.rawQuery(consulta, null);
         String[][] mat = Util.imprimirLista(c);
         c.close();
@@ -444,10 +443,14 @@ public class MapaActivity extends AppCompatActivity {
         DetailedInformation dt;
         ArrayList<DetailedInformation> detailedInformations = new ArrayList<>();
         for (int i = 0; i < mat.length; i++) {
-            for (int j = 1; j < mat[i].length; j++) {
-                infos.add(new InformationElement(mat[i][j]));
-                Log.e("info", mat[i][j]);
+            int size = mat[i].length;
+            for (int j = 1; j < size - 4; j++) {
+                if (mat[i][j] != null) {
+                    infos.add(new InformationElement(mat[i][j]));
+                    Log.e("info", mat[i][j]);
+                }
             }
+            infos.add(new InformationElement(mat[i][size - 4], mat[i][size - 3], mat[i][size - 2], mat[i][size - 1]));
             Log.e("title", mat[i][0]);
             dt = new DetailedInformation(infos, mat[i][0]);
             detailedInformations.add(dt);

@@ -59,7 +59,17 @@
     <string name="radio_exception">No es posible cargar el streaming por el momento</string>
     <string name="longitude">Longitud</string>
     <string name="latitude">Latitud</string>
-    <string name="himno">Gaudeamus igitur  \nJuvenes dum sumus  \nPost jucundum juventutem  \nPost molestam senectutem  \nNos habebit humus.  \n \nUbi sunt qui ante nos  \nIn mundo fuere?  \nVadite ad superos  \nTransite in inferos  \nHos si vis videre.  \n \nVita nostra brevis est  \nBrevi finietur.  \nVenit mors velociter  \nRapit nos atrociter  \nNemini parcetur.  \n \nVivat academia  \nVivant professores  \nVivat membrum quodlibet  \nVivat membra quaelibet  \nSemper sint in flore.  \n \nVivant omnes virgines  \nFaciles, formosae.  \nVivant et mulieres  \nTenerae amabiles  \nBonae laboriosae.  \n \nVivant et republica  \net qui illam regit.  \nVivat nostra civitas,  \nMaecenatum caritas  \nQuae nos hic protegit.  \n \nAlma Mater floreat \nquae nos educavit, \ncaros et conmilitones \ndissitas in regiones \nsparsos congregavit. \n \n(ver. C. W. Kindeleben 1781) \n</string>
+    <string name="himno">Gaudeamus igitur \nJuvenes dum sumus \nPost jucundum juventutem \nPost
+        molestam senectutem \nNos habebit humus. \n \nUbi sunt qui ante nos \nIn mundo fuere?
+        \nVadite ad superos \nTransite in inferos \nHos si vis videre. \n \nVita nostra brevis est
+        \nBrevi finietur. \nVenit mors velociter \nRapit nos atrociter \nNemini parcetur. \n \nVivat
+        academia \nVivant professores \nVivat membrum quodlibet \nVivat membra quaelibet \nSemper
+        sint in flore. \n \nVivant omnes virgines \nFaciles, formosae. \nVivant et mulieres
+        \nTenerae amabiles \nBonae laboriosae. \n \nVivant et republica \net qui illam regit.
+        \nVivat nostra civitas, \nMaecenatum caritas \nQuae nos hic protegit. \n \nAlma Mater
+        floreat \nquae nos educavit, \ncaros et conmilitones \ndissitas in regiones \nsparsos
+        congregavit. \n \n(ver. C. W. Kindeleben 1781) \n
+    </string>
     <string name="main_activity_sede">sede</string>
     <string name="details_background">fondo</string>
     <string name="community_un">Comunidad UN</string>
@@ -80,5 +90,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="build">edificio:</string>
 
 </resources>
