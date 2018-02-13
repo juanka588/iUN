@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unal.iun.LN.Util;
-import com.unal.iun.R.drawable;
 import com.unal.iun.R.id;
-import com.unal.iun.R.layout;
 
 import java.util.ArrayList;
 
@@ -69,15 +67,16 @@ public class MiAdaptador extends BaseAdapter {
         TextView textView2 = (TextView) view.findViewById(id.subtitulo);
         ImageView imageView = (ImageView) view.findViewById(id.icono);
 
-        if (lista[position] != null) {
-            textView.setText(Util.toCammelCase(lista[position].toLowerCase()));
-            textView.setHint(Util.toCammelCase(lista[position].toLowerCase()));
+        String element = lista[position];
+        if (element != null) {
+            textView.setText(Util.toCammelCase(element.toLowerCase()));
+            textView.setHint(Util.toCammelCase(element.toLowerCase()));
             if (tipo != 0) {
-                if (lista[position].contains("Museo Paleon")) {
+                if (element.contains("Museo Paleon")) {
                     textView.setText("\t Museo Paleontologico");
                     textView.setTextSize(15);
                 }
-                if (lista[position].contains("Estación de Biolo")) {
+                if (element.contains("Estación de Biolo")) {
                     textView.setText("\t Estación de Biología Tropical Roberto Franco");
                     textView.setTextSize(15);
                 }
@@ -89,39 +88,40 @@ public class MiAdaptador extends BaseAdapter {
             TextView prueba = (TextView) view.findViewById(ids[i]);
             prueba.setTypeface(fuente);
         }
-        if (lista2[position] != null) {
+        String element2 = lista2[position];
+        if (element2 != null) {
             textView2
-                    .setText(Util.toCammelCase(lista2[position].toLowerCase()));
+                    .setText(Util.toCammelCase(element2.toLowerCase()));
             if (tipo > 0 && tipo < 3) {
                 textView2.setText("");
             }
-            if (lista2[position].contains("Bogo")) {
+            if (element2.contains("Bogo")) {
                 imageView.setImageResource(drawable.ic_bogota);
             }
-            if (lista2[position].contains("Amaz")) {
+            if (element2.contains("Amaz")) {
                 imageView.setImageResource(drawable.ic_amazonia);
             }
-            if (lista2[position].contains("Caribe")) {
+            if (element2.contains("Caribe")) {
                 imageView.setImageResource(drawable.ic_caribe);
             }
-            if (lista2[position].contains("Mani")) {
+            if (element2.contains("Mani")) {
                 imageView.setImageResource(drawable.ic_manizales);
             }
-            if (lista2[position].contains("Mede")) {
+            if (element2.contains("Mede")) {
                 imageView.setImageResource(drawable.ic_medellin);
             }
-            if (lista2[position].contains("Tumac")) {
+            if (element2.contains("Tumac")) {
                 imageView.setImageResource(drawable.ic_tumaco);
             }
-            if (lista2[position].contains("Palmira")) {
+            if (element2.contains("Palmira")) {
                 imageView.setImageResource(drawable.ic_palmira);
             }
-            if (lista2[position].contains("Orino")) {
+            if (element2.contains("Orino")) {
                 imageView.setImageResource(drawable.ic_oriniquia);
             }
             if (tipo == 2) {
                 // Log.e("iconos en servicios",lista2[position]);
-                String cad = lista2[position];
+                String cad = element2;
                 cad = cad.substring(0, cad.length() - 4);
                 int id = actividad.getResources().getIdentifier(
                         "com.unal.iun:drawable/" + cad, null, null);

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -23,17 +23,17 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
-import com.unal.iun.Data.WebItem;
 import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MenuWEBActivity extends ActionBarActivity {
+public class MenuWEBActivity extends AppCompatActivity {
 
     private static String GENERAL_INTEREST = "0";
     private static String UN_COMMUNITY = "1";

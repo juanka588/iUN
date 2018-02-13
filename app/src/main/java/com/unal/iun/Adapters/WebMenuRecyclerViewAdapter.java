@@ -16,12 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unal.iun.Data.WebItem;
 import com.unal.iun.GUI.InstitucionesActivity;
 import com.unal.iun.GUI.RadioActivity;
 import com.unal.iun.GUI.WebActivity;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.WebItem;
 
 import java.util.List;
 

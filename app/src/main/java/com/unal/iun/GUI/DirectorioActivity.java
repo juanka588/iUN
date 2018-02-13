@@ -1,6 +1,5 @@
 package com.unal.iun.GUI;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -322,7 +321,6 @@ public class DirectorioActivity extends AppCompatActivity {
         }
     }
 
-    @TargetApi(11)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_directorio, menu);
@@ -596,7 +594,7 @@ public class DirectorioActivity extends AppCompatActivity {
                     c = db.rawQuery(query, null);
                 }
             }
-            simpleCursorAdapter.changeCursorAndColumns(c, from, to);
+//            simpleCursorAdapter.changeCursorAndColumns(c, from, to);
             final String[][] mat = Util.imprimirLista(c);
             MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
                     Util.getcolumn(mat, 1), tipo);
@@ -623,7 +621,7 @@ public class DirectorioActivity extends AppCompatActivity {
                             || seleccion.contains("Dirección Nacional")) {
                         animarFondo(seleccion, true);
                     }
-                    if (path == "") {
+                    if (path.isEmpty()) {
                         path = seleccion;
                         // item.setTitleCondensed(path.toUpperCase().trim());
                     } else {

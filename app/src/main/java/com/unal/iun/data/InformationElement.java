@@ -1,4 +1,4 @@
-package com.unal.iun.Data;
+package com.unal.iun.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

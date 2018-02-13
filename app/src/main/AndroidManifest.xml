@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.unal.iun"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unal.iun">
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -79,7 +79,7 @@
             android:parentActivityName=".GUI.MenuWebTabActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GUI.MainActivity"/>
+                android:value=".GUI.MainActivity" />
         </activity>
         <activity
             android:name=".GUI.MenuWEBActivity"
@@ -100,7 +100,7 @@
             android:parentActivityName=".GUI.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GUI.MainActivity"/>
+                android:value=".GUI.MainActivity" />
         </activity>
         <activity
             android:name=".GUI.DirectoryActivity"
@@ -109,8 +109,40 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GUI.MainActivity"/>
+                android:value=".GUI.MainActivity" />
         </activity>
+
+        <receiver
+            android:name="com.innoquant.moca.push.MOCAPushReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.innoquant.moca.push.ACTION_PUSH_RECEIVE" />
+                <action android:name="com.innoquant.moca.push.ACTION_PUSH_DISMISSED" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- REQUIRED by MOCA to handle push notifications -->
+        <receiver
+            android:name="com.innoquant.moca.push.GcmPushReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.unal.iun" />
+            </intent-filter>
+        </receiver>
+
+        <!-- MOCA GcmTokenListener listens to token registrations/updates -->
+        <service
+            android:name="com.innoquant.moca.push.GcmTokenListener"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

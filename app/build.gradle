@@ -2,33 +2,49 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     signingConfigs {
         config {
             keyAlias 'iun'
             keyPassword 'com.unal'
-            storeFile file('C:/Users/JuanCamilo/AndroidAppKey')
+            storeFile file('C:/Users/Camilo/AndroidAppKey')
             storePassword 'com.unal'
         }
     }
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "com.unal.iun"
-        minSdkVersion 10
-        targetSdkVersion 23
+        minSdkVersion 15
+        targetSdkVersion 22
         versionCode 6
         versionName "2.11"
+        resConfigs "auto"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     productFlavors {
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        jumboMode true
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:support-v4:23.1.0'
-    compile 'com.google.android.gms:play-services:8.3.0'
-    compile 'com.android.support:cardview-v7:23.1.0'
-    compile 'com.android.support:design:23.1.0'
-    compile 'com.android.support:recyclerview-v7:23.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.mocaplatform:moca-android-sdk:2.5.+'
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+
+    implementation 'com.google.android.gms:play-services-maps:11.4.2'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

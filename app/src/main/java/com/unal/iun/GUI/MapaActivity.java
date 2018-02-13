@@ -2,7 +2,6 @@ package com.unal.iun.GUI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,29 +16,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.unal.iun.Data.DetailedInformation;
-import com.unal.iun.Data.InformationElement;
-import com.unal.iun.Data.MapMarker;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.MiLocationListener;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.DetailedInformation;
+import com.unal.iun.data.InformationElement;
+import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
 
-public class MapaActivity extends AppCompatActivity {
+public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     public static final String ARG_MARKERS = "markers";
     public static final String ARG_LEVEL = "nivel";
@@ -94,30 +92,12 @@ public class MapaActivity extends AppCompatActivity {
         addNewMarkers(false, new ArrayList<MapMarker>());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setUpMapIfNeeded();
-    }
 
     private void setUpMapIfNeeded() {
         act = this;
-        int status = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(getBaseContext());
-        if (status == ConnectionResult.SUCCESS) {
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.map)).getMap();
-        } else {
-            int requestCode = 10;
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this,
-                    requestCode);
-            dialog.show();
-        }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setAllGesturesEnabled(true);
-        MapsInitializer.initialize(MapaActivity.this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void animarCamara(LatLng position, int zoom2) {
@@ -499,4 +479,13 @@ public class MapaActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setAllGesturesEnabled(true);
+        MapsInitializer.initialize(MapaActivity.this);
+    }
 }

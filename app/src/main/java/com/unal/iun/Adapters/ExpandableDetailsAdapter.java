@@ -16,12 +16,12 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.unal.iun.Data.DetailedInformation;
-import com.unal.iun.Data.InformationElement;
-import com.unal.iun.Data.MapMarker;
 import com.unal.iun.GUI.MapaActivity;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.DetailedInformation;
+import com.unal.iun.data.InformationElement;
+import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
 

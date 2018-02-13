@@ -25,12 +25,12 @@ import android.widget.TextView;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
-import com.unal.iun.Data.MapMarker;
-import com.unal.iun.Data.WebItem;
 import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.MapMarker;
+import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,20 +1,16 @@
 package com.unal.iun.GUI;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -24,12 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.MiLocationListener;
-import com.unal.iun.LN.Timer;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 
@@ -38,15 +30,9 @@ public class MainActivity extends Activity {
     public static final boolean DEBUG = true;
     public static String tbName = "BaseM";
     public static String sede = "Bogotá";
-    public Timer tim;
     ImageView im;
     int screenWidth;
     int screenHeight;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +63,6 @@ public class MainActivity extends Activity {
             Util.notificarRed(this);
         }
         // addShortcut();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -224,25 +207,10 @@ public class MainActivity extends Activity {
         MiLocationListener.textSede = (TextView) findViewById(R.id.textSede);
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
         MiLocationListener.db = lb.dataBase;
-        try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             milocManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, 0, 0, milocListener);
-        } catch (Exception e) {
-
-        } finally {
-            milocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    0, 0, milocListener);
-        }
+        milocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                0, 0, milocListener);
 
     }
 
@@ -263,7 +231,7 @@ public class MainActivity extends Activity {
     private void directorio(boolean cond) {
         try {
             Intent directorio = new Intent(getApplicationContext(),
-                    DirectoryActivity.class);
+                    DirectorioActivity.class);
             if (cond) {
                 directorio.putExtra("current", 3);
                 directorio.putExtra("sede", sede);
@@ -288,43 +256,4 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mClient.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.unal.iun.GUI/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(mClient, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.unal.iun.GUI/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(mClient, viewAction);
-        mClient.disconnect();
-    }
 }

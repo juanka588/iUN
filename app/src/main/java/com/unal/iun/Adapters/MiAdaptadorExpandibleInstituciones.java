@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.unal.iun.Data.MapMarker;
 import com.unal.iun.GUI.MapaActivity;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
 import java.util.List;
