@@ -62,7 +62,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
         setUpMapIfNeeded();
-        if (savedInstanceState == null) {
+        if (mMap != null) {
             handleBundle();
         }
         handleToolBar();
@@ -184,6 +184,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void changeMapType() {
+        if (mMap == null) {
+            return;
+        }
         if (type == 0) {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             type++;

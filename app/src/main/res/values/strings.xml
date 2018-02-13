@@ -4,14 +4,14 @@
     <string name="app_name">iUN</string>
     <string name="title_activity_directorio">Directorio</string>
     <string name="title_activity_menu_web">Servicios en linea</string>
-    <string name="title_activity_web"></string>
+    <string name="title_activity_web" translatable="false">asas</string>
     <string name="title_activity_main">iUN</string>
     <string name="menu_volver">Volver</string>
     <string name="menu_URL">URL</string>
     <string name="menu_adelante">Adelante</string>
     <string name="menu_Recargar">Recargar</string>
-    <string name="title_activity_mapa"></string>
-    <string name="lugar"></string>
+    <string name="title_activity_mapa" translatable="false">as</string>
+    <string name="lugar" translatable="false">asas</string>
     <string name="tipo_mapa">Cambiar Tipo</string>
     <string name="title_activity_eventos">Eventos</string>
     <string name="buscar">Buscar</string>
@@ -70,30 +70,30 @@
         floreat \nquae nos educavit, \ncaros et conmilitones \ndissitas in regiones \nsparsos
         congregavit. \n \n(ver. C. W. Kindeleben 1781) \n
     </string>
-    <string name="main_activity_sede">sede</string>
-    <string name="details_background">fondo</string>
-    <string name="community_un">Comunidad UN</string>
-    <string name="general_interest">Interes General</string>
-    <string name="community_services">Servicios a la Comunidad</string>
-    <string name="title_activity_menu_web_tab">Servicios en Linea</string>
+    <string name="main_activity_sede" translatable="false">sede</string>
+    <string name="details_background" translatable="false">fondo</string>
+    <string name="community_un" translatable="false">Comunidad UN</string>
+    <string name="general_interest" translatable="false">Interes General</string>
+    <string name="community_services" translatable="false">Servicios a la Comunidad</string>
+    <string name="title_activity_menu_web_tab" translatable="false">Servicios en Linea</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1" translatable="false">Section 1</string>
+    <string name="title_section2" translatable="false">Section 2</string>
+    <string name="title_section3" translatable="false">Section 3</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_directory">Directory</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_directory" translatable="false">Directory</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string name="action_example" translatable="false">Example action</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="build">edificio:</string>
-    <string name="accept">accept</string>
+    <string name="accept" translatable="false">accept</string>
 
 </resources>

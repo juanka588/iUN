@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unal.iun.LN.Util;
-import com.unal.iun.R.id;
+import com.unal.iun.R;
 
 import java.util.ArrayList;
 
@@ -61,11 +61,11 @@ public class MiAdaptador extends BaseAdapter {
         if (view == null) {
 
             LayoutInflater inflater = actividad.getLayoutInflater();
-            view = inflater.inflate(layout.elemento_lista, null, true);
+            view = inflater.inflate(R.layout.elemento_lista, null, true);
         }
-        TextView textView = (TextView) view.findViewById(id.titulo);
-        TextView textView2 = (TextView) view.findViewById(id.subtitulo);
-        ImageView imageView = (ImageView) view.findViewById(id.icono);
+        TextView textView = (TextView) view.findViewById(R.id.titulo);
+        TextView textView2 = (TextView) view.findViewById(R.id.subtitulo);
+        ImageView imageView = (ImageView) view.findViewById(R.id.icono);
 
         String element = lista[position];
         if (element != null) {
@@ -82,8 +82,8 @@ public class MiAdaptador extends BaseAdapter {
                 }
             }
         }
-        imageView.setImageResource(drawable.icono_app);
-        int ids[] = {id.titulo, id.subtitulo};
+        imageView.setImageResource(R.drawable.icono_app);
+        int ids[] = {R.id.titulo, R.id.subtitulo};
         for (int i = 0; i < ids.length; i++) {
             TextView prueba = (TextView) view.findViewById(ids[i]);
             prueba.setTypeface(fuente);
@@ -96,28 +96,28 @@ public class MiAdaptador extends BaseAdapter {
                 textView2.setText("");
             }
             if (element2.contains("Bogo")) {
-                imageView.setImageResource(drawable.ic_bogota);
+                imageView.setImageResource(R.drawable.ic_bogota);
             }
             if (element2.contains("Amaz")) {
-                imageView.setImageResource(drawable.ic_amazonia);
+                imageView.setImageResource(R.drawable.ic_amazonia);
             }
             if (element2.contains("Caribe")) {
-                imageView.setImageResource(drawable.ic_caribe);
+                imageView.setImageResource(R.drawable.ic_caribe);
             }
             if (element2.contains("Mani")) {
-                imageView.setImageResource(drawable.ic_manizales);
+                imageView.setImageResource(R.drawable.ic_manizales);
             }
             if (element2.contains("Mede")) {
-                imageView.setImageResource(drawable.ic_medellin);
+                imageView.setImageResource(R.drawable.ic_medellin);
             }
             if (element2.contains("Tumac")) {
-                imageView.setImageResource(drawable.ic_tumaco);
+                imageView.setImageResource(R.drawable.ic_tumaco);
             }
             if (element2.contains("Palmira")) {
-                imageView.setImageResource(drawable.ic_palmira);
+                imageView.setImageResource(R.drawable.ic_palmira);
             }
             if (element2.contains("Orino")) {
-                imageView.setImageResource(drawable.ic_oriniquia);
+                imageView.setImageResource(R.drawable.ic_oriniquia);
             }
             if (tipo == 2) {
                 // Log.e("iconos en servicios",lista2[position]);

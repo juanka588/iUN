@@ -4,14 +4,11 @@
     <string name="app_name">iUN</string>
     <string name="title_activity_directorio">Directory</string>
     <string name="title_activity_menu_web">Online Services</string>
-    <string name="title_activity_web"></string>
     <string name="title_activity_main">iUN</string>
     <string name="menu_volver">Back</string>
     <string name="menu_URL">URL</string>
     <string name="menu_adelante">Forward</string>
     <string name="menu_Recargar">Refresh</string>
-    <string name="title_activity_mapa"></string>
-    <string name="lugar"></string>
     <string name="tipo_mapa">Change type</string>
     <string name="title_activity_eventos">Events</string>
     <string name="buscar">Search</string>

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 26
@@ -18,8 +18,8 @@ android {
         targetSdkVersion 22
         versionCode 6
         versionName "2.11"
-        resConfigs "auto"
-        multiDexEnabled true
+//        resConfigs "auto"
+//        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
