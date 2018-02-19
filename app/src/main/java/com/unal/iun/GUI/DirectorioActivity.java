@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -36,8 +37,11 @@ import com.unal.iun.Adapters.MiAdaptador;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
+import com.unal.iun.data.DetailedInformation;
+import com.unal.iun.data.InformationElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DirectorioActivity extends AppCompatActivity {
@@ -162,7 +166,7 @@ public class DirectorioActivity extends AppCompatActivity {
                         }
 
                         sql = "select  distinct " + columnas[current] + ", "
-                                + columnas[2] + "," + tableName + "._id from " + tableName
+                                + columnas[2] + " from " + tableName
                                 + "  where " + condicion;
                         recargar(sql, false, false, 1);
 
@@ -229,9 +233,9 @@ public class DirectorioActivity extends AppCompatActivity {
                         } else {
                             String baseConsult = "select url from enlace natural join "
                                     + tableName + " where ";
-                            ArrayList<String[]> datos = getDatos(baseConsult,
+                            List<DetailedInformation> datos = getDatos(baseConsult,
                                     condicion, false);
-                            Util.irA(datos.get(0)[0], act);
+                            Util.irA(datos.get(0).getInformationElements().get(0).getInformationDescription(), act);
                         }
                         break;
                     case 2:
@@ -329,9 +333,9 @@ public class DirectorioActivity extends AppCompatActivity {
         sv = (SearchView) MenuItemCompat.getActionView(menuItem);
         Cursor c = db.rawQuery("select  distinct " + columnas[current] + " consulta, "
                 + columnas[2] + ",_id from " + tableName, null);
-        simpleCursorAdapter = new SimpleCursorAdapter(getApplicationContext(),
-                android.R.layout.simple_list_item_1, c, from, to, 0);
-        sv.setSuggestionsAdapter(simpleCursorAdapter);
+//        simpleCursorAdapter = new SimpleCursorAdapter(getApplicationContext(),
+//                android.R.layout.simple_list_item_1, c, from, to, 0);
+//        sv.setSuggestionsAdapter(simpleCursorAdapter);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -447,9 +451,10 @@ public class DirectorioActivity extends AppCompatActivity {
     public void detalles() {
         try {
             Intent deta = new Intent(this, DetailsActivity.class);
-            ArrayList<String[]> datos = getDatos();
-            deta.putExtra("datos", datos);
-            deta.putExtra("fondo", idFondoTras);
+            ArrayList<DetailedInformation> datos = new ArrayList<>(getDatos());
+            deta.putParcelableArrayListExtra(DetailsFragment.ARG_DATA, datos);
+            deta.putExtra(DetailsFragment.ARG_BACKGROUND, idFondoTras);
+            deta.putExtra(DetailsFragment.ARG_TITLE, datos.get(0).getInformationTitle());
             startActivity(deta);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             // this.finish();
@@ -462,7 +467,7 @@ public class DirectorioActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<String[]> getDatos() {
+    private List<DetailedInformation> getDatos() {
         boolean cond = false;
         if (!sql.contains("ASC")) {
             if (current != 5) {
@@ -582,7 +587,7 @@ public class DirectorioActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    public void recargar(String query, final boolean cond, final boolean cond2,
+    public void recargar(String query, final boolean isLastStep, final boolean isFromSearch,
                          int tipo) {
         try {
             lv.setAdapter(null);
@@ -628,9 +633,9 @@ public class DirectorioActivity extends AppCompatActivity {
                         path = path + ">" + seleccion.toUpperCase().trim();
                         // item.setTitleCondensed(path);
                     }
-                    if (cond) {
-                        if (cond2) {
-                            condicion = "secciones||departamentos as consulta like('" +
+                    if (isLastStep) {
+                        if (isFromSearch) {
+                            condicion = "secciones||departamentos like('" +
                                     seleccion + mat[posicion][1] + "')";
                             Log.e("Condicion busqueda", condicion);
                             animarFondo(mat[posicion][1], false);
@@ -654,13 +659,12 @@ public class DirectorioActivity extends AppCompatActivity {
                                 + " = '" + seleccion + "'";
                     }
                     sql = "select  distinct " + columnas[current] + ", "
-                            + columnas[2] + ",_id from " + tableName + "  where "
+                            + columnas[2] + " from " + tableName + "  where "
                             + condicion;
                     // Toast.makeText(getApplication(), sql, Toast.LENGTH_LONG)
                     // .show();
                     recargar(sql, current == 5, false, 1);
-                    boolean cont = path.contains("FACULTAD DE");
-                    if (cont) {
+                    if (path.contains("FACULTAD DE")) {
                         tr.setVisibility(View.VISIBLE);
                         refresh(findViewById(R.id.buttonDirectorio));
                     }
@@ -689,8 +693,8 @@ public class DirectorioActivity extends AppCompatActivity {
             query = condicion + " and " + query;
         }
         Intent deta = new Intent(this, DetailsActivity.class);
-        ArrayList<String[]> datos = getDatos(query, false);
-        deta.putExtra("datos", datos);
+        ArrayList<DetailedInformation> datos = new ArrayList<>(getDatos(query, false));
+        deta.putParcelableArrayListExtra("datos", (ArrayList<? extends Parcelable>) datos);
         try {
             deta.putExtra("fondo", idFondoTras);
         } catch (Exception e) {
@@ -704,15 +708,14 @@ public class DirectorioActivity extends AppCompatActivity {
         String query = columnas[current] + " = '" + seleccion + "' ";
         String baseConsult = "select url from enlace natural join " + tableName
                 + " where ";
-        ArrayList<String[]> datos = getDatos(baseConsult, condicion + " and "
+        List<DetailedInformation> datos = getDatos(baseConsult, condicion + " and "
                 + query, false);
-        Util.irA(datos.get(0)[0], this);
+        Util.irA(datos.get(0).getInformationElements().get(0).getInformationDescription(), this);
     }
 
-    public ArrayList<String[]> getDatos(String baseConsult, String criteria,
-                                        boolean cond) {
+    public List<DetailedInformation> getDatos(String baseConsult, String criteria,
+                                              boolean cond) {
         String consulta = baseConsult + criteria;
-        ArrayList<String[]> datos = new ArrayList<String[]>();
         Log.e("SQL ORIGINAL", consulta);
         if (cond) {
             consulta = sql;
@@ -724,42 +727,30 @@ public class DirectorioActivity extends AppCompatActivity {
         String[][] mat = Util.imprimirLista(c);
         c.close();
         Log.e("datos", Util.toString(mat));
-        try {
-            for (int i = 0; i < mat.length; i++) {
-                String arr[];
-                if (mat[i].length == 1) {
-                    arr = new String[]{mat[i][0]};
-                } else {
-                    arr = new String[mat[i].length - 1];
-                    for (int j = 0; j < mat[i].length - 1; j++) {
-                        if (j == mat[i].length - 2) {
-                            arr[j] = mat[i][j] + " " + mat[i][j + 1];
-                        } else {
-                            arr[j] = mat[i][j];
-                        }
-                    }
+        List<InformationElement> infos = new ArrayList<>();
+        DetailedInformation dt;
+        List<DetailedInformation> detailedInformations = new ArrayList<>();
+        for (int i = 0; i < mat.length; i++) {
+            int size = mat[i].length;
+            for (int j = 1; j < size - 4; j++) {
+                if (mat[i][j] != null || !mat[i][j].isEmpty()) {
+                    infos.add(new InformationElement(mat[i][j]));
+                    Log.e("info", mat[i][j]);
                 }
-                datos.add(arr);
-                Log.e("los datos " + i, Util.toString(arr));
             }
-            /*
-             * datos[0] = mat[0][0];// departamento datos[1] = mat[0][1];//
-			 * titulo datos[2] = mat[0][2];// telefono datos[3] = mat[0][3];//
-			 * extension datos[4] = mat[0][4];// email datos[5] = mat[0][5];//
-			 * edificio datos[6] = mat[0][6];// enlace datos[7] = mat[0][7];//
-			 * descripcion datos[8] = mat[0][8] + " " + mat[0][9];// posiciones
-			 */
-        } catch (Exception e) {
-            Log.e("Error Datos", e.toString());
-            Toast.makeText(getApplication(), this.getText(R.string.data_exception),
-                    Toast.LENGTH_LONG).show();
+            infos.add(new InformationElement(mat[i][size - 4], mat[i][size - 3], mat[i][size - 2], mat[i][size - 1]));
+            Log.e("title", mat[i][0]);
+            dt = new DetailedInformation(infos, mat[i][0]);
+            detailedInformations.add(dt);
+            infos = new ArrayList<>();
         }
-        return datos;
+
+        return detailedInformations;
     }
 
-    public ArrayList<String[]> getDatos(String criteria, boolean cond) {
+    public List<DetailedInformation> getDatos(String criteria, boolean cond) {
         String consulta = "SELECT departamentos,secciones,directo,extension,correo_electronico," +
-                "NOMBRE_EDIFICIO,url,piso_oficina, LATITUD,LONGITUD FROM "
+                "url,NOMBRE_EDIFICIO,piso_oficina, LATITUD,LONGITUD FROM "
                 + tableName
                 + " natural join "
                 + tableName2

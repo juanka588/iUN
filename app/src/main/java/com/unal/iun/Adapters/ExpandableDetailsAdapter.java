@@ -24,15 +24,16 @@ import com.unal.iun.data.InformationElement;
 import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
 
     public Typeface font;
     private Activity activity;
-    private ArrayList<DetailedInformation> items;
+    private List<DetailedInformation> items;
 
 
-    public ExpandableDetailsAdapter(ArrayList<DetailedInformation> children, Activity activity) {
+    public ExpandableDetailsAdapter(List<DetailedInformation> children, Activity activity) {
         this.items = children;
         this.activity = activity;
     }

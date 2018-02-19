@@ -4,11 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by JuanCamilo on 22/11/2015.
  */
 public class DetailedInformation implements Parcelable {
+    private List<InformationElement> mInformationElements;
+    private String informationTitle;
+
     public static final Creator<DetailedInformation> CREATOR = new Creator<DetailedInformation>() {
         @Override
         public DetailedInformation createFromParcel(Parcel in) {
@@ -20,10 +24,8 @@ public class DetailedInformation implements Parcelable {
             return new DetailedInformation[size];
         }
     };
-    private ArrayList<InformationElement> mInformationElements;
-    private String informationTitle;
 
-    public DetailedInformation(ArrayList<InformationElement> informationElements, String informationTitle) {
+    public DetailedInformation(List<InformationElement> informationElements, String informationTitle) {
         mInformationElements = informationElements;
         this.informationTitle = informationTitle;
     }
@@ -37,11 +39,11 @@ public class DetailedInformation implements Parcelable {
         }
     }
 
-    public ArrayList<InformationElement> getInformationElements() {
+    public List<InformationElement> getInformationElements() {
         return mInformationElements;
     }
 
-    public void setInformationElements(ArrayList<InformationElement> informationElements) {
+    public void setInformationElements(List<InformationElement> informationElements) {
         mInformationElements = informationElements;
     }
 

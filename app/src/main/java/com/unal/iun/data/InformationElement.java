@@ -27,11 +27,11 @@ public class InformationElement implements Parcelable {
         }
     };
     private static final String DIVIDER = "-";
-    private final int TYPE_EXTENSION = 0;
-    private final int TYPE_PHONE = 1;
-    private final int TYPE_EMAIL = 2;
-    private final int TYPE_MAP_POINT = 3;
-    private final int TYPE_URL = 4;
+    public static final int TYPE_EXTENSION = 0;
+    public static final int TYPE_PHONE = 1;
+    public static final int TYPE_EMAIL = 2;
+    public static final int TYPE_MAP_POINT = 3;
+    public static final int TYPE_URL = 4;
 
     private String informationDescription;
     private int informationIcon;
@@ -43,6 +43,9 @@ public class InformationElement implements Parcelable {
         informationIcon = in.readInt();
         type = in.readInt();
         setType(check(informationDescription));
+        if (getType() == TYPE_MAP_POINT) {
+            coordinates = new LatLng(in.readDouble(), in.readDouble());
+        }
     }
 
     public InformationElement(String informationDescription) {
@@ -126,6 +129,10 @@ public class InformationElement implements Parcelable {
         dest.writeString(informationDescription);
         dest.writeInt(informationIcon);
         dest.writeInt(type);
+        if (getType() == TYPE_MAP_POINT) {
+            dest.writeDouble(coordinates.latitude);
+            dest.writeDouble(coordinates.longitude);
+        }
     }
 
     public MapMarker getMapMarker() {
@@ -138,10 +145,20 @@ public class InformationElement implements Parcelable {
     }
 
     public String getInformationTitle() {
-        return informationDescription.split(DIVIDER)[0];
+        String[] split = informationDescription.split(DIVIDER);
+        if (split.length > 0) {
+            return split[0];
+
+        }
+        return "";
     }
 
     public String getInformationSubTitle() {
-        return informationDescription.split(DIVIDER)[1];
+        String[] split = informationDescription.split(DIVIDER);
+        if (split.length > 1) {
+            return split[1];
+
+        }
+        return "";
     }
 }

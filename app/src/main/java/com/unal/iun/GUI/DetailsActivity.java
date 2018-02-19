@@ -31,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.details_fragment, newFragment);
+        transaction.replace(R.id.container, newFragment);
         transaction.addToBackStack(null);
 
         // Commit the transaction

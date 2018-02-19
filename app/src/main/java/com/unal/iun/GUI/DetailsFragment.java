@@ -18,9 +18,9 @@ import android.widget.TextView;
 import com.unal.iun.Adapters.ExpandableDetailsAdapter;
 import com.unal.iun.R;
 import com.unal.iun.data.DetailedInformation;
-import com.unal.iun.data.InformationElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DetailsFragment extends Fragment {
 
@@ -28,7 +28,7 @@ public class DetailsFragment extends Fragment {
     public static final String ARG_DATA = "data";
     public static final String ARG_BACKGROUND = "background";
 
-    protected ArrayList<DetailedInformation> data = new ArrayList<>();
+    protected List<DetailedInformation> data = new ArrayList<>();
     protected String title;
     protected int background;
     protected ExpandableListView sc;
@@ -36,28 +36,25 @@ public class DetailsFragment extends Fragment {
     private FrameLayout tl;
 
     public DetailsFragment() {
-        data.add(new DetailedInformation(new ArrayList<InformationElement>(), "never show"));
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            title = getArguments().getString(ARG_TITLE);
-            data = getArguments().getParcelableArrayList(ARG_DATA);
-            background = getArguments().getInt(ARG_BACKGROUND);
-        }
+        data = new ArrayList<>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle args = getArguments();
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
-        sc = (ExpandableListView) rootView.findViewById(R.id.expandableListDetails);
-        tl = (FrameLayout) rootView.findViewById(R.id.content_frame);
-        TextView tx = (TextView) rootView.findViewById(R.id.titleDetailsData);
+        sc = rootView.findViewById(R.id.expandableListDetails);
+        tl = rootView.findViewById(R.id.content_frame);
+        TextView tx = rootView.findViewById(R.id.titleDetailsData);
+        if (args != null) {
+            title = args.getString(ARG_TITLE);
+            data = args.getParcelableArrayList(ARG_DATA);
+            background = args.getInt(ARG_BACKGROUND);
+            if (data == null) {
+                return rootView;
+            }
+        }
 
         tx.setText(title == null ? "" : title.trim());
         int id = R.drawable.ciudad_universitaria;

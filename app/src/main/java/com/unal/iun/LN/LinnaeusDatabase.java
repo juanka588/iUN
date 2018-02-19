@@ -19,7 +19,7 @@ import java.io.OutputStream;
 public class LinnaeusDatabase extends SQLiteOpenHelper {
 
     public final static String DATABASE_PATH = "/data/data/com.unal.iun/databases/";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public static String DATABASE_NAME = "datastore" + DATABASE_VERSION + ".sqlite";
     private final Context dbContext;
     public SQLiteDatabase dataBase;
@@ -64,7 +64,7 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
     }
 
     private void copyDataBase() throws IOException {
-        InputStream myInput = dbContext.getResources().openRawResource(R.raw.datastore2);
+        InputStream myInput = dbContext.getResources().openRawResource(R.raw.datastore3);
         /*.getResources().
         getIdentifier("com.unal.iun:raw/" + DATABASE_NAME, null, null));
         dbContext.getAssets().open(DATABASE_NAME);

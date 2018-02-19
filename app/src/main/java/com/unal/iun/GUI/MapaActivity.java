@@ -164,6 +164,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 changeMapType();
                 return true;
             case R.id.menu_trafico:
+                if (mMap == null) {
+                    return true;
+                }
                 mMap.setTrafficEnabled(traffic);
                 if (traffic) {
                     traffic = false;
