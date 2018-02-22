@@ -108,7 +108,7 @@ public class MiAdaptadorExpandibleInstituciones extends
                 query = "select distinct direccion_edificio,nombre_edificio,latitud,longitud,departamento from"
                         + " colegios" + " where " + condicion;
             } else {
-                query = "select distinct edificios._id,nombre_edificio,latitud,longitud from edificios "
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios "
                         + "where " + condicion;
             }
             Log.e("buscado", query);

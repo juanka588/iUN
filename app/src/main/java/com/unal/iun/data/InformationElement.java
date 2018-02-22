@@ -55,6 +55,9 @@ public class InformationElement implements Parcelable {
 
     public InformationElement(String buildName, String buildNumber, String lat, String lon) {
         this.informationDescription = buildName + DIVIDER + buildNumber;
+        if (null == buildNumber || buildNumber.isEmpty() || "null".equals(buildNumber)) {
+            this.informationDescription = buildName;
+        }
         setType(TYPE_MAP_POINT);
         coordinates = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
     }
@@ -156,8 +159,10 @@ public class InformationElement implements Parcelable {
     public String getInformationSubTitle() {
         String[] split = informationDescription.split(DIVIDER);
         if (split.length > 1) {
+            if ("null".equals(split[1])) {
+                return "";
+            }
             return split[1];
-
         }
         return "";
     }

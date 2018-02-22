@@ -73,7 +73,7 @@ public class InstitucionesActivity extends AppCompatActivity {
                         + table;
             } else {
                 table = "edificios";
-                query = "select distinct nombre_edificio,_id,latitud,longitud,sede_edificio from "
+                query = "select distinct nombre_edificio,_id_edificio,latitud,longitud,sede_edificio from "
                         + table;
                 barra.setTitle(this.getString(R.string.edificios));
             }
@@ -175,8 +175,8 @@ public class InstitucionesActivity extends AppCompatActivity {
                     + table + " where nombre_edificio like('%" + cad + "%')";
         } else {
             table = "edificios";
-            cad2 = "select nombre_edificio,edificios._id,latitud,longitud,sede_edificio,"
-                    + "nombre_edificio||edificios._id as busqueda from "
+            cad2 = "select nombre_edificio,_id_edificio,latitud,longitud,sede_edificio,"
+                    + "nombre_edificio||_id_edificio as busqueda from "
                     + table
                     + " where busqueda like('%" + cad + "%')";
         }

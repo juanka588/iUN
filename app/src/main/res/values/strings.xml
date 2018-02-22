@@ -4,14 +4,11 @@
     <string name="app_name">iUN</string>
     <string name="title_activity_directorio">Directorio</string>
     <string name="title_activity_menu_web">Servicios en linea</string>
-    <string name="title_activity_web" translatable="false">asas</string>
     <string name="title_activity_main">iUN</string>
     <string name="menu_volver">Volver</string>
     <string name="menu_URL">URL</string>
     <string name="menu_adelante">Adelante</string>
     <string name="menu_Recargar">Recargar</string>
-    <string name="title_activity_mapa" translatable="false">as</string>
-    <string name="lugar" translatable="false">asas</string>
     <string name="tipo_mapa">Cambiar Tipo</string>
     <string name="title_activity_eventos">Eventos</string>
     <string name="buscar">Buscar</string>
@@ -95,5 +92,7 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="build">edificio:</string>
     <string name="accept" translatable="false">accept</string>
+    <string name="title_activity_mapa" translatable="false">" "</string>
+    <string name="title_activity_web" translatable="false">" "</string>
 
 </resources>

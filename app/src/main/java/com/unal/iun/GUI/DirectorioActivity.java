@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -694,7 +693,7 @@ public class DirectorioActivity extends AppCompatActivity {
         }
         Intent deta = new Intent(this, DetailsActivity.class);
         ArrayList<DetailedInformation> datos = new ArrayList<>(getDatos(query, false));
-        deta.putParcelableArrayListExtra("datos", (ArrayList<? extends Parcelable>) datos);
+        deta.putParcelableArrayListExtra(DetailsFragment.ARG_DATA, datos);
         try {
             deta.putExtra("fondo", idFondoTras);
         } catch (Exception e) {
@@ -732,7 +731,7 @@ public class DirectorioActivity extends AppCompatActivity {
         List<DetailedInformation> detailedInformations = new ArrayList<>();
         for (int i = 0; i < mat.length; i++) {
             int size = mat[i].length;
-            for (int j = 1; j < size - 4; j++) {
+            for (int j = 2; j < size - 4; j++) {
                 if (mat[i][j] != null || !mat[i][j].isEmpty()) {
                     infos.add(new InformationElement(mat[i][j]));
                     Log.e("info", mat[i][j]);
