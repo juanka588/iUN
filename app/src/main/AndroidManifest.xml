@@ -36,15 +36,16 @@
         android:icon="@drawable/icono_app"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:name=".GUI.IUNApp"
         android:theme="@style/iUNTheme">
 
         <!-- MOCA SDK configuration -->
         <meta-data
             android:name="moca.APP_KEY"
-            android:value="YOUR-MOCA-APP-KEY" />
+            android:value="9tQli8VHSPawaT5TY62Y1g" />
         <meta-data
             android:name="moca.APP_SECRET"
-            android:value="YOUR-MOCA-APP-SECRET" />
+            android:value="G9xOItMmPXADUb2dWUz6EwQlxUQ=" />
         <meta-data
             android:name="moca.LOG_LEVEL"
             android:value="debug" />

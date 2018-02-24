@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keep class com.innoquant.** { *; }
+-keep class org.msgpack.** { *; }
+-keep class javassist.util.** { *; }
+-keep class javassist.tools.** { *; }
+-dontwarn org.msgpack.**
+-dontwarn javassist.util.**
+-dontwarn javassist.tools.**

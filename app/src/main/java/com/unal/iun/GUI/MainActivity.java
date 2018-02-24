@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     public static final boolean DEBUG = true;
     public static String tbName = "BaseM";
     public static String sede = "Bogotá";
@@ -144,7 +145,8 @@ public class MainActivity extends Activity {
     }
 
     public void eventos(View v) {
-        Util.irA("http://circular.unal.edu.co/nc/eventos-3.html", this);
+        final EventsDialog dialog = new EventsDialog(MainActivity.this, R.style.EventsDialog, EventsDialog.TYPE_TWO);
+        dialog.show();
     }
 
     public void admisiones(View v) {
@@ -154,27 +156,30 @@ public class MainActivity extends Activity {
         builder.setTitle(this.getString(R.string.admisiones)).setItems(items,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        if (item == 0) {
-                            try {
-                                Intent ca = new Intent(act,
-                                        InstitucionesActivity.class);
-                                ca.putExtra("modo", true);
+                        switch (item) {
+                            case 0:
+                                try {
+                                    Intent ca = new Intent(act,
+                                            InstitucionesActivity.class);
+                                    ca.putExtra("modo", true);
+                                    startActivity(ca);
+                                    overridePendingTransition(R.anim.fade_in,
+                                            R.anim.fade_out);
+                                } catch (Exception e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            act.getText(R.string.disponible), Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case 1:
+                                String cad = "http://admisiones.unal.edu.co/";
+                                Util.irA(cad, act);
+                                break;
+                            default:
+                                Intent ca = new Intent(act, InstitucionesActivity.class);
+                                ca.putExtra("modo", false);
                                 startActivity(ca);
-                                overridePendingTransition(R.anim.fade_in,
-                                        R.anim.fade_out);
-                            } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(),
-                                        act.getText(R.string.disponible), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        if (item == 1) {
-                            String cad = "http://admisiones.unal.edu.co/";
-                            Util.irA(cad, act);
-                        } else {
-                            Intent ca = new Intent(act, InstitucionesActivity.class);
-                            ca.putExtra("modo", false);
-                            startActivity(ca);
-                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                break;
                         }
                     }
                 });
@@ -207,8 +212,8 @@ public class MainActivity extends Activity {
         MiLocationListener.textSede = (TextView) findViewById(R.id.textSede);
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
         MiLocationListener.db = lb.dataBase;
-            milocManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, 0, 0, milocListener);
+        milocManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER, 0, 0, milocListener);
         milocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 0, 0, milocListener);
 

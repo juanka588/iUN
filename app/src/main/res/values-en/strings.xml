@@ -28,7 +28,7 @@
     <string name="main_menu_item1">Services</string>
     <string name="main_menu_item2">Admissions</string>
     <string name="main_menu_item3">Locations</string>
-    <string name="main_menu_item4">Events</string>
+    <string name="events">Events</string>
     <string name="title_activity_license">License</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>

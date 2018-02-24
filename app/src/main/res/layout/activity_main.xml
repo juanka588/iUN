@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="eventos"
-                        android:text="@string/main_menu_item4" />
+                        android:text="@string/events" />
                 </LinearLayout>
 
                 <LinearLayout

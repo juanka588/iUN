@@ -28,7 +28,7 @@
     <string name="main_menu_item1">Servicios</string>
     <string name="main_menu_item2">Admisiones</string>
     <string name="main_menu_item3">Sedes</string>
-    <string name="main_menu_item4">Eventos</string>
+    <string name="events">Eventos</string>
     <string name="title_activity_license">Licencia</string>
     <string name="drawer_open">abierto</string>
     <string name="drawer_close">cerrado</string>
@@ -94,5 +94,9 @@
     <string name="accept" translatable="false">accept</string>
     <string name="title_activity_mapa" translatable="false">" "</string>
     <string name="title_activity_web" translatable="false">" "</string>
+    <string name="iv_revolution">Registrarme IV Rrevolucion Industrial</string>
+    <string name="iv_revolution_web">Web IV Rrevolucion Industrial</string>
+    <string name="select_option">Seleccione una opcion</string>
+    <string name="email_hint">Ingrese su correo</string>
 
 </resources>

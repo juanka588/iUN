@@ -30,5 +30,12 @@
 
     </style>
 
+    <style name="EventsDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
 
 </resources>
