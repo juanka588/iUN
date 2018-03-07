@@ -62,9 +62,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
         setUpMapIfNeeded();
-        if (mMap != null) {
-            handleBundle();
-        }
         handleToolBar();
     }
 
@@ -447,7 +444,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void animarFondo(String cad) {
-        int id = R.drawable.fondo;
+        int id;
         Log.e("Seleccionado el fondo", cad);
         if (cad.contains("Bogo")) {
             id = R.drawable.ciudad_universitaria;
@@ -493,5 +490,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setAllGesturesEnabled(true);
         MapsInitializer.initialize(MapaActivity.this);
+        handleBundle();
     }
 }

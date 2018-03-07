@@ -94,9 +94,9 @@
     <string name="accept" translatable="false">accept</string>
     <string name="title_activity_mapa" translatable="false">" "</string>
     <string name="title_activity_web" translatable="false">" "</string>
-    <string name="iv_revolution">Registrarme IV Rrevolucion Industrial</string>
-    <string name="iv_revolution_web">Web IV Rrevolucion Industrial</string>
-    <string name="select_option">Seleccione una opcion</string>
-    <string name="email_hint">Ingrese su correo</string>
+    <string name="iv_revolution" translatable="false">Registrarme IV Revolucion Industrial</string>
+    <string name="iv_revolution_web" translatable="false">Web IV Revolucion Industrial</string>
+    <string name="select_option" translatable="false">Seleccione una opcion</string>
+    <string name="email_hint" translatable="false">Ingrese su correo</string>
 
 </resources>

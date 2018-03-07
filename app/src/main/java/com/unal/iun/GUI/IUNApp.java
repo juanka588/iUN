@@ -2,6 +2,8 @@ package com.unal.iun.GUI;
 
 import android.app.Application;
 
+import com.innoquant.moca.MOCA;
+
 /**
  * Created by Camilo on 24/02/2018.
  */
@@ -13,6 +15,6 @@ public class IUNApp extends Application {
         super.onCreate();
 
         // Init MOCA library
-//        MOCA.initializeSDK(this);
+        MOCA.initializeSDK(this);
     }
 }

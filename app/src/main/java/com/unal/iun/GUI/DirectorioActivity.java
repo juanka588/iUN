@@ -46,9 +46,9 @@ import java.util.List;
 public class DirectorioActivity extends AppCompatActivity {
     protected String seleccion = "";
     protected String condicion = "";
-    protected String tableName = "BaseM";
-    protected String tableName2 = "Edificios";
-    protected String tableName3 = "ENLACE";
+    protected String baseTableName = "BaseM";
+    protected String buildingsTableName = "Edificios";
+    protected String webTableName = "ENLACE";
     protected String sql = "";
     protected String path = "";
     protected String auxCon;
@@ -102,20 +102,20 @@ public class DirectorioActivity extends AppCompatActivity {
     }
 
     private void adaptadorInicial(Bundle b) {
-        tableName = MainActivity.tbName;
+        baseTableName = MainActivity.tbName;
         try {
             if (b.getBoolean("salto")) {
                 current = b.getInt("current");
                 String sede = b.getString("sede");
                 condicion = "sede='" + sede + "'";
                 sql = "select  distinct " + columnas[current] + " from "
-                        + tableName + " where " + condicion
+                        + baseTableName + " where " + condicion
                         + " and NIVEL_ADMINISTRATIVO between 1 and 4";
                 path = sede;
                 animarFondo(sede, false);
             } else {
                 sql = "select  distinct " + columnas[current] + " from "
-                        + tableName;
+                        + baseTableName;
             }
             Cursor c;
             if (b.getBoolean("salto")) {
@@ -165,7 +165,7 @@ public class DirectorioActivity extends AppCompatActivity {
                         }
 
                         sql = "select  distinct " + columnas[current] + ", "
-                                + columnas[2] + " from " + tableName
+                                + columnas[2] + " from " + baseTableName
                                 + "  where " + condicion;
                         recargar(sql, false, false, 1);
 
@@ -183,9 +183,9 @@ public class DirectorioActivity extends AppCompatActivity {
     }
 
     private void manejarDisplay() {
-        tl = (TableLayout) findViewById(R.id.TableLayoutDirectorio);
-        lv = (ListView) findViewById(R.id.listViewDirectorio);
-        tr = (TableRow) findViewById(R.id.tableRowDirectorio);
+        tl = findViewById(R.id.TableLayoutDirectorio);
+        lv = findViewById(R.id.listViewDirectorio);
+        tr = findViewById(R.id.tableRowDirectorio);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
         int screenHeight = display.getHeight();
@@ -206,8 +206,8 @@ public class DirectorioActivity extends AppCompatActivity {
         String[] valores = getResources().getStringArray(R.array.optionsArray);
         String[] files = new String[]{"edificio.jpg", "enlacep.jpg",
                 "mapap.jpg"};
-        cajon = (DrawerLayout) findViewById(R.id.drawer_layout);
-        final ListView opciones = (ListView) findViewById(R.id.left_drawer);
+        cajon = findViewById(R.id.drawer_layout);
+        final ListView opciones = findViewById(R.id.left_drawer);
         MiAdaptador adapter = new MiAdaptador(act, valores, files, MiAdaptador.TYPE_IMAGE);
         opciones.setAdapter(adapter);
         opciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -231,10 +231,11 @@ public class DirectorioActivity extends AppCompatActivity {
                             Util.irA("http://www.unal.edu.co", act);
                         } else {
                             String baseConsult = "select url from enlace natural join "
-                                    + tableName + " where ";
-                            List<DetailedInformation> datos = getDatos(baseConsult,
-                                    condicion, false);
-                            Util.irA(datos.get(0).getInformationElements().get(0).getInformationDescription(), act);
+                                    + baseTableName + " where " + condicion;
+                            Cursor c = db.rawQuery(baseConsult, null);
+                            String[][] mat = Util.imprimirLista(c);
+                            c.close();
+                            Util.irA(mat[0][0], act);
                         }
                         break;
                     case 2:
@@ -286,14 +287,14 @@ public class DirectorioActivity extends AppCompatActivity {
                 nivel = 3;
             }
             if (condicion != "") {
-                query = "select distinct edificios._id,nombre_edificio,latitud,longitud from edificios natural join "
-                        + tableName + " where " + condicion;
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios natural join "
+                        + baseTableName + " where " + condicion;
                 // chambonazo mMap
                 if (path.contains("Bogotá")) {
                     query = query + " and nivel=" + nivel;
                 }
             } else {
-                query = "select distinct edificios._id,nombre_edificio,latitud,longitud from edificios ";
+                query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios ";
                 query += " where nivel=" + nivel;
             }
             Log.e("query mMap", query);
@@ -331,7 +332,7 @@ public class DirectorioActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(0);
         sv = (SearchView) MenuItemCompat.getActionView(menuItem);
         Cursor c = db.rawQuery("select  distinct " + columnas[current] + " consulta, "
-                + columnas[2] + ",_id from " + tableName, null);
+                + columnas[2] + ",_id from " + baseTableName, null);
 //        simpleCursorAdapter = new SimpleCursorAdapter(getApplicationContext(),
 //                android.R.layout.simple_list_item_1, c, from, to, 0);
 //        sv.setSuggestionsAdapter(simpleCursorAdapter);
@@ -346,7 +347,7 @@ public class DirectorioActivity extends AppCompatActivity {
                 } else {
                     /*
                      * current = 2; recargar("select  distinct " + columnas[2] +
-					 * ", " + columnas[2] + " from " + tableName +
+					 * ", " + columnas[2] + " from " + baseTableName +
 					 * " natural join edificios order by (orden)", false,
 					 * false);
 					 */
@@ -361,7 +362,7 @@ public class DirectorioActivity extends AppCompatActivity {
                 } else {
                     /*
                      * current = 2; recargar("select  distinct " + columnas[2] +
-					 * ", " + columnas[2] + " from " + tableName +
+					 * ", " + columnas[2] + " from " + baseTableName +
 					 * " natural join edificios order by (orden)", false,
 					 * false);
 					 */
@@ -457,7 +458,6 @@ public class DirectorioActivity extends AppCompatActivity {
             startActivity(deta);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             // this.finish();
-            datos = null;
             if (current == 5) {
                 erase(condicion, false);
             }
@@ -498,8 +498,8 @@ public class DirectorioActivity extends AppCompatActivity {
             path = "";
             condicion = "";
             sql = "select  distinct " + columnas[2] + ", " + columnas[2]
-                    + " from " + tableName
-                    + " natural join edificios order by (orden)";
+                    + " from " + baseTableName
+                    + " natural join " + buildingsTableName + " order by (orden)";
             current = 2;
             animarFondo("", true);
             return;
@@ -519,19 +519,17 @@ public class DirectorioActivity extends AppCompatActivity {
         boolean cont = path.contains("FACULTAD DE");
         if (!cont) {
             tr.setVisibility(View.INVISIBLE);
-            CheckedTextView b = (CheckedTextView) findViewById(R.id.buttonDepartamentos);
+            CheckedTextView b = findViewById(R.id.buttonDepartamentos);
             b.setChecked(false);
-            b = (CheckedTextView) findViewById(R.id.buttonDirectorio);
+            b = findViewById(R.id.buttonDirectorio);
             b.setChecked(false);
         }
         condicion = cad;
         sql = "select distinct " + columnas[current - 1] + ", " + columnas[2]
-                + " from " + tableName + " where " + condicion;
+                + " from " + baseTableName + " where " + condicion;
         if (cond) {
             current--;
         }
-        // Log.e("la cond", sql);
-        // Log.e("current ", current + "");
     }
 
     public void recargar(String cad2) {
@@ -543,14 +541,13 @@ public class DirectorioActivity extends AppCompatActivity {
         Log.e("cadena", cad);
         sql = "select secciones, " + columnas[5]
                 + ", secciones||extension||departamentos as consulta,_id from "
-                + tableName + " where consulta like('%" + cad
+                + baseTableName + " where consulta like('%" + cad
                 + "%') order by NIVEL_ADMINISTRATIVO ASC";
         Log.e("buscado", sql);
         current = 1;
         tr.setVisibility(View.INVISIBLE);
         recargar(sql, true, true, 3);
         buscando = true;
-        // animarFondo("", false);
     }
 
     @Override
@@ -561,7 +558,6 @@ public class DirectorioActivity extends AppCompatActivity {
         outState.putInt("idFondo", idFondo);
         outState.putInt("idFondoTras", idFondoTras);
         outState.putString("condicion", condicion);
-        // recargar(current==6, false);
         super.onSaveInstanceState(outState);
     }
 
@@ -575,10 +571,8 @@ public class DirectorioActivity extends AppCompatActivity {
                 idFondo = savedInstanceState.getInt("idFondo");
                 idFondoTras = savedInstanceState.getInt("idFondoTras");
                 condicion = savedInstanceState.getString("condicion");
-                // Log.e("al restaurar", sql);
                 animarFondo(path, false);
                 recargar(sql, current == 5, false, 1);
-                // item.setTitleCondensed(path);
             }
         } catch (Exception e) {
             Log.e("Error de restauracion", e.toString());
@@ -594,7 +588,7 @@ public class DirectorioActivity extends AppCompatActivity {
             if (current == 3) {
                 c = db.rawQuery(query
                         + " and NIVEL_ADMINISTRATIVO between 1 and 4", null);
-                if (tableName.equals("Base")) {
+                if (baseTableName.equals("Base")) {
                     c = db.rawQuery(query, null);
                 }
             }
@@ -658,7 +652,7 @@ public class DirectorioActivity extends AppCompatActivity {
                                 + " = '" + seleccion + "'";
                     }
                     sql = "select  distinct " + columnas[current] + ", "
-                            + columnas[2] + " from " + tableName + "  where "
+                            + columnas[2] + " from " + baseTableName + "  where "
                             + condicion;
                     // Toast.makeText(getApplication(), sql, Toast.LENGTH_LONG)
                     // .show();
@@ -680,10 +674,7 @@ public class DirectorioActivity extends AppCompatActivity {
         if (seleccion2.contains("Museo")) {
             return true;
         }
-        if (seleccion2.contains("Roberto")) {
-            return true;
-        }
-        return false;
+        return seleccion2.contains("Roberto");
     }
 
     public void irDirecto(String seleccion) {
@@ -705,11 +696,15 @@ public class DirectorioActivity extends AppCompatActivity {
 
     public void irDirecto() {
         String query = columnas[current] + " = '" + seleccion + "' ";
-        String baseConsult = "select url from enlace natural join " + tableName
+        String baseConsult = "select url from enlace natural join " + baseTableName
                 + " where ";
-        List<DetailedInformation> datos = getDatos(baseConsult, condicion + " and "
-                + query, false);
-        Util.irA(datos.get(0).getInformationElements().get(0).getInformationDescription(), this);
+        String consulta = baseConsult + condicion + " and "
+                + query;
+        Log.e("consulta", consulta);
+        Cursor c = db.rawQuery(consulta, null);
+        String[][] mat = Util.imprimirLista(c);
+        c.close();
+        Util.irA(mat[0][0], this);
     }
 
     public List<DetailedInformation> getDatos(String baseConsult, String criteria,
@@ -750,11 +745,11 @@ public class DirectorioActivity extends AppCompatActivity {
     public List<DetailedInformation> getDatos(String criteria, boolean cond) {
         String consulta = "SELECT departamentos,secciones,directo,extension,correo_electronico," +
                 "url,NOMBRE_EDIFICIO,piso_oficina, LATITUD,LONGITUD FROM "
-                + tableName
+                + baseTableName
                 + " natural join "
-                + tableName2
+                + buildingsTableName
                 + " natural join "
-                + tableName3 + " where ";
+                + webTableName + " where ";
         return getDatos(consulta, criteria, cond);
     }
 
@@ -763,15 +758,15 @@ public class DirectorioActivity extends AppCompatActivity {
         CheckedTextView b2;
         switch (v.getId()) {
             case R.id.buttonDirectorio:
-                b = (CheckedTextView) findViewById(v.getId());
+                b = findViewById(v.getId());
                 b.setChecked(true);
-                b2 = (CheckedTextView) findViewById(R.id.buttonDepartamentos);
+                b2 = findViewById(R.id.buttonDepartamentos);
                 b2.setChecked(false);
                 break;
             case R.id.buttonDepartamentos:
-                b = (CheckedTextView) findViewById(v.getId());
+                b = findViewById(v.getId());
                 b.setChecked(true);
-                b2 = (CheckedTextView) findViewById(R.id.buttonDirectorio);
+                b2 = findViewById(R.id.buttonDirectorio);
                 b2.setChecked(false);
                 break;
             default:
@@ -789,7 +784,7 @@ public class DirectorioActivity extends AppCompatActivity {
         }
         try {
             String query = "select distinct departamentos,sede from "
-                    + tableName + " where " + condicion;
+                    + baseTableName + " where " + condicion;
             Cursor c = db.rawQuery(query + auxCond, null);
             Log.e("consulta recarga", query + auxCond);
             final String[][] mat = Util.imprimirLista(c);
@@ -818,7 +813,7 @@ public class DirectorioActivity extends AppCompatActivity {
                     condicion += " and " + columnas[5] + " = '" + seleccion
                             + "'";
                     sql = "select  distinct " + columnas[5] + ", "
-                            + columnas[2] + ",_id from " + tableName + "  where "
+                            + columnas[2] + ",_id from " + baseTableName + "  where "
                             + condicion;
                     detalles();
                     return;

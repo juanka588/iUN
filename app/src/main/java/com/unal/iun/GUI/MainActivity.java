@@ -21,13 +21,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unal.iun.Interfaces.OnEventsButtonClick;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.MiLocationListener;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnEventsButtonClick {
     public static final boolean DEBUG = true;
     public static String tbName = "BaseM";
     public static String sede = "Bogotá";
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void eventos(View v) {
-        final EventsDialog dialog = new EventsDialog(MainActivity.this, R.style.EventsDialog, EventsDialog.TYPE_TWO);
+        final EventsDialog dialog = new EventsDialog(MainActivity.this, R.style.EventsDialog, this);
         dialog.show();
     }
 
@@ -261,4 +262,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onEventClick() {
+        Util.irA("http://circular.unal.edu.co/nc/eventos-3.html", MainActivity.this);
+    }
 }

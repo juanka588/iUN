@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.unal.iun.Interfaces.OnEventsButtonClick;
 import com.unal.iun.R;
 
 /**
@@ -13,7 +14,6 @@ import com.unal.iun.R;
  */
 
 public class EventsDialog extends Dialog {
-    public static final int TYPE_OK = 101, TYPE_TWO = 102, TYPE_INPUT = 103, TYPE_SERVICE = 104;
     public static final int SELECTION_POSITIVE = 1, SELECTION_NEGATIVE = 2;
 
 
@@ -25,7 +25,7 @@ public class EventsDialog extends Dialog {
     private int selection;
 
 
-    public EventsDialog(final Context context, int themeId, int type) {
+    public EventsDialog(final Context context, int themeId, final OnEventsButtonClick callback) {
         super(context, themeId);
         this.setContentView(R.layout.dialog_input_options);
 
@@ -47,7 +47,7 @@ public class EventsDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 EventsDialog.this.selection = SELECTION_POSITIVE;
-//                Util.irA("http://circular.unal.edu.co/nc/eventos-3.html", activity);
+                callback.onEventClick();
                 EventsDialog.this.dismiss();
             }
         });
