@@ -32,12 +32,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.Adapters.MiAdaptador;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.DetailedInformation;
 import com.unal.iun.data.InformationElement;
+import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -311,10 +314,15 @@ public class DirectorioActivity extends AppCompatActivity {
             lon = Util.toDouble(Util.getcolumn(mat, 3));
             titulos = Util.getcolumn(mat, 1);
             descripciones = Util.getcolumn(mat, 0);
-            mapa.putExtra("lat", lat);
-            mapa.putExtra("lon", lon);
-            mapa.putExtra("titulos", titulos);
-            mapa.putExtra("descripciones", descripciones);
+            ArrayList<MapMarker> data = new ArrayList<>();
+            for (int i = 0; i < titulos.length; i++) {
+                data.add(new MapMarker(new LatLng(lat[i], lon[i]),
+                        titulos[i],
+                        descripciones[i],
+                        0,
+                        BitmapDescriptorFactory.HUE_VIOLET));
+            }
+            mapa.putExtra(MapaActivity.ARG_MARKERS, data);
             mapa.putExtra("nivel", current - 1);
             mapa.putExtra("zoom", current <= 2 ? current + 3 : current + 10);
             mapa.putExtra("type", 0);

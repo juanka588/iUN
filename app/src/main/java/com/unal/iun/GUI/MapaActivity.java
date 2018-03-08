@@ -243,7 +243,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         SQLiteDatabase db = lb.getReadableDatabase();
         double lat = focus.getPosition().latitude;
         double lon = focus.getPosition().longitude;
-        String query = "select latitud, longitud,nombre_edificio, edificios._id  from edificios where latitud between "
+        String query = "select latitud, longitud,nombre_edificio, _id_edificio  from edificios where latitud between "
                 + (lat - 0.001)
                 + " and "
                 + (lat + 0.001)
@@ -355,12 +355,12 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                     String consulta = "SELECT secciones,"
                                             + "directo,extension,correo_electronico,"
-                                            + "url,piso_oficina,NOMBRE_EDIFICIO,edificios._id, LATITUD,LONGITUD FROM "
+                                            + "url,piso_oficina,NOMBRE_EDIFICIO,edificios._id_edificio, LATITUD,LONGITUD FROM "
                                             + tableName
                                             + " inner join edificios"
-                                            + " on BaseM._id_edificio=edificios._id"
+                                            + " on BaseM._id_edificio=edificios._id_edificio"
                                             + " inner join enlace"
-                                            + " on " + tableName + "._id_enlace=enlace._id where ";
+                                            + " on " + tableName + "._id_enlace=enlace._id_enlace where ";
 
                                     ArrayList<DetailedInformation> data = getData(
                                             consulta, "NOMBRE_EDIFICIO='"
