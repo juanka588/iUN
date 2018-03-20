@@ -224,35 +224,4 @@ public class MenuWEBActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
-    public void ubicar() {
-        try {
-            Intent mapa = new Intent(this, MapaActivity.class);
-            LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-            SQLiteDatabase db = lb.dataBase;
-            String query;
-
-            query = "select distinct edificio._id,nombre_edificio,latitud,longitud from edificios "
-                    + " where nivel=" + 5;
-
-            Cursor c = db.rawQuery(query, null);
-            String[][] mat = Util.imprimirLista(c);
-            c.close();
-            db.close();
-            lat = Util.toDouble(Util.getcolumn(mat, 2));
-            lon = Util.toDouble(Util.getcolumn(mat, 3));
-            titulos = Util.getcolumn(mat, 1);
-            descripciones = Util.getcolumn(mat, 0);
-            mapa.putExtra("lat", lat);
-            mapa.putExtra("lon", lon);
-            mapa.putExtra("titulos", titulos);
-            mapa.putExtra("descripciones", descripciones);
-            mapa.putExtra("nivel", 3);
-            mapa.putExtra("zoom", 15);
-            mapa.putExtra("type", 1);
-            startActivity(mapa);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } catch (Exception ex) {
-        }
-    }
 }

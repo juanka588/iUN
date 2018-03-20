@@ -16,6 +16,7 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.unal.iun.GUI.MapaActivity;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
@@ -49,8 +50,8 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         }
         DetailedInformation detail = items.get(groupPosition);
         final InformationElement child = detail.getInformationElements().get(childPosition);
-        TextView textView = (TextView) convertView.findViewById(R.id.textDetalle);
-        ImageView im = (ImageView) convertView.findViewById(R.id.imageDetalle);
+        TextView textView = convertView.findViewById(R.id.textDetalle);
+        ImageView im = convertView.findViewById(R.id.imageDetalle);
         textView.setTypeface(font);
         textView.setText(child.getInformationDescription());
         int type = child.getType();
@@ -107,7 +108,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
             default:
                 break;
         }
-        im.setImageResource(draw);
+        Picasso.with(activity).load(draw).fit().into(im);
         return convertView;
     }
 

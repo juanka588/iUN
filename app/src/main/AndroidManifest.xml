@@ -32,11 +32,11 @@
          Google Maps Android API v2, but are recommended.
     -->
     <application
+        android:name=".GUI.IUNApp"
         android:allowBackup="true"
-        android:icon="@drawable/icono_app"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:name=".GUI.IUNApp"
         android:theme="@style/iUNTheme">
 
         <!-- MOCA SDK configuration -->
@@ -86,13 +86,15 @@
         <activity
             android:name=".GUI.MapaActivity"
             android:label="@string/title_activity_mapa"
-            android:logo="@drawable/home2">
+            android:logo="@drawable/home2"
+            android:screenOrientation="portrait">
             >
         </activity>
         <activity
             android:name=".GUI.MainActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -115,7 +117,8 @@
             android:name=".GUI.RadioActivity"
             android:label="@string/title_activity_radio"
             android:logo="@drawable/home2"
-            android:parentActivityName=".GUI.MenuWebTabActivity">
+            android:parentActivityName=".GUI.MenuWebTabActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GUI.MainActivity" />

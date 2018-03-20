@@ -91,12 +91,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="build">edificio:</string>
-    <string name="accept" translatable="false">accept</string>
+    <string name="accept">Aceptar</string>
     <string name="title_activity_mapa" translatable="false">" "</string>
     <string name="title_activity_web" translatable="false">" "</string>
     <string name="iv_revolution" translatable="false">Registrarme IV Revolucion Industrial</string>
     <string name="iv_revolution_web" translatable="false">Web IV Revolucion Industrial</string>
     <string name="select_option" translatable="false">Seleccione una opcion</string>
     <string name="email_hint" translatable="false">Ingrese su correo</string>
+    <string name="soon">Proximamente</string>
 
 </resources>

@@ -434,7 +434,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
             infos.add(new InformationElement(mat[i][size - 4], mat[i][size - 3], mat[i][size - 2], mat[i][size - 1]));
-            Log.e("title", mat[i][0]);
             dt = new DetailedInformation(infos, mat[i][0]);
             detailedInformations.add(dt);
             infos = new ArrayList<>();

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.unal.iun.GUI.InstitucionesActivity;
 import com.unal.iun.GUI.RadioActivity;
 import com.unal.iun.GUI.WebActivity;
@@ -65,7 +66,7 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
         WebItem s = items.get(i);
         holder.name.setText(s.name);
         holder.name.setTypeface(font);
-        holder.icon.setImageResource(s.icon);
+        Picasso.with(holder.cv.getContext()).load(s.icon).fit().into(holder.icon);
     }
 
     @Override

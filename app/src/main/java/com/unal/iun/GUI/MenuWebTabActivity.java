@@ -22,14 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
 import com.unal.iun.DataSource.DirectoryContract;
 import com.unal.iun.LN.LinnaeusDatabase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
-import com.unal.iun.data.MapMarker;
 import com.unal.iun.data.WebItem;
 
 import java.util.ArrayList;
@@ -164,44 +161,6 @@ public class MenuWebTabActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
-    public void ubicar() {
-        try {
-            Intent mapa = new Intent(this, MapaActivity.class);
-            LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-            SQLiteDatabase db = lb.dataBase;
-            String query;
-
-            query = "select distinct edificio._id,nombre_edificio,latitud,longitud from edificios "
-                    + " where nivel=" + 5;
-
-            Cursor c = db.rawQuery(query, null);
-            String[][] mat = Util.imprimirLista(c);
-            c.close();
-            db.close();
-            double lat, lon;
-            ArrayList<MapMarker> markers = new ArrayList<>();
-            for (int i = 0; i < mat.length; i++) {
-                lat = Double.parseDouble(mat[i][0]);
-                lon = Double.parseDouble(mat[i][1]);
-
-                markers.add(new MapMarker(new LatLng(lat, lon)
-                        , mat[i][2]
-                        , mat[i][3]
-                        , 0
-                        , (int) BitmapDescriptorFactory.HUE_VIOLET));
-            }
-            mapa.putExtra(MapaActivity.ARG_MARKERS, markers);
-            mapa.putExtra(MapaActivity.ARG_LEVEL, 3);
-            mapa.putExtra(MapaActivity.ARG_ZOOM, 18);
-            mapa.putExtra(MapaActivity.ARG_TYPE, 1);
-            startActivity(mapa);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } catch (Exception ex) {
-        }
-    }
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -233,8 +192,8 @@ public class MenuWebTabActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_menu_web_tab, container, false);
-            list = (RecyclerView) rootView.findViewById(R.id.list);
-            title = (TextView) rootView.findViewById(R.id.fragment_title);
+            list = rootView.findViewById(R.id.list);
+            title = rootView.findViewById(R.id.fragment_title);
             int spaces = 3;
             //Util.log("spaces ", screenWidth + " " + density + " " + spaces);
             int selected = getArguments().getInt(ARG_SECTION_NUMBER);

@@ -3,7 +3,7 @@
     android:id="@+id/card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
@@ -23,6 +23,7 @@
         android:gravity="center"
         android:maxLines="5"
         android:maxWidth="5dp"
+        android:textSize="12sp"
         android:padding="10dp"
         android:singleLine="false"
         android:text="@string/abc_action_mode_done"/>

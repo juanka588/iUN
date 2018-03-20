@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.unal.iun.Interfaces.OnEventsButtonClick;
 import com.unal.iun.R;
@@ -35,6 +36,18 @@ public class EventsDialog extends Dialog {
         events = this.findViewById(R.id.events_button);
         input = this.findViewById(R.id.input);
 
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, context.getString(R.string.soon), Toast.LENGTH_LONG).show();
+            }
+        });
+        webIVButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, context.getString(R.string.soon), Toast.LENGTH_LONG).show();
+            }
+        });
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

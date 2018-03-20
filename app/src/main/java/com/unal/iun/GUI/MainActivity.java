@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
                 R.id.sedesButton, R.id.textLatitud, R.id.textLongitud,
                 R.id.textLugar, R.id.eventosButton};
         for (int i = 0; i < ids.length; i++) {
-            TextView prueba = (TextView) findViewById(ids[i]);
+            TextView prueba = findViewById(ids[i]);
             prueba.setTypeface(fuente);
             if (ids[i] == R.id.textSede) {
                 prueba.setText(sede);
@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         sede = savedInstanceState.getString("sede");
-        TextView tx = (TextView) findViewById(R.id.textSede);
+        TextView tx = findViewById(R.id.textSede);
         tx.setText(sede);
-        im = (ImageView) findViewById(R.id.imageUNPrincipal);
+        im = findViewById(R.id.imageUNPrincipal);
         im.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
@@ -208,9 +208,9 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
         LocationManager milocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener milocListener = new MiLocationListener();
         MiLocationListener.appcont = this.getApplicationContext();
-        MiLocationListener.textLat = (TextView) findViewById(R.id.textLatitud);
-        MiLocationListener.textLon = (TextView) findViewById(R.id.textLongitud);
-        MiLocationListener.textSede = (TextView) findViewById(R.id.textSede);
+        MiLocationListener.textLat = findViewById(R.id.textLatitud);
+        MiLocationListener.textLon = findViewById(R.id.textLongitud);
+        MiLocationListener.textSede = findViewById(R.id.textSede);
         LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
         MiLocationListener.db = lb.dataBase;
         milocManager.requestLocationUpdates(
@@ -264,6 +264,6 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
 
     @Override
     public void onEventClick() {
-        Util.irA("http://circular.unal.edu.co/nc/eventos-3.html", MainActivity.this);
+        Util.irA("http://circular.unal.edu.co/museumlist/", MainActivity.this);
     }
 }
