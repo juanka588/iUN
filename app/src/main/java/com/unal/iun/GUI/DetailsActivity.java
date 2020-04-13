@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -42,9 +43,13 @@ public class DetailsActivity extends AppCompatActivity {
         BitmapDrawable background2 = new BitmapDrawable(getResources(),
                 BitmapFactory.decodeResource(getResources(),
                         R.drawable.fondoinf));
-        getSupportActionBar().setBackgroundDrawable(background2);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar == null) {
+            return;
+        }
+        supportActionBar.setBackgroundDrawable(background2);
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        supportActionBar.setHomeButtonEnabled(true);
     }
 
     @Override

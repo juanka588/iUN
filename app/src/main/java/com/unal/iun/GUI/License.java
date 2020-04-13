@@ -39,8 +39,8 @@ public class License extends AppCompatActivity {
     }
 
     private void initText() {
-        TextView tx1 = (TextView) findViewById(R.id.textDevelop);
-        TextView tx2 = (TextView) findViewById(R.id.textLicense);
+        TextView tx1 = findViewById(R.id.textDevelop);
+        TextView tx2 = findViewById(R.id.textLicense);
         tx1.setText("DESAROLLADORES iUNDev:\n\nmahiguerag\nafgranadosc\njcrodriguezd\n"
                 + "mechaconc\ngromerop\nmrinconl\naframosp\n"
                 + "gmcabanah\njajaramilloa" + "\nmjangaritar"

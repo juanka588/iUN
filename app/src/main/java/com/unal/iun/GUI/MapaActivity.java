@@ -165,11 +165,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                     return true;
                 }
                 mMap.setTrafficEnabled(traffic);
-                if (traffic) {
-                    traffic = false;
-                } else {
-                    traffic = true;
-                }
+                traffic = !traffic;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -275,11 +271,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void addNewMarkers(boolean mustClear, ArrayList<MapMarker> newMarks) {
         if (nivel < 3 && !mustClear) {
             mMap.clear();
-            markers.removeAll(markers);
-        }
-        int type = 0;
-        if (mustClear) {
-            type = 1;
+            markers.clear();
         }
         manageEventsOnMap();
         for (MapMarker marker : newMarks) {
@@ -320,12 +312,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 final String[] items = {act.getText(R.string.indications) + "", act.getText(R.string.informacion) + ""};
                 AlertDialog.Builder builder;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-                    builder = new AlertDialog.Builder(
-                            MapaActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-                } else {
-                    builder = new AlertDialog.Builder(MapaActivity.this);
-                }
+                builder = new AlertDialog.Builder(MapaActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
                 builder.setTitle(arg0.getTitle()).setItems(items,
                         new DialogInterface.OnClickListener() {

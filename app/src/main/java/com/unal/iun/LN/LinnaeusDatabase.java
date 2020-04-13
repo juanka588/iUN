@@ -18,9 +18,9 @@ import java.io.OutputStream;
 
 public class LinnaeusDatabase extends SQLiteOpenHelper {
 
-    public final static String DATABASE_PATH = "/data/data/com.unal.iun/databases/";
+    private final static String DATABASE_PATH = "/data/data/com.unal.iun/databases/";
     private static final int DATABASE_VERSION = 3;
-    public static String DATABASE_NAME = "datastore" + DATABASE_VERSION + ".sqlite";
+    private static String DATABASE_NAME = "datastore" + DATABASE_VERSION + ".sqlite";
     private final Context dbContext;
     public SQLiteDatabase dataBase;
 
@@ -29,7 +29,7 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
         /*
          * desde carpetas externas File f=new File(path) if extits f.mkdir();
 		 */
-        File f = null;
+        File f;
         try {
             if (DATABASE_VERSION == 1) {
                 f = new File(DATABASE_PATH + "datastore" + DATABASE_VERSION + ".sqlite");
@@ -58,8 +58,7 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
             } catch (IOException e) {
                 throw new Error("Error copying database");
             }
-            Toast.makeText(context, context.getText(R.string.database),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getText(R.string.database), Toast.LENGTH_LONG).show();
         }
     }
 

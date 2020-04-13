@@ -37,16 +37,15 @@ public class RadioActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_radio);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        spin = (Spinner) findViewById(R.id.spinnerSelector);
+        spin = findViewById(R.id.spinnerSelector);
         String[] list = this.getResources().getStringArray(R.array.radio);
-        ArrayAdapter dataAdapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, list);
+        ArrayAdapter dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         dataAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        text = (TextView) findViewById(R.id.textRadioTEMP);
+        text = findViewById(R.id.textRadioTEMP);
         spin.setAdapter(dataAdapter);
-        bPlay = (ImageButton) findViewById(R.id.play);
-        bPause = (ImageButton) findViewById(R.id.pause);
+        bPlay = findViewById(R.id.play);
+        bPause = findViewById(R.id.pause);
         bPause.setEnabled(false);
     }
 

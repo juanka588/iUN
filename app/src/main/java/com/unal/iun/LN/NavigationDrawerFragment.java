@@ -159,9 +159,7 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-                }
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
 
             }
 
@@ -181,9 +179,7 @@ public class NavigationDrawerFragment extends Fragment {
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-                }
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
 

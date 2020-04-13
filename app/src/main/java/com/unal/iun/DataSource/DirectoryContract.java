@@ -37,7 +37,7 @@ public class DirectoryContract {
         public static final String COLUMN_ICON = "nombre_icono";
         public static final String COLUMN_COMMUNITY_SERVICE = "serv_comunidad";
         public static final String COLUMN_ORDER = "orden_enlace";
-        public static final String COLUMN_NAMES[] = new String[]{COLUMN_DECRIPTION, COLUMN_ICON,
+        public static final String[] COLUMN_NAMES = new String[]{COLUMN_DECRIPTION, COLUMN_ICON,
                 COLUMN_URL, COLUMN_COMMUNITY_SERVICE, COLUMN_ORDER};
 
     }

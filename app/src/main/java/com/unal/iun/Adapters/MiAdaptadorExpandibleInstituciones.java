@@ -31,16 +31,16 @@ public class MiAdaptadorExpandibleInstituciones extends
         BaseExpandableListAdapter {
 
     public Typeface fuente;
-    public String mat[][];
-    public int parentsSize;
-    public boolean mode;
+    private String[][] mat;
+    private int parentsSize;
+    private boolean mode;
     private Activity activity;
     private ArrayList<List> childtems;
     private LayoutInflater inflater;
     private ArrayList<String> parentItems, child;
 
     public MiAdaptadorExpandibleInstituciones(ArrayList<String> parents,
-                                              ArrayList<List> childern, String data[][], boolean mode) {
+                                              ArrayList<List> childern, String[][] data, boolean mode) {
 
         this.parentItems = parents;
 
@@ -123,12 +123,12 @@ public class MiAdaptadorExpandibleInstituciones extends
             }
             double lat, lon;
             ArrayList<MapMarker> markers = new ArrayList<>();
-            for (int i = 0; i < mat.length; i++) {
-                lat = Double.parseDouble(mat[i][2]);
-                lon = Double.parseDouble(mat[i][3]);
+            for (String[] strings : mat) {
+                lat = Double.parseDouble(strings[2]);
+                lon = Double.parseDouble(strings[3]);
                 markers.add(new MapMarker(new LatLng(lat, lon)
-                        , mat[i][1]
-                        , mat[i][0]
+                        , strings[1]
+                        , strings[0]
                         , 0
                         , BitmapDescriptorFactory.HUE_VIOLET));
             }

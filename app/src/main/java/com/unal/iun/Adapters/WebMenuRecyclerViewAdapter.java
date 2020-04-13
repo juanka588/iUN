@@ -52,8 +52,7 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
     @Override
     public WebItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
-        WebItemViewHolder pvh = new WebItemViewHolder(v);
-        return pvh;
+        return new WebItemViewHolder(v);
     }
 
     @Override
@@ -137,15 +136,15 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
 
         WebItemViewHolder(View itemView) {
             super(itemView);
-            cv = (LinearLayout) itemView.findViewById(R.id.card_view);
-            name = (TextView) itemView.findViewById(R.id.webItemDescription);
-            icon = (ImageView) itemView.findViewById(R.id.webItemImage);
+            cv = itemView.findViewById(R.id.card_view);
+            name = itemView.findViewById(R.id.webItemDescription);
+            icon = itemView.findViewById(R.id.webItemImage);
             cv.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            TextView desc = (TextView) v.findViewById(R.id.webItemDescription);
+            TextView desc = v.findViewById(R.id.webItemDescription);
             String cad = desc.getText().toString();
             Log.e("desc", cad);
             if (cad.contains("Radio")) {

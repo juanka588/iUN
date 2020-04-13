@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -25,9 +26,10 @@ public class WebActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web);
-        browser = (WebView) findViewById(R.id.webView1);
-        browser.getSettings().setJavaScriptEnabled(true);
-        browser.getSettings().setBuiltInZoomControls(true);
+        browser = findViewById(R.id.webView1);
+        WebSettings settings = browser.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setBuiltInZoomControls(true);
         browser.setWebViewClient(new WebViewClient() {
             // evita que los enlaces se abran fuera nuestra app en el navegador
             // de android

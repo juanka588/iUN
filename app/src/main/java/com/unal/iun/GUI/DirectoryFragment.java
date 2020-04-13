@@ -23,9 +23,6 @@ public class DirectoryFragment extends Fragment {
      */
     public static final String ARG_SECTION_NUMBER = "section_number";
 
-    private int layout = android.R.layout.simple_list_item_activated_1;
-    private ListView list;
-
     public DirectoryFragment() {
     }
 
@@ -45,15 +42,16 @@ public class DirectoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_directory, container, false);
-        list = (ListView) rootView.findViewById(R.id.directoryList);
+        ListView list = (ListView) rootView.findViewById(R.id.directoryList);
 
         ArrayList<String> arr = new ArrayList<>();
         arr.add("Test 1");
         arr.add("Test 2");
         arr.add("Test 3");
+        int layout = android.R.layout.simple_list_item_activated_1;
         list.setAdapter(new ArrayAdapter<String>(rootView.getContext(), layout, arr));
         Bundle b = getArguments();
-        ((Button) rootView.findViewById(R.id.testB)).setText(b.getString(ARG_SECTION_NUMBER) + "");
+        ((Button) rootView.findViewById(R.id.testB)).setText(b.getString(ARG_SECTION_NUMBER));
         return rootView;
     }
 

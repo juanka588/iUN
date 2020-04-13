@@ -52,9 +52,10 @@ public class MenuWebTabActivity extends AppCompatActivity {
      */
     ViewPager mViewPager;
     private SearchView sv;
-    private double lat[];
-    private double lon[];
-    private String titulos[], descripciones[];
+    private double[] lat;
+    private double[] lon;
+    private String[] titulos;
+    private String[] descripciones;
 
     public static List<WebItem> initData(Context context, String filter) {
         LinnaeusDatabase ln = new LinnaeusDatabase(context);
@@ -68,7 +69,7 @@ public class MenuWebTabActivity extends AppCompatActivity {
                 null,
                 null,
                 DirectoryContract.EnlacesProvider.COLUMN_ORDER);
-        String mat[][] = Util.imprimirLista(cursor);
+        String[][] mat = Util.imprimirLista(cursor);
         for (int i = 0; i < mat.length; i++) {
             String cad = mat[i][1] + "";
             if (mat[i][1].contains(".")) {
@@ -170,8 +171,6 @@ public class MenuWebTabActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private RecyclerView list;
-        private TextView title;
 
         public PlaceholderFragment() {
         }
@@ -192,8 +191,8 @@ public class MenuWebTabActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_menu_web_tab, container, false);
-            list = rootView.findViewById(R.id.list);
-            title = rootView.findViewById(R.id.fragment_title);
+            RecyclerView list = rootView.findViewById(R.id.list);
+            TextView title = rootView.findViewById(R.id.fragment_title);
             int spaces = 3;
             //Util.log("spaces ", screenWidth + " " + density + " " + spaces);
             int selected = getArguments().getInt(ARG_SECTION_NUMBER);

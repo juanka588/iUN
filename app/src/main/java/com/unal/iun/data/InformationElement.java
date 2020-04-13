@@ -27,11 +27,11 @@ public class InformationElement implements Parcelable {
         }
     };
     private static final String DIVIDER = "-";
-    public static final int TYPE_EXTENSION = 0;
-    public static final int TYPE_PHONE = 1;
-    public static final int TYPE_EMAIL = 2;
-    public static final int TYPE_MAP_POINT = 3;
-    public static final int TYPE_URL = 4;
+    private static final int TYPE_EXTENSION = 0;
+    private static final int TYPE_PHONE = 1;
+    private static final int TYPE_EMAIL = 2;
+    private static final int TYPE_MAP_POINT = 3;
+    private static final int TYPE_URL = 4;
 
     private String informationDescription;
     private int informationIcon;

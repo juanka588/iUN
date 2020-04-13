@@ -30,7 +30,7 @@ public class DetailedInformation implements Parcelable {
         this.informationTitle = informationTitle;
     }
 
-    protected DetailedInformation(Parcel in) {
+    private DetailedInformation(Parcel in) {
         informationTitle = in.readString();
         Parcelable[] items = in.readParcelableArray(InformationElement.class.getClassLoader());
         mInformationElements = new ArrayList<>();

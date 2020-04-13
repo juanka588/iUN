@@ -27,7 +27,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/new_logo" />
+            android:src="@drawable/logo" />
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -36,7 +36,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="26dp"
-            android:layout_weight="1"
             android:gravity="bottom">
 
             <LinearLayout
@@ -109,6 +108,7 @@
                         android:layout_marginRight="24dp"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:onClick="licencia"
                         android:text="@string/title_activity_license"
@@ -121,6 +121,7 @@
                         android:layout_marginRight="24dp"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:onClick="comentar"
                         android:text="@string/opinion"
@@ -141,7 +142,7 @@
                 android:id="@+id/imageUNPrincipal"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_marginRight="19dp"
                 android:layout_weight="0"
                 android:background="@drawable/selectorfondocir"
@@ -158,7 +159,7 @@
                     android:id="@+id/textLugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:shrinkColumns="true"
                     android:text="@string/sede"
                     android:textColor="@android:color/white" />
@@ -185,7 +186,7 @@
                     android:id="@+id/textLongitud"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:maxLength="16"
                     android:shrinkColumns="true"
                     android:textColor="@android:color/white" />
@@ -194,7 +195,7 @@
                     android:id="@+id/textLatitud"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:maxLength="16"
                     android:textColor="@android:color/white" />
             </LinearLayout>

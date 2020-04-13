@@ -15,7 +15,7 @@ import com.unal.iun.R;
  */
 
 public class EventsDialog extends Dialog {
-    public static final int SELECTION_POSITIVE = 1, SELECTION_NEGATIVE = 2;
+    private static final int SELECTION_POSITIVE = 1, SELECTION_NEGATIVE = 2;
 
 
     private Button okButton;

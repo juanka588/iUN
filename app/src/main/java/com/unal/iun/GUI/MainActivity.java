@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
         screenHeight = display.getHeight();
         Typeface fuente = Typeface
                 .createFromAsset(getAssets(), "Helvetica.ttf");
-        int ids[] = {R.id.SOnlineButton, R.id.admisionesButton,
+        int[] ids = {R.id.SOnlineButton, R.id.admisionesButton,
                 R.id.sedesButton, R.id.textLatitud, R.id.textLongitud,
                 R.id.textLugar, R.id.eventosButton};
         for (int i = 0; i < ids.length; i++) {
@@ -75,11 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
 
     protected void cambiarBD() {
         AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo_Light_Dialog);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }
+        builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo_Light_Dialog);
         builder.setMessage("¿Que Base de Datos Desea usar?")
                 .setTitle("Confirme:")
                 .setPositiveButton("Modo Básico",

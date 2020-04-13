@@ -50,7 +50,7 @@ public class onItemSpinSelected implements OnItemSelectedListener {
                 break;
         }
         try {
-            tx.setText(RadioActivity.path + "");
+            tx.setText(RadioActivity.path);
             if (RadioActivity.mediaPlayer != null) {
                 if (RadioActivity.mediaPlayer.isPlaying()) {
                     RadioActivity.mediaPlayer.stop();

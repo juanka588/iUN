@@ -42,28 +42,27 @@ public class MenuWEBActivity extends AppCompatActivity {
     private RecyclerView list_general_interest;
     private RecyclerView list_communityUN;
     private RecyclerView list_community_services;
-    private double lat[];
-    private double lon[];
-    private String titulos[], descripciones[];
+    private double[] lat;
+    private double[] lon;
+    private String[] titulos;
+    private String[] descripciones;
     private boolean colegios = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_menu_web);
-        list_general_interest = (RecyclerView) findViewById(R.id.list_general_interest);
-        list_communityUN = (RecyclerView) findViewById(R.id.list_un_community);
-        list_community_services = (RecyclerView) findViewById(R.id.list_community_services);
+        list_general_interest = findViewById(R.id.list_general_interest);
+        list_communityUN = findViewById(R.id.list_un_community);
+        list_community_services = findViewById(R.id.list_community_services);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
-        int screenWidth, screenHeight, dpi;
+        int screenWidth;
         float density;
         DisplayMetrics metrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
         density = metrics.density;
-        dpi = metrics.densityDpi;
         int spaces = (int) ((screenWidth) / (300));
         Util.log("spaces ", screenWidth + " " + density + " " + spaces);
         LinnaeusDatabase ln = new LinnaeusDatabase(getApplicationContext());
@@ -101,7 +100,7 @@ public class MenuWEBActivity extends AppCompatActivity {
                 null,
                 null,
                 DirectoryContract.EnlacesProvider.COLUMN_ORDER);
-        String mat[][] = Util.imprimirLista(cursor);
+        String[][] mat = Util.imprimirLista(cursor);
         for (int i = 0; i < mat.length; i++) {
             String cad = mat[i][1] + "";
             if (mat[i][1].contains(".")) {
@@ -182,7 +181,6 @@ public class MenuWEBActivity extends AppCompatActivity {
         Intent radio = new Intent(this, RadioActivity.class);
         startActivity(radio);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        return;
     }
 
     private void preguntar(final Activity act) {

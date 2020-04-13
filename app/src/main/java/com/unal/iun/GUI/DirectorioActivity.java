@@ -147,7 +147,7 @@ public class DirectorioActivity extends AppCompatActivity {
                             irDirecto();
                             return;
                         }
-                        if (path == "") {
+                        if ("".equals(path)) {
                             path = seleccion;
                             // item.setTitleCondensed(path.toUpperCase().trim());
                         } else {
@@ -289,7 +289,7 @@ public class DirectorioActivity extends AppCompatActivity {
             if (nivel > 2) {
                 nivel = 3;
             }
-            if (condicion != "") {
+            if (!"".equals(condicion)) {
                 query = "select distinct _id_edificio,nombre_edificio,latitud,longitud from edificios natural join "
                         + baseTableName + " where " + condicion;
                 // chambonazo mMap
@@ -498,8 +498,8 @@ public class DirectorioActivity extends AppCompatActivity {
     }
 
     private void erase(String condicion2, boolean cond) {
-        String conds[] = condicion2.split("and");
-        String textos[] = path.split(">");
+        String[] conds = condicion2.split("and");
+        String[] textos = path.split(">");
 
         if (conds.length == 1) {
             // item.setTitleCondensed("");
@@ -512,18 +512,19 @@ public class DirectorioActivity extends AppCompatActivity {
             animarFondo("", true);
             return;
         }
-        String cad = "", cad2 = "";
+        StringBuilder cad = new StringBuilder();
+        StringBuilder cad2 = new StringBuilder();
         for (int i = 0; i < conds.length - 1; i++) {
             if (i != conds.length - 2) {
-                cad += conds[i] + "and";
-                cad2 += textos[i] + ">";
+                cad.append(conds[i]).append("and");
+                cad2.append(textos[i]).append(">");
             } else {
-                cad += conds[i];
-                cad2 += textos[i];
+                cad.append(conds[i]);
+                cad2.append(textos[i]);
             }
         }
         // item.setTitleCondensed(cad2);
-        path = cad2;
+        path = cad2.toString();
         boolean cont = path.contains("FACULTAD DE");
         if (!cont) {
             tr.setVisibility(View.INVISIBLE);
@@ -532,7 +533,7 @@ public class DirectorioActivity extends AppCompatActivity {
             b = findViewById(R.id.buttonDirectorio);
             b.setChecked(false);
         }
-        condicion = cad;
+        condicion = cad.toString();
         sql = "select distinct " + columnas[current - 1] + ", " + columnas[2]
                 + " from " + baseTableName + " where " + condicion;
         if (cond) {
@@ -687,7 +688,7 @@ public class DirectorioActivity extends AppCompatActivity {
 
     public void irDirecto(String seleccion) {
         String query = columnas[current] + " = '" + seleccion + "'";
-        if (condicion != "") {
+        if (!condicion.equals("")) {
             query = condicion + " and " + query;
         }
         Intent deta = new Intent(this, DetailsActivity.class);
@@ -824,7 +825,6 @@ public class DirectorioActivity extends AppCompatActivity {
                             + columnas[2] + ",_id from " + baseTableName + "  where "
                             + condicion;
                     detalles();
-                    return;
                 }
             });
         } catch (Exception e) {

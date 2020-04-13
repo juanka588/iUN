@@ -1,6 +1,7 @@
 package com.unal.iun.Adapters;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,6 +41,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
     }
 
 
+    @SuppressLint("InflateParams")
     @SuppressWarnings("unchecked")
     @Override
     public View getChildView(int groupPosition, int childPosition,
@@ -149,6 +151,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         Util.enviar(activity, email.split(" "), null, "", "");
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {

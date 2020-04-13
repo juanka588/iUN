@@ -33,8 +33,6 @@ public class DetailsFragment extends Fragment {
     protected int background;
     protected ExpandableListView sc;
 
-    private FrameLayout tl;
-
     public DetailsFragment() {
         data = new ArrayList<>();
     }
@@ -45,7 +43,7 @@ public class DetailsFragment extends Fragment {
         Bundle args = getArguments();
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
         sc = rootView.findViewById(R.id.expandableListDetails);
-        tl = rootView.findViewById(R.id.content_frame);
+        FrameLayout tl = rootView.findViewById(R.id.content_frame);
         TextView tx = rootView.findViewById(R.id.titleDetailsData);
         if (args != null) {
             title = args.getString(ARG_TITLE);

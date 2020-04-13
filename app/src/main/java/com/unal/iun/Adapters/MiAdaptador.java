@@ -1,5 +1,6 @@
 package com.unal.iun.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -57,15 +58,16 @@ public class MiAdaptador extends BaseAdapter {
         this.tipo = tipo;
     }
 
+    @SuppressLint("InflateParams")
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
 
             LayoutInflater inflater = actividad.getLayoutInflater();
             view = inflater.inflate(R.layout.elemento_lista, null, true);
         }
-        TextView textView = (TextView) view.findViewById(R.id.titulo);
-        TextView textView2 = (TextView) view.findViewById(R.id.subtitulo);
-        ImageView imageView = (ImageView) view.findViewById(R.id.icono);
+        TextView textView = view.findViewById(R.id.titulo);
+        TextView textView2 = view.findViewById(R.id.subtitulo);
+        ImageView imageView = view.findViewById(R.id.icono);
 
         String element = lista[position];
         if (element != null) {
@@ -83,9 +85,9 @@ public class MiAdaptador extends BaseAdapter {
             }
         }
         imageView.setImageResource(R.drawable.icono_app);
-        int ids[] = {R.id.titulo, R.id.subtitulo};
-        for (int i = 0; i < ids.length; i++) {
-            TextView prueba = (TextView) view.findViewById(ids[i]);
+        int[] ids = {R.id.titulo, R.id.subtitulo};
+        for (int value : ids) {
+            TextView prueba = view.findViewById(value);
             prueba.setTypeface(fuente);
         }
         String element2 = lista2[position];

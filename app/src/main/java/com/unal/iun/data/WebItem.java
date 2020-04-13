@@ -9,7 +9,7 @@ public class WebItem {
     public String name;
     public int icon;
     public String url;
-    public boolean special = false;
+    public boolean special;
 
     public WebItem(String name, int icon, String url, boolean special) {
         this.name = name;

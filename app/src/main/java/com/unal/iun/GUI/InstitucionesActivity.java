@@ -199,8 +199,7 @@ public class InstitucionesActivity extends AppCompatActivity {
         }
         String instituciones[] = Util.getcolumn(mat, 0);
         for (int i = 0; i < instituciones.length; i++) {
-            childItems.get(parentItems.indexOf(ciudades[i])).add(
-                    instituciones[i]);
+            childItems.get(parentItems.indexOf(ciudades[i])).add(instituciones[i]);
         }
         MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(
                 parentItems, childItems, mat, mode);

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MiAdaptadorEventos extends BaseAdapter {
     private final Activity actividad;
     private final String[][] lista;
-    public Typeface fuente;
+    private Typeface fuente;
 
     public MiAdaptadorEventos(Activity actividad, String[][] titulos) {
         super();
@@ -76,11 +76,11 @@ public class MiAdaptadorEventos extends BaseAdapter {
             textView7.setHint(Util.toCammelCase(lista[position][6].toLowerCase()));
         }
 
-        int ids[] = {id.tituloEvento, id.lugarEvento, id.fechaEvento,
+        int[] ids = {id.tituloEvento, id.lugarEvento, id.fechaEvento,
                 id.descripcionEvento, id.emailEvento, id.sitioWEBEvento,
                 id.telefonoEvento};
-        for (int i = 0; i < ids.length; i++) {
-            TextView prueba = (TextView) view.findViewById(ids[i]);
+        for (int id : ids) {
+            TextView prueba = view.findViewById(id);
             prueba.setTypeface(fuente);
         }
         return view;

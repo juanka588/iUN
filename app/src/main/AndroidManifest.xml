@@ -87,14 +87,13 @@
             android:name=".GUI.MapaActivity"
             android:label="@string/title_activity_mapa"
             android:logo="@drawable/home2"
-            android:screenOrientation="portrait">
-            >
+            android:screenOrientation="fullSensor">
         </activity>
         <activity
             android:name=".GUI.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -118,7 +117,7 @@
             android:label="@string/title_activity_radio"
             android:logo="@drawable/home2"
             android:parentActivityName=".GUI.MenuWebTabActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GUI.MainActivity" />
@@ -131,7 +130,7 @@
             android:name=".GUI.DirectorioActivity"
             android:label="@string/title_activity_directorio"
             android:logo="@drawable/logo"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".GUI.License"
             android:label="@string/title_activity_license"
