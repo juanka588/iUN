@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.GUI.MapaActivity;
-import com.unal.iun.LN.LinnaeusDatabase;
+import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.MapMarker;
@@ -76,7 +76,7 @@ public class MiAdaptadorExpandibleInstituciones extends
         }
         final int posicion = (int) getChildId(groupPosition, childPosition);
         textView = (TextView) convertView.findViewById(R.id.textItem);
-        textView.setText(Util.toCammelCase(mat[posicion][0].trim()
+        textView.setText(Util.toCamelCase(mat[posicion][0].trim()
                 .toLowerCase()));
         textView2 = (TextView) convertView.findViewById(R.id.textItemSub);
         textView2.setText(mat[posicion][1].trim());
@@ -98,7 +98,7 @@ public class MiAdaptadorExpandibleInstituciones extends
         try {
             Intent mapa = new Intent(activity, MapaActivity.class);
             String query;
-            LinnaeusDatabase lb = new LinnaeusDatabase(
+            IUNDataBase lb = new IUNDataBase(
                     activity.getApplicationContext());
             SQLiteDatabase db = lb.getReadableDatabase();
             String condicion = "latitud between " + (lt - 0.0001) + " and "

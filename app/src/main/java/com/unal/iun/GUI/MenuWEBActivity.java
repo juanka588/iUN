@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
 import com.unal.iun.DataSource.DirectoryContract;
-import com.unal.iun.LN.LinnaeusDatabase;
+import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.WebItem;
@@ -38,23 +38,15 @@ public class MenuWEBActivity extends AppCompatActivity {
     private static String GENERAL_INTEREST = "0";
     private static String UN_COMMUNITY = "1";
     private static String COMMUNITY_SERVICES = "2";
-    private SearchView sv;
-    private RecyclerView list_general_interest;
-    private RecyclerView list_communityUN;
-    private RecyclerView list_community_services;
-    private double[] lat;
-    private double[] lon;
-    private String[] titulos;
-    private String[] descripciones;
-    private boolean colegios = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_menu_web);
-        list_general_interest = findViewById(R.id.list_general_interest);
-        list_communityUN = findViewById(R.id.list_un_community);
-        list_community_services = findViewById(R.id.list_community_services);
+        RecyclerView list_general_interest = findViewById(R.id.list_general_interest);
+        RecyclerView list_communityUN = findViewById(R.id.list_un_community);
+        RecyclerView list_community_services = findViewById(R.id.list_community_services);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
         int screenWidth;
@@ -65,7 +57,7 @@ public class MenuWEBActivity extends AppCompatActivity {
         density = metrics.density;
         int spaces = (int) ((screenWidth) / (300));
         Util.log("spaces ", screenWidth + " " + density + " " + spaces);
-        LinnaeusDatabase ln = new LinnaeusDatabase(getApplicationContext());
+        IUNDataBase ln = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = ln.dataBase;
         Typeface font = Typeface
                 .createFromAsset(getAssets(), "Helvetica.ttf");
@@ -143,10 +135,6 @@ public class MenuWEBActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void home(View v) {
-        home();
-    }
-
     public void home() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -157,7 +145,7 @@ public class MenuWEBActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_menu_web, menu);
         MenuItem menuItem = menu.getItem(0);
-        sv = (SearchView) MenuItemCompat.getActionView(menuItem);
+        SearchView sv = (SearchView) MenuItemCompat.getActionView(menuItem);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override

@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
 import com.unal.iun.DataSource.DirectoryContract;
-import com.unal.iun.LN.LinnaeusDatabase;
+import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.WebItem;
@@ -52,13 +52,9 @@ public class MenuWebTabActivity extends AppCompatActivity {
      */
     ViewPager mViewPager;
     private SearchView sv;
-    private double[] lat;
-    private double[] lon;
-    private String[] titulos;
-    private String[] descripciones;
 
     public static List<WebItem> initData(Context context, String filter) {
-        LinnaeusDatabase ln = new LinnaeusDatabase(context);
+        IUNDataBase ln = new IUNDataBase(context);
         SQLiteDatabase db = ln.dataBase;
         List<WebItem> items = new ArrayList<>();
         Cursor cursor = db.query(DirectoryContract.EnlacesProvider.TABLE_NAME,

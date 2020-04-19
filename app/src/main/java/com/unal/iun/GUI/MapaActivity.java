@@ -2,12 +2,16 @@ package com.unal.iun.GUI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,8 +31,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.unal.iun.LN.LinnaeusDatabase;
-import com.unal.iun.LN.MiLocationListener;
+import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.DetailedInformation;
@@ -37,14 +40,15 @@ import com.unal.iun.data.MapMarker;
 
 import java.util.ArrayList;
 
-public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     public static final String ARG_MARKERS = "markers";
     public static final String ARG_LEVEL = "nivel";
     public static final String ARG_ZOOM = "zoom";
     public static final String ARG_TYPE = "tipo";
     private static final String TAG = MapaActivity.class.getSimpleName();
-    private static int type = 1, zoom = 19;
+    private static int type = 1;
+    private static int zoom = 19;
     private static String cond = "";
     private ArrayList<MapMarker> markers = new ArrayList<>();
     private GoogleMap mMap;
@@ -57,12 +61,22 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private android.support.v7.app.ActionBar bar;
     private Activity act;
 
+    private double latitude;
+    private double longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
         setUpMapIfNeeded();
         handleToolBar();
+        initLocationService();
+    }
+
+    private void initLocationService() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     private void handleToolBar() {
@@ -78,11 +92,14 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void handleBundle() {
         deta = new Intent(this, DetailsActivity.class);
-        Bundle b = getIntent().getExtras();
-        markers = b.getParcelableArrayList(ARG_MARKERS);
-        zoom = b.getInt(ARG_ZOOM);
-        type = b.getInt(ARG_TYPE);
-        nivel = b.getInt(ARG_LEVEL);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+        markers = bundle.getParcelableArrayList(ARG_MARKERS);
+        zoom = bundle.getInt(ARG_ZOOM);
+        type = bundle.getInt(ARG_TYPE);
+        nivel = bundle.getInt(ARG_LEVEL);
         changeMapType();
         animarCamara(markers.get(0).getPosition(), zoom);
         tableName = MainActivity.tbName;
@@ -115,8 +132,8 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (Exception e) {
             Intent navigation = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://maps.google.com/maps?" + "saddr="
-                            + MiLocationListener.lat + ","
-                            + MiLocationListener.longi + "&daddr=" + lat + ","
+                            + latitude + ","
+                            + longitude+ "&daddr=" + lat + ","
                             + lon));
             startActivity(navigation);
         }
@@ -193,7 +210,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void zoomIn(Marker arg0) {
-        LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
+        IUNDataBase lb = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = lb.getReadableDatabase();
         double lat = arg0.getPosition().latitude;
         double lon = arg0.getPosition().longitude;
@@ -235,7 +252,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void zoomIn() {
-        LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
+        IUNDataBase lb = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = lb.getReadableDatabase();
         double lat = focus.getPosition().latitude;
         double lon = focus.getPosition().longitude;
@@ -384,25 +401,24 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onMarkerClick(Marker marker) {
                 int len = marker.getTitle().length();
                 bar.setTitle(marker.getTitle()
-                        .substring(0, len > 20 ? 20 : len));
+                        .substring(0, Math.min(len, 20)));
                 return false;
             }
         });
     }
 
     private MarkerOptions getMarkerOption(MapMarker focus) {
-        MarkerOptions options = new MarkerOptions()
+        return new MarkerOptions()
                 .position(focus.getPosition())
                 .title(focus.getTitle())
                 .snippet(focus.getDescription())
                 .icon(BitmapDescriptorFactory.defaultMarker(focus.getIcon()));
-        return options;
     }
 
     public ArrayList<DetailedInformation> getData(String baseConsult, String criteria) {
         String consulta = baseConsult + criteria;
         Log.e("consulta mMap", consulta);
-        LinnaeusDatabase lin = new LinnaeusDatabase(getApplicationContext());
+        IUNDataBase lin = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = lin.getReadableDatabase();
         Cursor c = db.rawQuery(consulta, null);
         String[][] mat = Util.imprimirLista(c);
@@ -477,5 +493,26 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setAllGesturesEnabled(true);
         MapsInitializer.initialize(MapaActivity.this);
         handleBundle();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+        // not implemented
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+        // not implemented
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+        // not implemented
     }
 }

@@ -35,7 +35,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.unal.iun.Adapters.MiAdaptador;
-import com.unal.iun.LN.LinnaeusDatabase;
+import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 import com.unal.iun.data.DetailedInformation;
@@ -54,7 +54,6 @@ public class DirectorioActivity extends AppCompatActivity {
     protected String webTableName = "ENLACE";
     protected String sql = "";
     protected String path = "";
-    protected String auxCon;
     protected ListView lv;
     protected MenuItem item;
     protected SearchView sv;
@@ -62,10 +61,11 @@ public class DirectorioActivity extends AppCompatActivity {
     protected TableRow tr;
     protected int idFondo = R.drawable.fondo,
             idFondoTras = R.drawable.ciudad_universitaria;
-    protected double lat[];
-    protected double lon[];
-    protected String titulos[], descripciones[];
-    protected String columnas[] = {"_id", "NIVEL_ADMINISTRATIVO", "SEDE",
+    protected double[] lat;
+    protected double[] lon;
+    protected String[] titulos;
+    protected String[] descripciones;
+    protected String[] columnas = {"_id", "NIVEL_ADMINISTRATIVO", "SEDE",
             "DEPENDENCIAS", "DIVISIONES", "DEPARTAMENTOS", "SECCIONES",
             "CORREO_ELECTRONICO", "EXTENSION", "DIRECTO",
             "edificios._id", "enlace._id"};
@@ -79,15 +79,14 @@ public class DirectorioActivity extends AppCompatActivity {
     private SimpleCursorAdapter simpleCursorAdapter;
     private String[] from = new String[]{"consulta"};
     private int[] to = new int[]{android.R.id.text1};
-    private LinnaeusDatabase ln;
+    private IUNDataBase ln;
     private SQLiteDatabase db;
     private Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        ln = new LinnaeusDatabase(getApplicationContext());
+        ln = new IUNDataBase(getApplicationContext());
         db = ln.getWritableDatabase();
         font = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
         setContentView(R.layout.activity_directorio);
@@ -149,12 +148,9 @@ public class DirectorioActivity extends AppCompatActivity {
                         }
                         if ("".equals(path)) {
                             path = seleccion;
-                            // item.setTitleCondensed(path.toUpperCase().trim());
                         } else {
                             path = path + ">" + seleccion.toUpperCase().trim();
-                            // item.setTitleCondensed(path);
                         }
-                        // item.setTitleCondensed(path);
                         current++;
                         if (current == 3) {
                             animarFondo(mat[posicion][0], true);
@@ -207,8 +203,7 @@ public class DirectorioActivity extends AppCompatActivity {
                         R.drawable.fondoinf));
         barra.setBackgroundDrawable(background2);
         String[] valores = getResources().getStringArray(R.array.optionsArray);
-        String[] files = new String[]{"edificio.jpg", "enlacep.jpg",
-                "mapap.jpg"};
+        String[] files = new String[]{"edificio.jpg", "enlacep.jpg", "mapap.jpg"};
         cajon = findViewById(R.id.drawer_layout);
         final ListView opciones = findViewById(R.id.left_drawer);
         MiAdaptador adapter = new MiAdaptador(act, valores, files, MiAdaptador.TYPE_IMAGE);
@@ -336,14 +331,8 @@ public class DirectorioActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_directorio, menu);
-        // item = menu.getItem(0);
         MenuItem menuItem = menu.getItem(0);
         sv = (SearchView) MenuItemCompat.getActionView(menuItem);
-        Cursor c = db.rawQuery("select  distinct " + columnas[current] + " consulta, "
-                + columnas[2] + ",_id from " + baseTableName, null);
-//        simpleCursorAdapter = new SimpleCursorAdapter(getApplicationContext(),
-//                android.R.layout.simple_list_item_1, c, from, to, 0);
-//        sv.setSuggestionsAdapter(simpleCursorAdapter);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -352,13 +341,6 @@ public class DirectorioActivity extends AppCompatActivity {
                     recargar(query);
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(sv.getWindowToken(), 0);
-                } else {
-                    /*
-                     * current = 2; recargar("select  distinct " + columnas[2] +
-					 * ", " + columnas[2] + " from " + baseTableName +
-					 * " natural join edificios order by (orden)", false,
-					 * false);
-					 */
                 }
                 return false;
             }
@@ -367,20 +349,10 @@ public class DirectorioActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() > 2) {
                     recargar(newText);
-                } else {
-                    /*
-                     * current = 2; recargar("select  distinct " + columnas[2] +
-					 * ", " + columnas[2] + " from " + baseTableName +
-					 * " natural join edificios order by (orden)", false,
-					 * false);
-					 */
                 }
                 return false;
             }
         });
-        /*
-         * c.close(); db.close();
-		 */
         sv.setOnCloseListener(new SearchView.OnCloseListener() {
 
             @Override
@@ -502,7 +474,6 @@ public class DirectorioActivity extends AppCompatActivity {
         String[] textos = path.split(">");
 
         if (conds.length == 1) {
-            // item.setTitleCondensed("");
             path = "";
             condicion = "";
             sql = "select  distinct " + columnas[2] + ", " + columnas[2]
@@ -601,7 +572,6 @@ public class DirectorioActivity extends AppCompatActivity {
                     c = db.rawQuery(query, null);
                 }
             }
-//            simpleCursorAdapter.changeCursorAndColumns(c, from, to);
             final String[][] mat = Util.imprimirLista(c);
             MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
                     Util.getcolumn(mat, 1), tipo);
@@ -630,10 +600,8 @@ public class DirectorioActivity extends AppCompatActivity {
                     }
                     if (path.isEmpty()) {
                         path = seleccion;
-                        // item.setTitleCondensed(path.toUpperCase().trim());
                     } else {
                         path = path + ">" + seleccion.toUpperCase().trim();
-                        // item.setTitleCondensed(path);
                     }
                     if (isLastStep) {
                         if (isFromSearch) {
@@ -663,8 +631,6 @@ public class DirectorioActivity extends AppCompatActivity {
                     sql = "select  distinct " + columnas[current] + ", "
                             + columnas[2] + " from " + baseTableName + "  where "
                             + condicion;
-                    // Toast.makeText(getApplication(), sql, Toast.LENGTH_LONG)
-                    // .show();
                     recargar(sql, current == 5, false, 1);
                     if (path.contains("FACULTAD DE")) {
                         tr.setVisibility(View.VISIBLE);

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class LinnaeusDatabase extends SQLiteOpenHelper {
+public class IUNDataBase extends SQLiteOpenHelper {
 
     private final static String DATABASE_PATH = "/data/data/com.unal.iun/databases/";
     private static final int DATABASE_VERSION = 3;
@@ -24,7 +24,7 @@ public class LinnaeusDatabase extends SQLiteOpenHelper {
     private final Context dbContext;
     public SQLiteDatabase dataBase;
 
-    public LinnaeusDatabase(Context context) {
+    public IUNDataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         /*
          * desde carpetas externas File f=new File(path) if extits f.mkdir();

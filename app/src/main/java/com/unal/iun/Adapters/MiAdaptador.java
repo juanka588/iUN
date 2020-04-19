@@ -71,8 +71,8 @@ public class MiAdaptador extends BaseAdapter {
 
         String element = lista[position];
         if (element != null) {
-            textView.setText(Util.toCammelCase(element.toLowerCase()));
-            textView.setHint(Util.toCammelCase(element.toLowerCase()));
+            textView.setText(Util.toCamelCase(element.toLowerCase()));
+            textView.setHint(Util.toCamelCase(element.toLowerCase()));
             if (tipo != 0) {
                 if (element.contains("Museo Paleon")) {
                     textView.setText("\t Museo Paleontologico");
@@ -93,7 +93,7 @@ public class MiAdaptador extends BaseAdapter {
         String element2 = lista2[position];
         if (element2 != null) {
             textView2
-                    .setText(Util.toCammelCase(element2.toLowerCase()));
+                    .setText(Util.toCamelCase(element2.toLowerCase()));
             if (tipo > 0 && tipo < 3) {
                 textView2.setText("");
             }

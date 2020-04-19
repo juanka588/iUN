@@ -54,8 +54,7 @@
     <string name="sede">Mi sede</string>
     <string name="no_hay">No hay</string>
     <string name="radio_exception">No es posible cargar el streaming por el momento</string>
-    <string name="longitude">Longitud</string>
-    <string name="latitude">Latitud</string>
+    <string name="location">Latitud : %1$.4f Longitud : %2$.4f</string>
     <string name="himno">Gaudeamus igitur \nJuvenes dum sumus \nPost jucundum juventutem \nPost
         molestam senectutem \nNos habebit humus. \n \nUbi sunt qui ante nos \nIn mundo fuere?
         \nVadite ad superos \nTransite in inferos \nHos si vis videre. \n \nVita nostra brevis est
@@ -99,5 +98,6 @@
     <string name="select_option" translatable="false">Seleccione una opcion</string>
     <string name="email_hint" translatable="false">Ingrese su correo</string>
     <string name="soon">Proximamente</string>
+    <string name="timestamp_label">Hora Legal en Colombia\nInstituto Nacional de Meteorología:</string>
 
 </resources>

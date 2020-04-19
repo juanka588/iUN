@@ -17,24 +17,26 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unal.iun.Interfaces.OnEventsButtonClick;
-import com.unal.iun.LN.LinnaeusDatabase;
-import com.unal.iun.LN.MiLocationListener;
+import com.unal.iun.Interfaces.OnTimeUpdate;
+import com.unal.iun.LN.IUNDataBase;
+import com.unal.iun.LN.MainScreenLocationListener;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements OnEventsButtonClick {
+
+public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
     public static final boolean DEBUG = true;
     public static String tbName = "BaseM";
     public static String sede = "Bogotá";
-    ImageView im;
     int screenWidth;
     int screenHeight;
+    TextView dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,56 +50,37 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
                 .getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
-        Typeface fuente = Typeface
-                .createFromAsset(getAssets(), "Helvetica.ttf");
+        Typeface fuente = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
         int[] ids = {R.id.SOnlineButton, R.id.admisionesButton,
-                R.id.sedesButton, R.id.textLatitud, R.id.textLongitud,
+                R.id.sedesButton, R.id.textLocation,
+                R.id.textTimestamp, R.id.timestamp_label,
                 R.id.textLugar, R.id.eventosButton};
-        for (int i = 0; i < ids.length; i++) {
-            TextView prueba = findViewById(ids[i]);
-            prueba.setTypeface(fuente);
-            if (ids[i] == R.id.textSede) {
-                prueba.setText(sede);
-            }
+        for (int id : ids) {
+            TextView textView = findViewById(id);
+            textView.setTypeface(fuente);
         }
         iniciarLocalService();
         if (!Util.isOnline(this)) {
             Util.notificarRed(this);
         }
-        // addShortcut();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-    protected void cambiarBD() {
-        AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo_Light_Dialog);
-        builder.setMessage("¿Que Base de Datos Desea usar?")
-                .setTitle("Confirme:")
-                .setPositiveButton("Modo Básico",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                tbName = "BaseM";
-                                dialog.cancel();
-                            }
-                        })
-                .setNegativeButton("Modo Experto",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                tbName = "Base";
-                                dialog.cancel();
-                            }
-                        });
-        builder.create().show();
+        dateTextView = findViewById(R.id.textTimestamp);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String currentNetworkTime = Util.getCurrentNetworkTime();
+                        MainActivity.this.onTimeUpdated(currentNetworkTime);
+                    }
+                });
+            }
+        },0,10_000);
     }
 
     public void licencia(View v) {
-        Intent ca = new Intent(this, License.class);
-        startActivity(ca);
+        Intent intent = new Intent(this, License.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
@@ -129,21 +112,11 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
         sede = savedInstanceState.getString("sede");
         TextView tx = findViewById(R.id.textSede);
         tx.setText(sede);
-        im = findViewById(R.id.imageUNPrincipal);
-        im.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View v) {
-                cambiarBD();
-                return false;
-            }
-        });
         super.onRestoreInstanceState(savedInstanceState);
     }
 
     public void eventos(View v) {
-        final EventsDialog dialog = new EventsDialog(MainActivity.this, R.style.EventsDialog, this);
-        dialog.show();
+        Util.irA("http://circular.unal.edu.co/museumlist/", MainActivity.this);
     }
 
     public void admisiones(View v) {
@@ -193,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private AlertDialog.Builder getBuilderApi() {
         int currentVersion = Build.VERSION.SDK_INT;
-        Log.e("version", currentVersion + "");
+        Log.e("version", String.valueOf(currentVersion));
         if (currentVersion <= Build.VERSION_CODES.HONEYCOMB_MR2) {
             return new AlertDialog.Builder(this);
         }
@@ -202,18 +175,15 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
 
     private void iniciarLocalService() {
         LocationManager milocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener milocListener = new MiLocationListener();
-        MiLocationListener.appcont = this.getApplicationContext();
-        MiLocationListener.textLat = findViewById(R.id.textLatitud);
-        MiLocationListener.textLon = findViewById(R.id.textLongitud);
-        MiLocationListener.textSede = findViewById(R.id.textSede);
-        LinnaeusDatabase lb = new LinnaeusDatabase(getApplicationContext());
-        MiLocationListener.db = lb.dataBase;
+        LocationListener milocListener = new MainScreenLocationListener(getApplicationContext(),
+                (TextView) findViewById(R.id.textLocation),
+                (TextView) findViewById(R.id.textSede),
+                new IUNDataBase(getApplicationContext()).dataBase
+        );
         milocManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 0, 0, milocListener);
+                LocationManager.NETWORK_PROVIDER, 0, 1, milocListener);
         milocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                0, 0, milocListener);
-
+                0, 1, milocListener);
     }
 
     @Override
@@ -232,8 +202,7 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
 
     private void directorio(boolean cond) {
         try {
-            Intent directorio = new Intent(getApplicationContext(),
-                    DirectorioActivity.class);
+            Intent directorio = new Intent(getApplicationContext(), DirectorioActivity.class);
             if (cond) {
                 directorio.putExtra("current", 3);
                 directorio.putExtra("sede", sede);
@@ -241,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
             directorio.putExtra("salto", cond);
             startActivity(directorio);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            // this.finish();
         } catch (Exception e) {
             Log.e("error", e.toString());
         }
@@ -252,14 +220,14 @@ public class MainActivity extends AppCompatActivity implements OnEventsButtonCli
         try {
             startActivity(new Intent(getApplicationContext(), MenuWebTabActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            // this.finish();
         } catch (Exception e) {
             Log.e("error", e.toString());
         }
     }
 
     @Override
-    public void onEventClick() {
-        Util.irA("http://circular.unal.edu.co/museumlist/", MainActivity.this);
+    public void onTimeUpdated(String newDate) {
+        dateTextView.setText(newDate);
     }
+
 }

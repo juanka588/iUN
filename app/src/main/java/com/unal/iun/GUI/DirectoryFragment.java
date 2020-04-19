@@ -42,7 +42,7 @@ public class DirectoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_directory, container, false);
-        ListView list = (ListView) rootView.findViewById(R.id.directoryList);
+        ListView list = rootView.findViewById(R.id.directoryList);
 
         ArrayList<String> arr = new ArrayList<>();
         arr.add("Test 1");

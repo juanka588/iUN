@@ -14,9 +14,9 @@ import com.unal.iun.R;
 import java.io.IOException;
 
 public class onItemSpinSelected implements OnItemSelectedListener {
-    ImageButton b;
-    ImageButton b2;
-    TextView tx;
+    private ImageButton b;
+    private ImageButton b2;
+    private TextView tx;
 
     public onItemSpinSelected(ImageButton play, ImageButton pause, TextView text) {
         b = play;
@@ -25,8 +25,7 @@ public class onItemSpinSelected implements OnItemSelectedListener {
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View arg1, int arg2,
-                               long arg3) {
+    public void onItemSelected(AdapterView<?> parent, View arg1, int arg2, long arg3) {
         Toast.makeText(parent.getContext(), "" + parent.getSelectedItem(), Toast.LENGTH_SHORT)
                 .show();
         int selected = parent.getSelectedItemPosition();
