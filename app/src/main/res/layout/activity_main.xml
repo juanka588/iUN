@@ -1,162 +1,156 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".GUI.MainActivity">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/new_logo" />
+
+    <TextView
+        android:id="@+id/textLugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:text="@string/sede"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textSede"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Bogotá"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageUNPrincipal"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selectorfondocir"
+        android:onClick="irSede"
+        android:src="@drawable/persona" />
+
+    <TextView
+        android:id="@+id/textLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/location"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/timestamp_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/timestamp_label"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textTimestamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="2020 M04 april 19 09:56:45 GTM-05:00"
+        android:textColor="@android:color/white" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="140dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/SOnlineButton"
+            style="@style/TextMenuStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/new_logo" />
+            android:onClick="servicios"
+            android:text="@string/main_menu_item1" />
 
         <TextView
-            android:id="@+id/textLugar"
-            android:layout_width="wrap_content"
+            android:id="@+id/sedesButton"
+            style="@style/TextMenuStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="120dp"
-            android:text="@string/sede"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/textSede"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Bogotá"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageUNPrincipal"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/selectorfondocir"
-            android:onClick="irSede"
-            android:src="@drawable/persona" />
-
-        <TextView
-            android:id="@+id/textLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/location"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/timestamp_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/timestamp_label"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/textTimestamp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="2020 M04 april 19 09:56:45 GTM-05:00"
-            android:textColor="@android:color/white" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/SOnlineButton"
-                style="@style/TextMenuStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="servicios"
-                android:text="@string/main_menu_item1" />
-
-            <TextView
-                android:id="@+id/sedesButton"
-                style="@style/TextMenuStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="directorio"
-                android:text="@string/main_menu_item3" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/admisionesButton"
-                style="@style/TextMenuStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="admisiones"
-                android:text="@string/main_menu_item2" />
-
-            <TextView
-                android:id="@+id/eventosButton"
-                style="@style/TextMenuStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="eventos"
-                android:text="@string/events" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textLicencia"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="start"
-                android:onClick="licencia"
-                android:text="@string/title_activity_license"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/textOpinion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="end"
-                android:onClick="comentar"
-                android:text="@string/opinion"
-                android:textColor="@android:color/white"
-                android:textStyle="" />
-        </LinearLayout>
+            android:layout_weight="1"
+            android:onClick="directorio"
+            android:text="@string/main_menu_item3" />
     </LinearLayout>
-</FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/admisionesButton"
+            style="@style/TextMenuStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="admisiones"
+            android:text="@string/main_menu_item2" />
+
+        <TextView
+            android:id="@+id/eventosButton"
+            style="@style/TextMenuStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="eventos"
+            android:text="@string/events" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textLicencia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="start"
+            android:onClick="licencia"
+            android:text="@string/title_activity_license"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textOpinion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="end"
+            android:onClick="comentar"
+            android:text="@string/opinion"
+            android:textColor="@android:color/white"
+            android:textStyle="" />
+    </LinearLayout>
+</LinearLayout>
