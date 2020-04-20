@@ -79,7 +79,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#20000000"
+        android:background="@color/semi_transparent"
         android:choiceMode="singleChoice"/>
 
 </android.support.v4.widget.DrawerLayout>

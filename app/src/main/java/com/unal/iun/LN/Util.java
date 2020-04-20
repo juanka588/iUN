@@ -19,9 +19,7 @@ import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
 
 import java.net.InetAddress;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by JuanCamilo on 15/03/2015.
@@ -30,7 +28,7 @@ public class Util {
 
     private static final String TIME_SERVER = "co.pool.ntp.org";
 
-    public static String getCurrentNetworkTime() {
+    public static long getCurrentNetworkTime() {
         NTPUDPClient lNTPUDPClient = new NTPUDPClient();
         lNTPUDPClient.setDefaultTimeout(3000);
         long returnTime = new Date().getTime();
@@ -47,20 +45,18 @@ public class Util {
         } finally {
             lNTPUDPClient.close();
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy 'M'MM dd, EEE HH:mm:ss z", Locale.getDefault());
-        return dateFormat.format(new Date(returnTime));
+        return returnTime;
     }
 
-    public static boolean isOnline(Activity acc) {
+    public static boolean isOffline(Activity acc) {
         ConnectivityManager cm = (ConnectivityManager) acc.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null) {
-            return netInfo.isConnectedOrConnecting();
+            return !netInfo.isConnectedOrConnecting();
         }
-
-        return false;
+        return true;
     }
 
     public static double[] toDouble(String[] getcolumn) {
@@ -90,8 +86,7 @@ public class Util {
     }
 
     public static String[][] imprimirLista(Cursor cursor) {
-        String[][] lista = new String[cursor.getCount()][cursor
-                .getColumnCount()];
+        String[][] lista = new String[cursor.getCount()][cursor.getColumnCount()];
         if (cursor.moveToFirst()) {
             for (int i = 0; i < cursor.getCount(); i++) {
                 for (int j = 0; j < cursor.getColumnCount(); j++) {

@@ -76,9 +76,6 @@ public class DirectorioActivity extends AppCompatActivity {
     protected ActionBarDrawerToggle toggle;
     protected Activity act;
     private DrawerLayout cajon;
-    private SimpleCursorAdapter simpleCursorAdapter;
-    private String[] from = new String[]{"consulta"};
-    private int[] to = new int[]{android.R.id.text1};
     private IUNDataBase ln;
     private SQLiteDatabase db;
     private Typeface font;
@@ -91,8 +88,11 @@ public class DirectorioActivity extends AppCompatActivity {
         font = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
         setContentView(R.layout.activity_directorio);
         crearBarra();
-        manejarDisplay();
+        tl = findViewById(R.id.TableLayoutDirectorio);
+        lv = findViewById(R.id.listViewDirectorio);
+        tr = findViewById(R.id.tableRowDirectorio);
         Bundle b = getIntent().getExtras();
+        manejarDisplay();
         adaptadorInicial(b);
     }
 
@@ -105,86 +105,78 @@ public class DirectorioActivity extends AppCompatActivity {
 
     private void adaptadorInicial(Bundle b) {
         baseTableName = MainActivity.tbName;
-        try {
-            if (b.getBoolean("salto")) {
-                current = b.getInt("current");
-                String sede = b.getString("sede");
-                condicion = "sede='" + sede + "'";
-                sql = "select  distinct " + columnas[current] + " from "
-                        + baseTableName + " where " + condicion
-                        + " and NIVEL_ADMINISTRATIVO between 1 and 4";
-                path = sede;
-                animarFondo(sede, false);
-            } else {
-                sql = "select  distinct " + columnas[current] + " from "
-                        + baseTableName;
-            }
-            Cursor c;
-            if (b.getBoolean("salto")) {
-                c = db.rawQuery(sql, null);
-            } else {
-                c = db.rawQuery(sql
-                        + " natural join edificios order by (orden)", null);
-            }
-            final String[][] mat = Util.imprimirLista(c);
-            c.close();
-            MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                    Util.getcolumn(mat, 0), MiAdaptador.TYPE_SIMPLE);
-            adapter.fuente = font;
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View vista,
-                                        int posicion, long arg3) {
-                    try {
-                        seleccion = mat[posicion][0];
-                        if (saltar(seleccion)) {
-                            irDirecto(seleccion);
-                            return;
-                        }
-                        if (seleccion.contains("Programas")) {
-                            irDirecto();
-                            return;
-                        }
-                        if ("".equals(path)) {
-                            path = seleccion;
-                        } else {
-                            path = path + ">" + seleccion.toUpperCase().trim();
-                        }
-                        current++;
-                        if (current == 3) {
-                            animarFondo(mat[posicion][0], true);
-                        }
-                        if (condicion.equals("")) {
-                            condicion = columnas[current - 1] + " = '"
-                                    + seleccion + "'";
-                        } else {
-                            condicion += " and " + columnas[current - 1]
-                                    + " = '" + seleccion + "'";
-                        }
-
-                        sql = "select  distinct " + columnas[current] + ", "
-                                + columnas[2] + " from " + baseTableName
-                                + "  where " + condicion;
-                        recargar(sql, false, false, 1);
-
-                    } catch (Exception e) {
-                        Toast.makeText(getApplication(), e.toString(),
-                                Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        if (b.getBoolean("salto")) {
+            current = b.getInt("current");
+            String sede = b.getString("sede");
+            condicion = "sede='" + sede + "'";
+            sql = "select  distinct " + columnas[current] + " from "
+                    + baseTableName + " where " + condicion
+                    + " and NIVEL_ADMINISTRATIVO between 1 and 4";
+            path = sede;
+            animarFondo(sede, false);
+        } else {
+            sql = "select  distinct " + columnas[current] + " from "
+                    + baseTableName;
         }
+        Cursor c;
+        if (b.getBoolean("salto")) {
+            c = db.rawQuery(sql, null);
+        } else {
+            c = db.rawQuery(sql
+                    + " natural join edificios order by (orden)", null);
+        }
+        final String[][] mat = Util.imprimirLista(c);
+        c.close();
+        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
+                Util.getcolumn(mat, 0), MiAdaptador.TYPE_SIMPLE);
+        adapter.fuente = font;
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View vista,
+                                    int posicion, long arg3) {
+                try {
+                    seleccion = mat[posicion][0];
+                    if (saltar(seleccion)) {
+                        irDirecto(seleccion);
+                        return;
+                    }
+                    if (seleccion.contains("Programas")) {
+                        irDirecto();
+                        return;
+                    }
+                    if ("".equals(path)) {
+                        path = seleccion;
+                    } else {
+                        path = path + ">" + seleccion.toUpperCase().trim();
+                    }
+                    current++;
+                    if (current == 3) {
+                        animarFondo(mat[posicion][0], true);
+                    }
+                    if (condicion.equals("")) {
+                        condicion = columnas[current - 1] + " = '"
+                                + seleccion + "'";
+                    } else {
+                        condicion += " and " + columnas[current - 1]
+                                + " = '" + seleccion + "'";
+                    }
 
+                    sql = "select  distinct " + columnas[current] + ", "
+                            + columnas[2] + " from " + baseTableName
+                            + "  where " + condicion;
+                    recargar(sql, false, false, 1);
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplication(), e.toString(),
+                            Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void manejarDisplay() {
-        tl = findViewById(R.id.TableLayoutDirectorio);
-        lv = findViewById(R.id.listViewDirectorio);
-        tr = findViewById(R.id.tableRowDirectorio);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
         int screenHeight = display.getHeight();
@@ -494,7 +486,6 @@ public class DirectorioActivity extends AppCompatActivity {
                 cad2.append(textos[i]);
             }
         }
-        // item.setTitleCondensed(cad2);
         path = cad2.toString();
         boolean cont = path.contains("FACULTAD DE");
         if (!cont) {
@@ -560,88 +551,82 @@ public class DirectorioActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    public void recargar(String query, final boolean isLastStep, final boolean isFromSearch,
-                         int tipo) {
-        try {
-            lv.setAdapter(null);
-            Cursor c = db.rawQuery(query, null);
-            if (current == 3) {
-                c = db.rawQuery(query
-                        + " and NIVEL_ADMINISTRATIVO between 1 and 4", null);
-                if (baseTableName.equals("Base")) {
-                    c = db.rawQuery(query, null);
+    public void recargar(String query, final boolean isLastStep, final boolean isFromSearch, int tipo) {
+        lv.setAdapter(null);
+        Cursor c = db.rawQuery(query, null);
+        if (current == 3) {
+            c = db.rawQuery(query
+                    + " and NIVEL_ADMINISTRATIVO between 1 and 4", null);
+            if (baseTableName.equals("Base")) {
+                c = db.rawQuery(query, null);
+            }
+        }
+        final String[][] mat = Util.imprimirLista(c);
+        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
+                Util.getcolumn(mat, 1), tipo);
+        adapter.fuente = font;
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View vista,
+                                    int posicion, long arg3) {
+                seleccion = mat[posicion][0];
+                if (saltar(seleccion)) {
+                    irDirecto(seleccion);
+                    return;
+                }
+                if (seleccion.contains("Programas")) {
+                    irDirecto();
+                    return;
+                }
+                if (path.contains("INSTITUTOS ")) {
+                    irDirecto(seleccion);
+                    return;
+                }
+                if (current == 2
+                        || seleccion.contains("Dirección Nacional")) {
+                    animarFondo(seleccion, true);
+                }
+                if (path.isEmpty()) {
+                    path = seleccion;
+                } else {
+                    path = path + ">" + seleccion.toUpperCase().trim();
+                }
+                if (isLastStep) {
+                    if (isFromSearch) {
+                        condicion = "secciones||departamentos like('" +
+                                seleccion + mat[posicion][1] + "')";
+                        Log.e("Condicion busqueda", condicion);
+                        animarFondo(mat[posicion][1], false);
+                        detalles();
+                        return;
+                    } else {
+                        condicion += " and " + columnas[current] + " = '"
+                                + seleccion + "'";
+                        detalles();
+                        return;
+                    }
+                }
+                current++;
+                int resta = 1;
+                if (condicion.equals("")) {
+                    condicion = columnas[current - resta] + " = '"
+                            + seleccion + "'";
+
+                } else {
+                    condicion += " and " + columnas[current - resta]
+                            + " = '" + seleccion + "'";
+                }
+                sql = "select  distinct " + columnas[current] + ", "
+                        + columnas[2] + " from " + baseTableName + "  where "
+                        + condicion;
+                recargar(sql, current == 5, false, 1);
+                if (path.contains("FACULTAD DE")) {
+                    tr.setVisibility(View.VISIBLE);
+                    refresh(findViewById(R.id.buttonDirectorio));
                 }
             }
-            final String[][] mat = Util.imprimirLista(c);
-            MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                    Util.getcolumn(mat, 1), tipo);
-            adapter.fuente = font;
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View vista,
-                                        int posicion, long arg3) {
-                    seleccion = mat[posicion][0];
-                    if (saltar(seleccion)) {
-                        irDirecto(seleccion);
-                        return;
-                    }
-                    if (seleccion.contains("Programas")) {
-                        irDirecto();
-                        return;
-                    }
-                    if (path.contains("INSTITUTOS ")) {
-                        irDirecto(seleccion);
-                        return;
-                    }
-                    if (current == 2
-                            || seleccion.contains("Dirección Nacional")) {
-                        animarFondo(seleccion, true);
-                    }
-                    if (path.isEmpty()) {
-                        path = seleccion;
-                    } else {
-                        path = path + ">" + seleccion.toUpperCase().trim();
-                    }
-                    if (isLastStep) {
-                        if (isFromSearch) {
-                            condicion = "secciones||departamentos like('" +
-                                    seleccion + mat[posicion][1] + "')";
-                            Log.e("Condicion busqueda", condicion);
-                            animarFondo(mat[posicion][1], false);
-                            detalles();
-                            return;
-                        } else {
-                            condicion += " and " + columnas[current] + " = '"
-                                    + seleccion + "'";
-                            detalles();
-                            return;
-                        }
-                    }
-                    current++;
-                    int resta = 1;
-                    if (condicion.equals("")) {
-                        condicion = columnas[current - resta] + " = '"
-                                + seleccion + "'";
-
-                    } else {
-                        condicion += " and " + columnas[current - resta]
-                                + " = '" + seleccion + "'";
-                    }
-                    sql = "select  distinct " + columnas[current] + ", "
-                            + columnas[2] + " from " + baseTableName + "  where "
-                            + condicion;
-                    recargar(sql, current == 5, false, 1);
-                    if (path.contains("FACULTAD DE")) {
-                        tr.setVisibility(View.VISIBLE);
-                        refresh(findViewById(R.id.buttonDirectorio));
-                    }
-                }
-            });
-        } catch (Exception e) {
-            Log.e("error al recargar ", e.toString());
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        });
 
     }
 
@@ -757,45 +742,41 @@ public class DirectorioActivity extends AppCompatActivity {
         } else {
             auxCond = " and departamentos like('%Departamento%')";
         }
-        try {
-            String query = "select distinct departamentos,sede from "
-                    + baseTableName + " where " + condicion;
-            Cursor c = db.rawQuery(query + auxCond, null);
-            Log.e("consulta recarga", query + auxCond);
-            final String[][] mat = Util.imprimirLista(c);
-            if (mat.length == 0) {
-                Toast.makeText(getApplicationContext(),
-                        this.getString(R.string.no_hay) + " " + (cond ? this.getString(R.string.textSwitchON) : this.getString(R.string.textSwitchOFF)), Toast.LENGTH_SHORT)
-                        .show();
-                c.close();
-                return;
-            }
+
+        String query = "select distinct departamentos,sede from "
+                + baseTableName + " where " + condicion;
+        Cursor c = db.rawQuery(query + auxCond, null);
+        Log.e("consulta recarga", query + auxCond);
+        final String[][] mat = Util.imprimirLista(c);
+        if (mat.length == 0) {
+            Toast.makeText(getApplicationContext(),
+                    this.getString(R.string.no_hay) + " " + (cond ? this.getString(R.string.textSwitchON) : this.getString(R.string.textSwitchOFF)), Toast.LENGTH_SHORT)
+                    .show();
             c.close();
-            lv.setAdapter(null);
-            MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                    Util.getcolumn(mat, 1), 1);
-            adapter.fuente = Typeface.createFromAsset(getAssets(),
-                    "Helvetica.ttf");
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View vista,
-                                        int posicion, long arg3) {
-                    seleccion = mat[posicion][0];
-                    if (seleccion.contains("Observatorio")) {
-                        animarFondo(seleccion, true);
-                    }
-                    condicion += " and " + columnas[5] + " = '" + seleccion
-                            + "'";
-                    sql = "select  distinct " + columnas[5] + ", "
-                            + columnas[2] + ",_id from " + baseTableName + "  where "
-                            + condicion;
-                    detalles();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("error al recargar ", e.toString());
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            return;
         }
+        c.close();
+        lv.setAdapter(null);
+        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
+                Util.getcolumn(mat, 1), 1);
+        adapter.fuente = Typeface.createFromAsset(getAssets(),
+                "Helvetica.ttf");
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View vista,
+                                    int posicion, long arg3) {
+                seleccion = mat[posicion][0];
+                if (seleccion.contains("Observatorio")) {
+                    animarFondo(seleccion, true);
+                }
+                condicion += " and " + columnas[5] + " = '" + seleccion
+                        + "'";
+                sql = "select  distinct " + columnas[5] + ", "
+                        + columnas[2] + ",_id from " + baseTableName + "  where "
+                        + condicion;
+                detalles();
+            }
+        });
     }
 }

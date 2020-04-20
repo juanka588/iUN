@@ -36,12 +36,6 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
     private Context context;
     private Typeface font;
 
-    public WebMenuRecyclerViewAdapter(List<WebItem> webItems, Context context, Typeface font) {
-        this.items = webItems;
-        this.context = context;
-        this.font = font;
-    }
-
     public WebMenuRecyclerViewAdapter(List<WebItem> webItems, Activity activity, Typeface font) {
         this.items = webItems;
         this.context = activity.getApplicationContext();

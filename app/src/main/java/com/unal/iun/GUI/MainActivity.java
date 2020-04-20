@@ -13,10 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +24,11 @@ import com.unal.iun.LN.MainScreenLocationListener;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,10 +36,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
     public static final boolean DEBUG = true;
     public static String tbName = "BaseM";
-    public static String sede = "Bogotá";
-    int screenWidth;
-    int screenHeight;
-    TextView dateTextView;
+    public static String CLOSEST_LOCATION_PARAM = "Bogotá";
+    private TextView dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,8 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
-            sede = savedInstanceState.getString(getString(R.string.main_activity_sede));
+            CLOSEST_LOCATION_PARAM = savedInstanceState.getString(getString(R.string.main_activity_sede));
         }
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                .getDefaultDisplay();
-        screenWidth = display.getWidth();
-        screenHeight = display.getHeight();
         Typeface fuente = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
         int[] ids = {R.id.SOnlineButton, R.id.admisionesButton,
                 R.id.sedesButton, R.id.textLocation,
@@ -60,22 +57,17 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
             textView.setTypeface(fuente);
         }
         iniciarLocalService();
-        if (!Util.isOnline(this)) {
+        if (Util.isOffline(this)) {
             Util.notificarRed(this);
         }
         dateTextView = findViewById(R.id.textTimestamp);
-        Timer timer = new Timer();
+        final UINetworkClock action = new UINetworkClock();
+        final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String currentNetworkTime = Util.getCurrentNetworkTime();
-                        MainActivity.this.onTimeUpdated(currentNetworkTime);
-                    }
-                });
+                runOnUiThread(action);
             }
-        },0,10_000);
+        }, 0, 1_000);
     }
 
     public void licencia(View v) {
@@ -109,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        sede = savedInstanceState.getString("sede");
+        CLOSEST_LOCATION_PARAM = savedInstanceState.getString("sede");
         TextView tx = findViewById(R.id.textSede);
-        tx.setText(sede);
+        tx.setText(CLOSEST_LOCATION_PARAM);
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -188,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(getString(R.string.main_activity_sede), sede);
+        outState.putString(getString(R.string.main_activity_sede), CLOSEST_LOCATION_PARAM);
         super.onSaveInstanceState(outState);
     }
 
@@ -205,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
             Intent directorio = new Intent(getApplicationContext(), DirectorioActivity.class);
             if (cond) {
                 directorio.putExtra("current", 3);
-                directorio.putExtra("sede", sede);
+                directorio.putExtra("sede", CLOSEST_LOCATION_PARAM);
             }
             directorio.putExtra("salto", cond);
             startActivity(directorio);
@@ -230,4 +222,35 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
         dateTextView.setText(newDate);
     }
 
+    private class UINetworkClock implements Runnable {
+        private final SimpleDateFormat dateFormat;
+
+        private boolean hasSyncedWithServer;
+        private int counter;
+        private long lastNetworkDate;
+
+
+        private UINetworkClock() {
+            hasSyncedWithServer = false;
+            counter = 0;
+            dateFormat = new SimpleDateFormat(
+                    "yyyy 'M'MM dd, EEE HH:mm:ss ZZZZ",
+                    new Locale("es", "CO")
+            );
+            dateFormat.setTimeZone(TimeZone.getTimeZone("America/Bogota"));
+        }
+
+        @Override
+        public void run() {
+            if (!hasSyncedWithServer) {
+                lastNetworkDate = Util.getCurrentNetworkTime();
+                hasSyncedWithServer = true;
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date(lastNetworkDate));
+            cal.add(Calendar.SECOND, counter);
+            MainActivity.this.onTimeUpdated(dateFormat.format(cal.getTime()));
+            counter++;
+        }
+    }
 }

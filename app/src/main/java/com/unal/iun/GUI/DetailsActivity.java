@@ -41,8 +41,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void manejarDisplay() {
         BitmapDrawable background2 = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(),
-                        R.drawable.fondoinf));
+                BitmapFactory.decodeResource(getResources(), R.drawable.fondoinf));
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar == null) {
             return;

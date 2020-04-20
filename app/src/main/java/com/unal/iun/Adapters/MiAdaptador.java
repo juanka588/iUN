@@ -22,32 +22,11 @@ public class MiAdaptador extends BaseAdapter {
     public static final int TYPE_SIMPLE = 1;
     /*TYPE_IMAGE con imagen sin subtitulo*/
     public static final int TYPE_IMAGE = 2;
-    /*TYPE_SUBTITLE sin imagen solo titulo y subtitulo*/
-    public static final int TYPE_SUBTITLE = 3;
     private final Activity actividad;
     private final String[] lista;
     private final String[] lista2;
     public Typeface fuente;
-    public int tipo = 0;
-
-    public MiAdaptador(Activity actividad, ArrayList<String> titulos,
-                       ArrayList<String> subtitulos, int tipo) {
-        super();
-        this.actividad = actividad;
-        lista = new String[titulos.size()];
-        titulos.toArray(lista);
-        lista2 = new String[subtitulos.size()];
-        subtitulos.toArray(lista2);
-        this.tipo = tipo;
-    }
-
-    public MiAdaptador(Activity actividad, String[] titulos, String[] subtitulos) {
-        super();
-        this.actividad = actividad;
-        this.lista = titulos;
-        this.lista2 = subtitulos;
-        this.tipo = 1;
-    }
+    public int tipo;
 
     public MiAdaptador(Activity actividad, String[] titulos,
                        String[] subtitulos, int tipo) {
@@ -122,7 +101,6 @@ public class MiAdaptador extends BaseAdapter {
                 imageView.setImageResource(R.drawable.ic_oriniquia);
             }
             if (tipo == 2) {
-                // Log.e("iconos en servicios",lista2[position]);
                 String cad = element2;
                 cad = cad.substring(0, cad.length() - 4);
                 int id = actividad.getResources().getIdentifier(

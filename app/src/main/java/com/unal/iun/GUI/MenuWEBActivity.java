@@ -47,22 +47,18 @@ public class MenuWEBActivity extends AppCompatActivity {
         RecyclerView list_general_interest = findViewById(R.id.list_general_interest);
         RecyclerView list_communityUN = findViewById(R.id.list_un_community);
         RecyclerView list_community_services = findViewById(R.id.list_community_services);
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                .getDefaultDisplay();
         int screenWidth;
         float density;
         DisplayMetrics metrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenWidth = metrics.widthPixels;
         density = metrics.density;
-        int spaces = (int) ((screenWidth) / (300));
+        int spaces = (screenWidth) / (300);
         Util.log("spaces ", screenWidth + " " + density + " " + spaces);
         IUNDataBase ln = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = ln.dataBase;
-        Typeface font = Typeface
-                .createFromAsset(getAssets(), "Helvetica.ttf");
-        WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(initData(db,
-                GENERAL_INTEREST), this, font);
+        Typeface font = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
+        WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(initData(db, GENERAL_INTEREST), this, font);
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(getApplicationContext(), spaces);
         GridLayoutManager gridLayoutManager2 =

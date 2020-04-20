@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unal.iun.Adapters.ExpandableDetailsAdapter;
@@ -28,7 +29,7 @@ public class DetailsFragment extends Fragment {
     public static final String ARG_DATA = "data";
     public static final String ARG_BACKGROUND = "background";
 
-    protected List<DetailedInformation> data = new ArrayList<>();
+    protected List<DetailedInformation> data;
     protected String title;
     protected int background;
     protected ExpandableListView sc;
@@ -43,7 +44,7 @@ public class DetailsFragment extends Fragment {
         Bundle args = getArguments();
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
         sc = rootView.findViewById(R.id.expandableListDetails);
-        FrameLayout tl = rootView.findViewById(R.id.content_frame);
+        LinearLayout tl = rootView.findViewById(R.id.content_frame);
         TextView tx = rootView.findViewById(R.id.titleDetailsData);
         if (args != null) {
             title = args.getString(ARG_TITLE);
@@ -59,8 +60,7 @@ public class DetailsFragment extends Fragment {
         if (background != 0) {
             id = background;
         }
-        Drawable bitmapDrawable = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), id));
+        Drawable bitmapDrawable = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), id));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             tl.setBackground(bitmapDrawable);

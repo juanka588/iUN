@@ -38,43 +38,6 @@
         android:largeHeap="true"
         android:theme="@style/iUNTheme">
 
-        <!-- MOCA SDK configuration -->
-        <meta-data
-            android:name="moca.APP_KEY"
-            android:value="9tQli8VHSPawaT5TY62Y1g" />
-        <meta-data
-            android:name="moca.APP_SECRET"
-            android:value="G9xOItMmPXADUb2dWUz6EwQlxUQ=" />
-        <meta-data
-            android:name="moca.LOG_LEVEL"
-            android:value="debug" />
-        <meta-data
-            android:name="moca.AUTOMATIC_PUSH_SETUP_ENABLED"
-            android:value="true" />
-        <meta-data
-            android:name="moca.PROXIMITY_SERVICE_ENABLED"
-            android:value="true" />
-        <meta-data
-            android:name="moca.GEOLOCATION_SERVICE_ENABLED"
-            android:value="true" />
-        <meta-data
-            android:name="moca.BACKGROUND_LOCATION_ENABLED"
-            android:value="true" />
-        <meta-data
-            android:name="moca.DATA_FETCH_INTERVAL_MS"
-            android:value="auto" />
-        <meta-data
-            android:name="moca.EVENT_UPLOAD_INTERVAL_MS"
-            android:value="auto" />
-        <meta-data
-            android:name="moca.MOCA_DRIVER_ENABLED"
-            android:value="true" />
-        <!--Optional: Include it for remote push notifications-->
-        <!--Be careful with the space before the number-->
-        <meta-data
-            android:name="moca.GCM_SENDER"
-            android:value="\ YOUR_GCM_SENDER_ID" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -91,8 +54,8 @@
         <activity
             android:name=".GUI.MainActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleInstance"
-            android:screenOrientation="fullSensor">
+            android:theme="@style/NoActionBar"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -145,44 +108,13 @@
         <activity
             android:name=".GUI.DirectoryActivity"
             android:label="@string/title_activity_directory"
+            android:screenOrientation="fullSensor"
             android:parentActivityName=".GUI.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GUI.MainActivity" />
         </activity>
-
-        <receiver
-            android:name="com.innoquant.moca.push.MOCAPushReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.innoquant.moca.push.ACTION_PUSH_RECEIVE" />
-                <action android:name="com.innoquant.moca.push.ACTION_PUSH_DISMISSED" />
-            </intent-filter>
-        </receiver>
-
-
-        <!-- REQUIRED by MOCA to handle push notifications -->
-        <receiver
-            android:name="com.innoquant.moca.push.GcmPushReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <category android:name="com.unal.iun" />
-            </intent-filter>
-        </receiver>
-
-        <!-- MOCA GcmTokenListener listens to token registrations/updates -->
-        <service
-            android:name="com.innoquant.moca.push.GcmTokenListener"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>

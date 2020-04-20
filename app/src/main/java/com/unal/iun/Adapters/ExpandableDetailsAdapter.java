@@ -40,9 +40,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         this.activity = activity;
     }
 
-
     @SuppressLint("InflateParams")
-    @SuppressWarnings("unchecked")
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
@@ -151,7 +149,6 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         Util.enviar(activity, email.split(" "), null, "", "");
     }
 
-    @SuppressLint("InflateParams")
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {

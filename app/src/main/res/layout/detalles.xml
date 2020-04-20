@@ -19,6 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:text="Telefono"
+        android:textColor="@android:color/white"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

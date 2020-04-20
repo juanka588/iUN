@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,7 +76,7 @@ public class MainScreenLocationListener implements LocationListener {
                 Toast.LENGTH_SHORT).show();
         String a = Util.getcolumn(mat, 0)[0].trim();
         textSede.setText(a);
-        MainActivity.sede = a;
+        MainActivity.CLOSEST_LOCATION_PARAM = a;
         c.close();
     }
 

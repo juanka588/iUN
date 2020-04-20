@@ -24,7 +24,6 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web);
         browser = findViewById(R.id.webView1);
         WebSettings settings = browser.getSettings();
@@ -47,7 +46,7 @@ public class WebActivity extends AppCompatActivity {
             Bundle b = getIntent().getExtras();
             URL = b.getString(ARG_TAG);
             browser.loadUrl(URL);
-            if (!Util.isOnline(this)) {
+            if (Util.isOffline(this)) {
                 Util.notificarRed(this);
             }
         }

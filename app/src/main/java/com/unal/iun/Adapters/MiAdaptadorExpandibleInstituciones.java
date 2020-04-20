@@ -27,12 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MiAdaptadorExpandibleInstituciones extends
-        BaseExpandableListAdapter {
+public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapter {
 
     public Typeface fuente;
     private String[][] mat;
-    private int parentsSize;
     private boolean mode;
     private Activity activity;
     private ArrayList<List> childtems;
@@ -40,26 +38,17 @@ public class MiAdaptadorExpandibleInstituciones extends
     private ArrayList<String> parentItems, child;
 
     public MiAdaptadorExpandibleInstituciones(ArrayList<String> parents,
-                                              ArrayList<List> childern, String[][] data, boolean mode) {
+                                              ArrayList<List> children, String[][] data, boolean mode) {
 
         this.parentItems = parents;
-
-        this.childtems = childern;
-
+        this.childtems = children;
         this.mat = data;
-
-        this.parentsSize = parents.size() - 1;
-
         this.mode = mode;
-
     }
 
     public void setInflater(LayoutInflater inflater, Activity activity) {
-
         this.inflater = inflater;
-
         this.activity = activity;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -69,16 +58,16 @@ public class MiAdaptadorExpandibleInstituciones extends
 
         child = (ArrayList<String>) childtems.get(groupPosition);
 
-        TextView textView = null;
-        TextView textView2 = null;
+        TextView textView;
+        TextView textView2;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.itemsub, null);
         }
         final int posicion = (int) getChildId(groupPosition, childPosition);
-        textView = (TextView) convertView.findViewById(R.id.textItem);
+        textView = convertView.findViewById(R.id.textItem);
         textView.setText(Util.toCamelCase(mat[posicion][0].trim()
                 .toLowerCase()));
-        textView2 = (TextView) convertView.findViewById(R.id.textItemSub);
+        textView2 = convertView.findViewById(R.id.textItemSub);
         textView2.setText(mat[posicion][1].trim());
         convertView.setOnClickListener(new OnClickListener() {
 
@@ -183,7 +172,7 @@ public class MiAdaptadorExpandibleInstituciones extends
 
     @Override
     public Object getGroup(int groupPosition) {
-        return (ArrayList<String>) child;
+        return child;
     }
 
     @Override
