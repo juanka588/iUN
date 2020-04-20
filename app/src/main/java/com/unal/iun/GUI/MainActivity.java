@@ -80,23 +80,8 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
         Util.enviar(
                 this,
                 "mahiguerag@unal.edu.co",
-                "",
-                "Comentarios Aplicacion iUN Android",
-                "iUN es una aplicacción de apoyo, "
-                        + "en tal razón la información contenida "
-                        + "en ella es solo de referencia. \n\n\n "
-                        + "Envía tus comentarios acerca de la aplicación iUN"
-                        + " respondiendo las siguientes preguntas.\n\n\n "
-                        + "A. Nombres y Apellidos. \n\n\n B. Estudiante, Docente, "
-                        + "Administrativo de la Universidad Nacional de Colombia o "
-                        + "persona externa? \n\n\n 1 "
-                        + "¿Cual fue la primera acción que ejecutó? \n\n\n 2 "
-                        + "¿Identifica claramente las acciones de los botones e iconos?"
-                        + " \n\n\n 3. Si hubo un bloqueo, ¿Cual fue, si recuerda, "
-                        + "la acción que causo esto?  \n\n\n 4 "
-                        + "¿ Impresión general sobre la aplicación? "
-                        + "\n\n\n Gracias por su colaboración.\n "
-                        + "Equipo de Desarrollo iUN.");
+                getString(R.string.android_app_feedback_subject),
+                getString(R.string.android_app_feedback_content));
     }
 
     @Override

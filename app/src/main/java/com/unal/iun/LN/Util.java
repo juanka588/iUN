@@ -146,21 +146,13 @@ public class Util {
         builder.create().show();
     }
 
-    public static void enviar(Activity act, String[] to, String[] cc,
+    public static void enviar(Activity act, String email,
                               String asunto, String mensaje) {
-        Intent emailIntent = new Intent(Intent.ACTION_SEND)
-                .setType("message/rfc822")
-                .setData(Uri.parse("mailto:"))
-                .putExtra(Intent.EXTRA_EMAIL, to)
-                .putExtra(Intent.EXTRA_CC, cc)
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO)
+                .setDataAndType(Uri.parse("mailto:" + email), "text/plain")
                 .putExtra(Intent.EXTRA_SUBJECT, asunto)
                 .putExtra(Intent.EXTRA_TEXT, mensaje);
         act.startActivity(Intent.createChooser(emailIntent, "Email "));
-    }
-
-    public static void enviar(Activity act, String to, String cc,
-                              String asunto, String mensaje) {
-        enviar(act, new String[]{to}, new String[]{cc}, asunto, mensaje);
     }
 
     public static void irA(String url, Activity act) {
@@ -181,7 +173,7 @@ public class Util {
         for (int i = 1; i < palabras.length; i++) {
             if (palabras[i].length() > 3) {
                 palabras[i] = (palabras[i].charAt(0) + "").toUpperCase()
-                        + palabras[i].substring(1, palabras[i].length());
+                        + palabras[i].substring(1);
             }
             if (palabras[i].contains("un")) {
                 palabras[i] = "UN";

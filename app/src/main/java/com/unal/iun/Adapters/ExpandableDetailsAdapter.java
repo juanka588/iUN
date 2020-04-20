@@ -146,7 +146,7 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         if (email.contains("Correo")) {
             return;
         }
-        Util.enviar(activity, email.split(" "), null, "", "");
+        Util.enviar(activity, email, "", "");
     }
 
     @Override
