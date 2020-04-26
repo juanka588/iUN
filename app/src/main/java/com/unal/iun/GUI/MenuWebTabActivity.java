@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -209,11 +208,9 @@ public class MenuWebTabActivity extends AppCompatActivity {
                     break;
             }
             title.setText(fragmentTitle);
-            Typeface font = Typeface
-                    .createFromAsset(rootView.getContext().getAssets(), "Helvetica.ttf");
             WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(
                     initData(rootView.getContext(), filter),
-                    getActivity(), font);
+                    getActivity());
             GridLayoutManager gridLayoutManager =
                     new GridLayoutManager(rootView.getContext(), spaces);
             list.setLayoutManager(gridLayoutManager);

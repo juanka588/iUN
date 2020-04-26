@@ -109,8 +109,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void setUpMapIfNeeded() {
         act = this;
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -126,8 +125,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void ruta(double lat, double lon) {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("dir:"
-                    + lat + "," + lon));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("dir:" + lat + "," + lon));
             startActivity(intent);
         } catch (Exception e) {
             Intent navigation = new Intent(Intent.ACTION_VIEW,

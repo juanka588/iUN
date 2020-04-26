@@ -16,6 +16,7 @@
 
     <TextView
         android:id="@+id/textLugar"
+        style="@style/iUNTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -25,11 +26,11 @@
 
     <TextView
         android:id="@+id/textSede"
+        style="@style/iUNTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Bogotá"
-        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
     <ImageView
@@ -44,32 +45,32 @@
 
     <TextView
         android:id="@+id/textLocation"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/location"
-        android:textColor="@android:color/white" />
+        android:text="@string/location" />
 
     <TextView
         android:id="@+id/timestamp_label"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/timestamp_label"
-        android:textColor="@android:color/white" />
+        android:text="@string/timestamp_label" />
 
     <TextView
         android:id="@+id/textTimestamp"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="2020 M04 april 19 09:56:45 GTM-05:00"
-        android:textColor="@android:color/white" />
+        android:text="2020 M04 april 19 09:56:45 GTM-05:00" />
 
 
     <LinearLayout
@@ -130,6 +131,7 @@
 
         <TextView
             android:id="@+id/textLicencia"
+            style="@style/iUNTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -137,11 +139,11 @@
             android:focusable="true"
             android:gravity="start"
             android:onClick="licencia"
-            android:text="@string/title_activity_license"
-            android:textColor="@android:color/white" />
+            android:text="@string/title_activity_license" />
 
         <TextView
             android:id="@+id/textOpinion"
+            style="@style/iUNTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -149,8 +151,6 @@
             android:focusable="true"
             android:gravity="end"
             android:onClick="comentar"
-            android:text="@string/opinion"
-            android:textColor="@android:color/white"
-            android:textStyle="" />
+            android:text="@string/opinion" />
     </LinearLayout>
 </LinearLayout>

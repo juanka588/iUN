@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -8,21 +7,20 @@
 
     <CheckedTextView
         android:id="@+id/textItem"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:gravity="left"
-        android:text="item"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"/>
+        android:text="item" />
 
     <CheckedTextView
         android:id="@+id/textItemSub"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:gravity="left"
-        android:text="subItem"
-        android:textAppearance="?android:attr/textAppearanceSmallInverse"/>
+        android:text="subItem" />
 
 </LinearLayout>

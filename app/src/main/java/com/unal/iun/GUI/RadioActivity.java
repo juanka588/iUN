@@ -40,8 +40,7 @@ public class RadioActivity extends AppCompatActivity implements
         spin = findViewById(R.id.spinnerSelector);
         String[] list = this.getResources().getStringArray(R.array.radio);
         ArrayAdapter dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
-        dataAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         text = findViewById(R.id.textRadioTEMP);
         spin.setAdapter(dataAdapter);
         bPlay = findViewById(R.id.play);

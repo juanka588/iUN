@@ -1,5 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight">
 
@@ -10,31 +9,30 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/selectorfondocir"
-        android:src="@drawable/icono_app"/>
+        android:src="@drawable/icono_app" />
 
     <TextView
         android:id="@+id/titulo"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@id/icono"
         android:gravity="fill_horizontal"
-        android:text="Mi Titulo"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"/>
+        android:text="Mi Titulo" />
 
     <TextView
         android:id="@+id/subtitulo"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_below="@id/titulo"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_toRightOf="@id/icono"
         android:gravity="right"
         android:src="@drawable/icono_app"
-        android:text="Otro Texto"
-        android:textColor="@android:color/white"/>
+        android:text="Otro Texto" />
 
 </RelativeLayout>

@@ -34,12 +34,10 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
     private List<WebItem> items;
     private Activity activity;
     private Context context;
-    private Typeface font;
 
-    public WebMenuRecyclerViewAdapter(List<WebItem> webItems, Activity activity, Typeface font) {
+    public WebMenuRecyclerViewAdapter(List<WebItem> webItems, Activity activity) {
         this.items = webItems;
         this.context = activity.getApplicationContext();
-        this.font = font;
         this.activity = activity;
     }
 
@@ -58,7 +56,6 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
     public void onBindViewHolder(WebItemViewHolder holder, int i) {
         WebItem s = items.get(i);
         holder.name.setText(s.name);
-        holder.name.setTypeface(font);
         Picasso.with(holder.cv.getContext()).load(s.icon).fit().into(holder.icon);
     }
 

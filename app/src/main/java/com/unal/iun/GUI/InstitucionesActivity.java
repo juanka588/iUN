@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -94,13 +93,8 @@ public class InstitucionesActivity extends AppCompatActivity {
             for (int i = 0; i < instituciones.length; i++) {
                 childItems.get(parentItems.indexOf(ciudades[i])).add(instituciones[i]);
             }
-            MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(
-                    parentItems, childItems, mat, mode);
-            adapter.fuente = Typeface.createFromAsset(getAssets(),
-                    "Helvetica.ttf");
-            adapter.setInflater(
-                    (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-                    this);
+            MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(parentItems, childItems, mat, mode);
+            adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
             lv.setAdapter(adapter);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -196,12 +190,8 @@ public class InstitucionesActivity extends AppCompatActivity {
         for (int i = 0; i < instituciones.length; i++) {
             childItems.get(parentItems.indexOf(ciudades[i])).add(instituciones[i]);
         }
-        MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(
-                parentItems, childItems, mat, mode);
-        adapter.fuente = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
-        adapter.setInflater(
-                (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-                this);
+        MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(parentItems, childItems, mat, mode);
+        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
         lv.setAdapter(adapter);
         lv.expandGroup(0);
     }

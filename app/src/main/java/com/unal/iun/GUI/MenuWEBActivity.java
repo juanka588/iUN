@@ -2,12 +2,10 @@ package com.unal.iun.GUI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +13,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.unal.iun.Adapters.WebMenuRecyclerViewAdapter;
@@ -57,8 +53,7 @@ public class MenuWEBActivity extends AppCompatActivity {
         Util.log("spaces ", screenWidth + " " + density + " " + spaces);
         IUNDataBase ln = new IUNDataBase(getApplicationContext());
         SQLiteDatabase db = ln.dataBase;
-        Typeface font = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
-        WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(initData(db, GENERAL_INTEREST), this, font);
+        WebMenuRecyclerViewAdapter adapter = new WebMenuRecyclerViewAdapter(initData(db, GENERAL_INTEREST), this);
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(getApplicationContext(), spaces);
         GridLayoutManager gridLayoutManager2 =
@@ -68,9 +63,9 @@ public class MenuWEBActivity extends AppCompatActivity {
         list_general_interest.setLayoutManager(gridLayoutManager);
         list_general_interest.setAdapter(adapter);
         WebMenuRecyclerViewAdapter adapter2 = new WebMenuRecyclerViewAdapter(initData(db,
-                UN_COMMUNITY), this, font);
+                UN_COMMUNITY), this);
         WebMenuRecyclerViewAdapter adapter3 = new WebMenuRecyclerViewAdapter(initData(db,
-                COMMUNITY_SERVICES), this, font);
+                COMMUNITY_SERVICES), this);
         list_communityUN.setLayoutManager(gridLayoutManager2);
         list_community_services.setLayoutManager(gridLayoutManager3);
         list_communityUN.setAdapter(adapter2);

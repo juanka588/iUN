@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -85,7 +84,6 @@ public class DirectorioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ln = new IUNDataBase(getApplicationContext());
         db = ln.getWritableDatabase();
-        font = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
         setContentView(R.layout.activity_directorio);
         crearBarra();
         tl = findViewById(R.id.TableLayoutDirectorio);
@@ -129,7 +127,6 @@ public class DirectorioActivity extends AppCompatActivity {
         c.close();
         MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
                 Util.getcolumn(mat, 0), MiAdaptador.TYPE_SIMPLE);
-        adapter.fuente = font;
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -759,8 +756,6 @@ public class DirectorioActivity extends AppCompatActivity {
         lv.setAdapter(null);
         MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
                 Util.getcolumn(mat, 1), 1);
-        adapter.fuente = Typeface.createFromAsset(getAssets(),
-                "Helvetica.ttf");
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override

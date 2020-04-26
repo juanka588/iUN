@@ -3,7 +3,7 @@
     <style name="iUNTheme" parent="Theme.AppCompat">
         <item name="android:windowBackground">@drawable/fondo</item>
         <item name="actionBarStyle">@style/iUNActionBar</item>
-        <item name="android:textViewStyle">@style/TextStyle</item>
+        <item name="android:textViewStyle">@style/iUNTextStyle</item>
         <item name="alertDialogTheme">@style/AlertDialog</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="colorAccent">@color/accent_blue</item>

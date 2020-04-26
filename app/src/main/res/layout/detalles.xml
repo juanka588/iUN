@@ -14,12 +14,11 @@
 
     <CheckedTextView
         android:id="@+id/textDetalle"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:text="Telefono"
-        android:textColor="@android:color/white"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="Telefono" />
 
 </LinearLayout>

@@ -47,15 +47,6 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
         if (savedInstanceState != null) {
             CLOSEST_LOCATION_PARAM = savedInstanceState.getString(getString(R.string.main_activity_sede));
         }
-        Typeface fuente = Typeface.createFromAsset(getAssets(), "Helvetica.ttf");
-        int[] ids = {R.id.SOnlineButton, R.id.admisionesButton,
-                R.id.sedesButton, R.id.textLocation,
-                R.id.textTimestamp, R.id.timestamp_label,
-                R.id.textLugar, R.id.eventosButton};
-        for (int id : ids) {
-            TextView textView = findViewById(id);
-            textView.setTypeface(fuente);
-        }
         iniciarLocalService();
         if (Util.isOffline(this)) {
             Util.notificarRed(this);

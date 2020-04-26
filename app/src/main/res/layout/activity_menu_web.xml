@@ -1,10 +1,10 @@
-<LinearLayout android:id="@+id/container"
-              xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-              tools:context=".GUI.MenuWEBActivity">
+    tools:context=".GUI.MenuWEBActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,19 +13,19 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/iUNTextTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:padding="10dp"
-            android:text="@string/general_interest"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:text="@string/general_interest" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_general_interest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/cardview" />
 
     </LinearLayout>
 
@@ -36,19 +36,19 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/iUNTextTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:padding="10dp"
-            android:text="@string/community_un"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:text="@string/community_un" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_un_community"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/cardview" />
 
     </LinearLayout>
 
@@ -59,19 +59,19 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/iUNTextTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:padding="10dp"
-            android:text="@string/community_services"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:text="@string/community_services" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_community_services"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/cardview" />
 
     </LinearLayout>
 </LinearLayout>

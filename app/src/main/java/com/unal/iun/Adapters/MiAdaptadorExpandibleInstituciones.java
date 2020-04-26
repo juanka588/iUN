@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,6 @@ import java.util.Locale;
 
 public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapter {
 
-    public Typeface fuente;
     private String[][] mat;
     private boolean mode;
     private Activity activity;
@@ -65,8 +63,7 @@ public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapte
         }
         final int posicion = (int) getChildId(groupPosition, childPosition);
         textView = convertView.findViewById(R.id.textItem);
-        textView.setText(Util.toCamelCase(mat[posicion][0].trim()
-                .toLowerCase()));
+        textView.setText(Util.toCamelCase(mat[posicion][0].trim().toLowerCase()));
         textView2 = convertView.findViewById(R.id.textItemSub);
         textView2.setText(mat[posicion][1].trim());
         convertView.setOnClickListener(new OnClickListener() {
@@ -141,8 +138,7 @@ public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapte
             convertView = inflater.inflate(R.layout.grupo, null);
 
         }
-        String cad = parentItems.get(groupPosition).toUpperCase(
-                Locale.getDefault());
+        String cad = parentItems.get(groupPosition).toUpperCase(Locale.getDefault());
         CheckedTextView ctv = ((CheckedTextView) convertView);
         ctv.setText("\t\t" + cad + "\n");
         ctv.setChecked(isExpanded);

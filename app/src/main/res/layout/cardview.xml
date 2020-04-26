@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
@@ -14,18 +13,19 @@
         android:layout_gravity="center"
         android:background="@drawable/selectorfondocir"
         android:padding="2dp"
-        android:src="@drawable/un"/>
+        android:src="@drawable/un" />
 
     <TextView
         android:id="@+id/webItemDescription"
+        style="@style/iUNTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:maxLines="5"
         android:maxWidth="5dp"
-        android:textSize="12sp"
+        android:maxLines="5"
         android:padding="10dp"
         android:singleLine="false"
-        android:text="@string/abc_action_mode_done"/>
+        android:text="@string/abc_action_mode_done"
+        android:textSize="12sp" />
 
 </LinearLayout>

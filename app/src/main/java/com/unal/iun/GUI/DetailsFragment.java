@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -71,8 +70,6 @@ public class DetailsFragment extends Fragment {
         sc.setClickable(true);
 
         ExpandableDetailsAdapter adapter = new ExpandableDetailsAdapter(data, getActivity());
-        adapter.font = Typeface.createFromAsset(rootView.getContext().getAssets(),
-                "Helvetica.ttf");
         sc.setAdapter(adapter);
         sc.expandGroup(0);
         return rootView;
