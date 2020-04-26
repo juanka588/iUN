@@ -24,8 +24,8 @@
             android:id="@+id/imageUNPrincipal"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/selectorfondocir"
             android:layout_marginRight="10dp"
+            android:background="@drawable/selectorfondocir"
             android:onClick="irSede"
             android:src="@drawable/persona" />
 
@@ -160,4 +160,13 @@
             android:textColor="@android:color/white"
             android:textStyle="" />
     </LinearLayout>
+
+    <TextView
+        style="@style/iUNMainLabelStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="@string/university_name" />
 </LinearLayout>

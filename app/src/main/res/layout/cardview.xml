@@ -25,7 +25,6 @@
         android:maxLines="5"
         android:padding="10dp"
         android:singleLine="false"
-        android:text="@string/abc_action_mode_done"
-        android:textSize="12sp" />
+        android:text="@string/abc_action_mode_done" />
 
 </LinearLayout>

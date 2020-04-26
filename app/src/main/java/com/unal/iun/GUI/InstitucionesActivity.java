@@ -18,7 +18,7 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.unal.iun.Adapters.MiAdaptadorExpandibleInstituciones;
+import com.unal.iun.Adapters.InstitutionsExpandableAdapter;
 import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
@@ -93,7 +93,7 @@ public class InstitucionesActivity extends AppCompatActivity {
             for (int i = 0; i < instituciones.length; i++) {
                 childItems.get(parentItems.indexOf(ciudades[i])).add(instituciones[i]);
             }
-            MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(parentItems, childItems, mat, mode);
+            InstitutionsExpandableAdapter adapter = new InstitutionsExpandableAdapter(parentItems, childItems, mat, mode);
             adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
             lv.setAdapter(adapter);
         } catch (Exception e) {
@@ -190,7 +190,7 @@ public class InstitucionesActivity extends AppCompatActivity {
         for (int i = 0; i < instituciones.length; i++) {
             childItems.get(parentItems.indexOf(ciudades[i])).add(instituciones[i]);
         }
-        MiAdaptadorExpandibleInstituciones adapter = new MiAdaptadorExpandibleInstituciones(parentItems, childItems, mat, mode);
+        InstitutionsExpandableAdapter adapter = new InstitutionsExpandableAdapter(parentItems, childItems, mat, mode);
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
         lv.setAdapter(adapter);
         lv.expandGroup(0);

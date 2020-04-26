@@ -92,7 +92,7 @@
             android:name=".GUI.DirectorioActivity"
             android:label="@string/title_activity_directorio"
             android:logo="@drawable/logo"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".GUI.License"
             android:label="@string/title_activity_license"

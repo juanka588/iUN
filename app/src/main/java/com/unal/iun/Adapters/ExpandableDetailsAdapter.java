@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
@@ -29,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
-
-    public Typeface font;
     private Activity activity;
     private List<DetailedInformation> items;
 
@@ -52,7 +49,6 @@ public class ExpandableDetailsAdapter extends BaseExpandableListAdapter {
         final InformationElement child = detail.getInformationElements().get(childPosition);
         TextView textView = convertView.findViewById(R.id.textDetalle);
         ImageView im = convertView.findViewById(R.id.imageDetalle);
-        textView.setTypeface(font);
         textView.setText(child.getInformationDescription());
         int type = child.getType();
         int draw = R.drawable.llamar;

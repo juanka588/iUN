@@ -24,10 +24,22 @@
         <item name="font">@font/helvetica</item>
     </style>
 
+    <style name="iUNTextStyleMedium" parent="iUNTextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
     <style name="iUNTextTitleStyle" parent="@style/TextAppearance.AppCompat.Large">
         <item name="android:textColor">@android:color/white</item>
         <item name="font">@font/helvetica</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="iUNTextGroupTitleStyle" parent="@style/TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="font">@font/helvetica</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="iUNTextStyleDark" parent="@android:style/Widget.TextView">
@@ -48,6 +60,14 @@
 
     <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
 
+    </style>
+
+    <style name="iUNMainLabelStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="font">@font/helvetica_neue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="EventsDialog" parent="Theme.AppCompat.Dialog.Alert">

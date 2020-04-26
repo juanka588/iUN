@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapter {
+public class InstitutionsExpandableAdapter extends BaseExpandableListAdapter {
 
     private String[][] mat;
     private boolean mode;
@@ -35,8 +35,8 @@ public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapte
     private LayoutInflater inflater;
     private ArrayList<String> parentItems, child;
 
-    public MiAdaptadorExpandibleInstituciones(ArrayList<String> parents,
-                                              ArrayList<List> children, String[][] data, boolean mode) {
+    public InstitutionsExpandableAdapter(ArrayList<String> parents,
+                                         ArrayList<List> children, String[][] data, boolean mode) {
 
         this.parentItems = parents;
         this.childtems = children;
@@ -84,8 +84,7 @@ public class MiAdaptadorExpandibleInstituciones extends BaseExpandableListAdapte
         try {
             Intent mapa = new Intent(activity, MapaActivity.class);
             String query;
-            IUNDataBase lb = new IUNDataBase(
-                    activity.getApplicationContext());
+            IUNDataBase lb = new IUNDataBase(activity.getApplicationContext());
             SQLiteDatabase db = lb.getReadableDatabase();
             String condicion = "latitud between " + (lt - 0.0001) + " and "
                     + (lt + 0.0001) + " and longitud between" + (lg - 0.0001)

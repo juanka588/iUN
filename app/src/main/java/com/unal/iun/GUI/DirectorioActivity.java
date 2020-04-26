@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -33,7 +32,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.unal.iun.Adapters.MiAdaptador;
+import com.unal.iun.Adapters.DirectoryAdapter;
 import com.unal.iun.LN.IUNDataBase;
 import com.unal.iun.LN.Util;
 import com.unal.iun.R;
@@ -77,7 +76,6 @@ public class DirectorioActivity extends AppCompatActivity {
     private DrawerLayout cajon;
     private IUNDataBase ln;
     private SQLiteDatabase db;
-    private Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +99,14 @@ public class DirectorioActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void adaptadorInicial(Bundle b) {
+    private void adaptadorInicial(Bundle bundle) {
+        if (bundle == null) {
+            return;
+        }
         baseTableName = MainActivity.tbName;
-        if (b.getBoolean("salto")) {
-            current = b.getInt("current");
-            String sede = b.getString("sede");
+        if (bundle.getBoolean("salto")) {
+            current = bundle.getInt("current");
+            String sede = bundle.getString("sede");
             condicion = "sede='" + sede + "'";
             sql = "select  distinct " + columnas[current] + " from "
                     + baseTableName + " where " + condicion
@@ -117,7 +118,7 @@ public class DirectorioActivity extends AppCompatActivity {
                     + baseTableName;
         }
         Cursor c;
-        if (b.getBoolean("salto")) {
+        if (bundle.getBoolean("salto")) {
             c = db.rawQuery(sql, null);
         } else {
             c = db.rawQuery(sql
@@ -125,8 +126,8 @@ public class DirectorioActivity extends AppCompatActivity {
         }
         final String[][] mat = Util.imprimirLista(c);
         c.close();
-        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                Util.getcolumn(mat, 0), MiAdaptador.TYPE_SIMPLE);
+        DirectoryAdapter adapter = new DirectoryAdapter(getLayoutInflater(), Util.getcolumn(mat, 0)
+        );
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -195,7 +196,7 @@ public class DirectorioActivity extends AppCompatActivity {
         String[] files = new String[]{"edificio.jpg", "enlacep.jpg", "mapap.jpg"};
         cajon = findViewById(R.id.drawer_layout);
         final ListView opciones = findViewById(R.id.left_drawer);
-        MiAdaptador adapter = new MiAdaptador(act, valores, files, MiAdaptador.TYPE_IMAGE);
+        DirectoryAdapter adapter = new DirectoryAdapter(getLayoutInflater(), valores);
         opciones.setAdapter(adapter);
         opciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -559,9 +560,7 @@ public class DirectorioActivity extends AppCompatActivity {
             }
         }
         final String[][] mat = Util.imprimirLista(c);
-        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                Util.getcolumn(mat, 1), tipo);
-        adapter.fuente = font;
+        DirectoryAdapter adapter = new DirectoryAdapter(getLayoutInflater(), Util.getcolumn(mat, 0));
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
@@ -754,8 +753,8 @@ public class DirectorioActivity extends AppCompatActivity {
         }
         c.close();
         lv.setAdapter(null);
-        MiAdaptador adapter = new MiAdaptador(this, Util.getcolumn(mat, 0),
-                Util.getcolumn(mat, 1), 1);
+        DirectoryAdapter adapter = new DirectoryAdapter(getLayoutInflater(), Util.getcolumn(mat, 0)
+        );
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override

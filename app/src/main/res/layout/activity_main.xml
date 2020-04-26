@@ -153,4 +153,13 @@
             android:onClick="comentar"
             android:text="@string/opinion" />
     </LinearLayout>
+
+    <TextView
+        style="@style/iUNMainLabelStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:text="@string/university_name" />
 </LinearLayout>

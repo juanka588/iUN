@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
             CLOSEST_LOCATION_PARAM = savedInstanceState.getString(getString(R.string.main_activity_sede));
@@ -211,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
             counter = 0;
             dateFormat = new SimpleDateFormat(
                     "yyyy 'M'MM dd, EEE HH:mm:ss ZZZZ",
-                    new Locale("es", "CO")
+                    Locale.getDefault()
             );
             dateFormat.setTimeZone(TimeZone.getTimeZone("America/Bogota"));
         }

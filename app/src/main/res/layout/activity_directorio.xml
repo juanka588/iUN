@@ -28,7 +28,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="80"
                 android:gravity="bottom"
-                tools:listitem="@layout/elemento_lista" />
+                tools:listitem="@layout/simple_text_list_item" />
 
             <TableRow
                 android:id="@+id/tableRowDirectorio"
