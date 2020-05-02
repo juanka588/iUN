@@ -112,5 +112,38 @@
         Equipo de Desarrollo iUN.
     </string>
     <string name="university_name">Universidad Nacional de Colombia</string>
-
+    <string name="see_on_map">Ver en el mapa</string>
+    <string name="search_buildings">Buscar por edificios</string>
+    <string name="developers" translatable="false">DESAROLLADORES iUNDev:\n\n
+        mahiguerag\n
+        afgranadosc\n
+        jcrodriguezd\n
+        mechaconc\n
+        gromerop\n
+        mrinconl\n
+        aframosp\n
+        gmcabanah\n
+        jajaramilloa\n
+        mjangaritar\n\n
+        @unal.edu.co
+    </string>
+    <string name="license" translatable="false">
+        LICENCIA DE USO\n
+        aplicación móvil iUN\n\n
+        A- Reglas de uso:\n
+        A1- Usted estará autorizado a utilizar la aplicación móvil iUN sólo para uso personal, no comercial.\n
+        A2- Puede utilizar iUN para explorar, buscar y/o navegar contenidos en su dispositivo móvil. \n
+        Tenga en cuenta que la disponibilidad del contenido puede variar con base en \n
+        actualizaciones de los datos del directorio o enlaces de los sitios web.\n
+        B- Limitación de responsabilidad\n
+        B1-. iUN, suministrará servicios con el cuidado y profesionalismo razonable.\n
+        iUN no asume responsabilidades y garantías adicionales en relación con el Servicio,\n
+        en particular, no garantiza que:\n
+        -  El uso que usted haga del Servicio  se mantenga ininterrumpido o libre de errores.\n
+        Usted acepta que ocasionalmente, iUN pueda dejar de funcionar por limitaciones de las redes Wi-Fi, o de datos.\n\n
+        - El Servicio estará exento de pérdidas, corrupción, ataques, virus, interferencia o cualquier intromisión \n
+        en la seguridad, los cuales serán considerados como eventos de Fuerza Mayor, y sobre los cuales iUN no será responsable.\n\n
+        B2- El equipo de desarrollo iUNDev hará esfuerzos razonables por validar, actualizar y proteger \n
+        la información registrada en la aplicación iUN, pero usted reconoce y acepta que dicha información es de referencia y debe ser siempre validada por usted.
+    </string>
 </resources>

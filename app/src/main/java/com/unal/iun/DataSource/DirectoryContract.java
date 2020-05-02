@@ -16,8 +16,6 @@ public class DirectoryContract {
         // Weather id as returned by API, to identify the icon to be used
         public static final String COLUMN_DEPENDENCIA = "DEPENDENCIAS";
 
-        // Short description and long description of the weather, as provided by API.
-        // e.g "clear" vs "sky is clear".
         public static final String COLUMN_DIVISIONES = "DIVISIONES";
         public static final String COLUMN_DEPARTAMENTOS = "DEPARTEMENTOS";
         public static final String COLUMN_SECCIONES = "SECCIONES";

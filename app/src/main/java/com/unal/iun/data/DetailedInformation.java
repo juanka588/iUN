@@ -2,6 +2,7 @@ package com.unal.iun.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,10 @@ public class DetailedInformation implements Parcelable {
     private DetailedInformation(Parcel in) {
         informationTitle = in.readString();
         Parcelable[] items = in.readParcelableArray(InformationElement.class.getClassLoader());
+        if (items == null) {
+            Log.e(DetailedInformation.class.getSimpleName(), "details array not found " + informationTitle);
+            return;
+        }
         mInformationElements = new ArrayList<>();
         for (Parcelable element : items) {
             mInformationElements.add((InformationElement) element);
@@ -43,16 +48,8 @@ public class DetailedInformation implements Parcelable {
         return mInformationElements;
     }
 
-    public void setInformationElements(List<InformationElement> informationElements) {
-        mInformationElements = informationElements;
-    }
-
     public String getInformationTitle() {
         return informationTitle;
-    }
-
-    public void setInformationTitle(String informationTitle) {
-        this.informationTitle = informationTitle;
     }
 
     @Override
@@ -63,10 +60,6 @@ public class DetailedInformation implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(informationTitle);
-        InformationElement[] elements = new InformationElement[mInformationElements.size()];
-        for (int i = 0; i < elements.length; i++) {
-            elements[i] = mInformationElements.get(i);
-        }
-        dest.writeParcelableArray(elements, flags);
+        dest.writeParcelableArray(mInformationElements.toArray(new InformationElement[0]), flags);
     }
 }

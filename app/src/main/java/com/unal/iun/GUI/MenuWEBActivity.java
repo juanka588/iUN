@@ -96,7 +96,7 @@ public class MenuWEBActivity extends AppCompatActivity {
             }
             int icon = this.getResources().getIdentifier("drawable/" + cad, null,
                     this.getPackageName());
-            items.add(new WebItem(mat[i][0], icon, mat[i][2], false));
+            items.add(new WebItem(mat[i][0], icon, mat[i][2]));
         }
         cursor.close();
         Util.log("Cambio", filter);

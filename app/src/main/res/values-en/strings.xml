@@ -61,4 +61,6 @@
     <string name="soon">"Coming soon "</string>
     <string name="timestamp_label">Legal hour in Colombia\nNational Institute of meteorology:</string>
     <string name="university_name">National University of Colombia</string>
+    <string name="see_on_map">See on map</string>
+    <string name="search_buildings">Search by buildings</string>
 </resources>

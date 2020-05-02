@@ -20,11 +20,11 @@ public class MapMarker implements Parcelable {
             return new MapMarker[size];
         }
     };
-    private LatLng position;
-    private String title;
-    private String description;
-    private int type;
-    private float icon;
+    private final LatLng position;
+    private final String title;
+    private final String description;
+    private final int type;
+    private final float icon;
 
     public MapMarker(LatLng position, String title, String description, int type, float icon) {
         this.position = position;
@@ -34,7 +34,7 @@ public class MapMarker implements Parcelable {
         this.icon = icon;
     }
 
-    protected MapMarker(Parcel in) {
+    private MapMarker(Parcel in) {
         position = in.readParcelable(LatLng.class.getClassLoader());
         title = in.readString();
         description = in.readString();
@@ -46,40 +46,16 @@ public class MapMarker implements Parcelable {
         return position;
     }
 
-    public void setPosition(LatLng position) {
-        this.position = position;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public float getIcon() {
         return icon;
-    }
-
-    public void setIcon(float icon) {
-        this.icon = icon;
     }
 
     @Override

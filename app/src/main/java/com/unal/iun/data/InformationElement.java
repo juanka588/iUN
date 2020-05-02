@@ -38,7 +38,7 @@ public class InformationElement implements Parcelable {
     private int type;
     private LatLng coordinates;
 
-    public InformationElement(Parcel in) {
+    private InformationElement(Parcel in) {
         informationDescription = in.readString();
         informationIcon = in.readInt();
         type = in.readInt();
@@ -62,7 +62,7 @@ public class InformationElement implements Parcelable {
         coordinates = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
     }
 
-    public LatLng getCoordinates() {
+    private LatLng getCoordinates() {
         return coordinates;
     }
 
@@ -70,7 +70,7 @@ public class InformationElement implements Parcelable {
         return type;
     }
 
-    public void setType(int type) {
+    private void setType(int type) {
         this.type = type;
     }
 
@@ -78,15 +78,7 @@ public class InformationElement implements Parcelable {
         return informationDescription;
     }
 
-    public void setInformationDescription(String informationDescription) {
-        this.informationDescription = informationDescription;
-    }
-
-    public int getInformationIcon() {
-        return informationIcon;
-    }
-
-    public void setInformationIcon(int informationIcon) {
+    private void setInformationIcon(int informationIcon) {
         this.informationIcon = informationIcon;
     }
 
@@ -147,7 +139,7 @@ public class InformationElement implements Parcelable {
         return informationDescription;
     }
 
-    public String getInformationTitle() {
+    private String getInformationTitle() {
         String[] split = informationDescription.split(DIVIDER);
         if (split.length > 0) {
             return split[0];
@@ -156,7 +148,7 @@ public class InformationElement implements Parcelable {
         return "";
     }
 
-    public String getInformationSubTitle() {
+    private String getInformationSubTitle() {
         String[] split = informationDescription.split(DIVIDER);
         if (split.length > 1) {
             if ("null".equals(split[1])) {

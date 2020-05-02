@@ -2,7 +2,6 @@ package com.unal.iun.GUI;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -38,8 +37,7 @@ public class DetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = getArguments();
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
         sc = rootView.findViewById(R.id.expandableListDetails);

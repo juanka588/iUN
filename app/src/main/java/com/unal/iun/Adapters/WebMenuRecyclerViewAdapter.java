@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,8 +54,8 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
     @Override
     public void onBindViewHolder(WebItemViewHolder holder, int i) {
         WebItem s = items.get(i);
-        holder.name.setText(s.name);
-        Picasso.with(holder.cv.getContext()).load(s.icon).fit().into(holder.icon);
+        holder.name.setText(s.getName());
+        Picasso.with(holder.cv.getContext()).load(s.getIcon()).fit().into(holder.icon);
     }
 
     @Override
@@ -71,7 +70,7 @@ public class WebMenuRecyclerViewAdapter extends RecyclerView.Adapter<WebMenuRecy
 
     public void openWeb(int position) {
         Intent info = new Intent(activity, WebActivity.class);
-        info.putExtra(WebActivity.ARG_TAG, items.get(position).url);
+        info.putExtra(WebActivity.ARG_TAG, items.get(position).getUrl());
         activity.startActivity(info);
     }
 

@@ -10,7 +10,7 @@
     tools:context=".GUI.RadioActivity">
 
     <LinearLayout
-        android:id="@+id/ButonsLayout"
+        android:id="@+id/ButtonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,8 +40,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ButonsLayout"
-        android:layout_alignLeft="@+id/ButonsLayout"
+        android:layout_below="@+id/ButtonsLayout"
+        android:layout_alignLeft="@+id/ButtonsLayout"
         android:layout_marginTop="29dp"
         android:background="#70000000">
 
@@ -50,7 +50,7 @@
             style="@style/iUNTextTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ButonsLayout"
+            android:layout_alignLeft="@+id/ButtonsLayout"
             android:gravity="center"
             android:text="RADIO UNAL" />
     </ScrollView>

@@ -1,5 +1,6 @@
 package com.unal.iun.GUI;
 
+import android.annotation.SuppressLint;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class WebActivity extends AppCompatActivity {
     String URL = "";
     WebView browser;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

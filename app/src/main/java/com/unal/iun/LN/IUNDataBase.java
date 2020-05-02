@@ -64,10 +64,6 @@ public class IUNDataBase extends SQLiteOpenHelper {
 
     private void copyDataBase() throws IOException {
         InputStream myInput = dbContext.getResources().openRawResource(R.raw.datastore3);
-        /*.getResources().
-        getIdentifier("com.unal.iun:raw/" + DATABASE_NAME, null, null));
-        dbContext.getAssets().open(DATABASE_NAME);
-        */
         String outFileName = DATABASE_PATH + DATABASE_NAME;
         OutputStream myOutput = new FileOutputStream(outFileName);
         byte[] buffer = new byte[1024];

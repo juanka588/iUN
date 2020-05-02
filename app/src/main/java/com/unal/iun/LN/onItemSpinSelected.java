@@ -14,13 +14,13 @@ import com.unal.iun.R;
 import java.io.IOException;
 
 public class onItemSpinSelected implements OnItemSelectedListener {
-    private ImageButton b;
-    private ImageButton b2;
+    private ImageButton playButton;
+    private ImageButton pauseButton;
     private TextView tx;
 
     public onItemSpinSelected(ImageButton play, ImageButton pause, TextView text) {
-        b = play;
-        b2 = pause;
+        playButton = play;
+        pauseButton = pause;
         tx = text;
     }
 
@@ -66,8 +66,8 @@ public class onItemSpinSelected implements OnItemSelectedListener {
                 RadioActivity.mediaPlayer.prepare();
             }
             RadioActivity.mediaPlayer.start();
-            b.setEnabled(false);
-            b2.setEnabled(true);
+            playButton.setEnabled(false);
+            pauseButton.setEnabled(true);
         } catch (IllegalArgumentException e) {
             mensaje();
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class onItemSpinSelected implements OnItemSelectedListener {
     }
 
     protected void mensaje() {
-        Toast.makeText(b.getContext(), b.getContext().getString(R.string.radio_exception), Toast.LENGTH_SHORT).show();
+        Toast.makeText(playButton.getContext(), playButton.getContext().getString(R.string.radio_exception), Toast.LENGTH_SHORT).show();
     }
 
     @Override

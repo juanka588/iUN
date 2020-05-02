@@ -3,7 +3,7 @@
     <string-array name="optionsArray">
         <item>@string/see_on_map</item>
         <item>@string/web_site</item>
-        <item>@string/serch_buildings</item>
+        <item>@string/search_buildings</item>
     </string-array>
     <string-array name="radio">
         <item>UN Radio</item>
@@ -12,6 +12,4 @@
         <item>RFI</item>
         <item>Himno Gaudeamus Igitur</item>
     </string-array>
-    <string name="see_on_map">Ver en el mapa</string>
-    <string name="serch_buildings">Buscar por edificios</string>
 </resources>

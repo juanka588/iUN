@@ -46,7 +46,6 @@ public class DirectoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            // Poner ícono del drawer toggle
             ab.setHomeAsUpIndicator(android.R.drawable.ic_menu_add);
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setTitle(mTitle);
@@ -72,7 +71,6 @@ public class DirectoryActivity extends AppCompatActivity {
     }
 
     private void selectItem(String title) {
-        // Enviar título como arguemento del fragmento
         Bundle args = new Bundle();
         args.putString(DirectoryFragment.ARG_SECTION_NUMBER, title);
 
@@ -84,9 +82,8 @@ public class DirectoryActivity extends AppCompatActivity {
                 .replace(R.id.container, fragment)
                 .commit();
 
-        drawerLayout.closeDrawers(); // Cerrar drawer
-
-        setTitle(title); // Setear título actual
+        drawerLayout.closeDrawers();
+        setTitle(title);
 
     }
 

@@ -6,16 +6,25 @@ import com.unal.iun.R;
  * Created by JuanCamilo on 05/08/2015.
  */
 public class WebItem {
-    public String name;
-    public int icon;
-    public String url;
-    public boolean special;
+    private final String name;
+    private final int icon;
+    private final String url;
 
-    public WebItem(String name, int icon, String url, boolean special) {
+    public WebItem(String name, int icon, String url) {
         this.name = name;
         this.icon = icon == 0 ? R.drawable.un : icon;
         this.url = url;
-        this.special = special;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

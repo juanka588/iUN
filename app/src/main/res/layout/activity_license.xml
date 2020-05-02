@@ -14,21 +14,18 @@
         android:orientation="horizontal">
 
         <ScrollView
-            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/textDevelop"
                 style="@style/iUNTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium Text" />
+                android:text="@string/developers" />
         </ScrollView>
 
         <ScrollView
-            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -41,11 +38,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textLicense"
                     style="@style/iUNTextStyleDark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Medium Text" />
+                    android:text="@string/license" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

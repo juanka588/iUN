@@ -34,9 +34,6 @@ import java.util.Locale;
 
 public class MenuWebTabActivity extends AppCompatActivity {
 
-    private static String GENERAL_INTEREST = "0";
-    private static String UN_COMMUNITY = "1";
-    private static String COMMUNITY_SERVICES = "2";
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -77,7 +74,7 @@ public class MenuWebTabActivity extends AppCompatActivity {
             }
             int icon = context.getResources().getIdentifier("drawable/" + cad, null,
                     context.getPackageName());
-            items.add(new WebItem(mat[i][0], icon, mat[i][2], false));
+            items.add(new WebItem(mat[i][0], icon, mat[i][2]));
         }
         cursor.close();
         Util.log("Cambio", filter);
@@ -193,6 +190,9 @@ public class MenuWebTabActivity extends AppCompatActivity {
             int selected = getArguments().getInt(ARG_SECTION_NUMBER);
             String filter = "";
             String fragmentTitle = "";
+            String GENERAL_INTEREST = "0";
+            String UN_COMMUNITY = "1";
+            String COMMUNITY_SERVICES = "2";
             switch (selected) {
                 case 1:
                     filter = GENERAL_INTEREST;

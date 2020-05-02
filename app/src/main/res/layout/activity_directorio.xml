@@ -46,28 +46,21 @@
 
                     <CheckedTextView
                         android:id="@+id/buttonDirectorio"
-                        style="@style/iUNTextStyle"
+                        style="@style/TextMenuStyle"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
                         android:gravity="center_vertical|center"
                         android:onClick="refresh"
-                        android:padding="2dp"
                         android:text="@string/textSwitchON" />
 
                     <CheckedTextView
                         android:id="@+id/buttonDepartamentos"
-                        style="@style/iUNTextStyle"
+                        style="@style/TextMenuStyle"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/selectorfondo"
-                        android:clickable="true"
-                        android:gravity="center_vertical|center"
                         android:onClick="refresh"
-                        android:padding="2dp"
                         android:text="@string/textSwitchOFF" />
                 </LinearLayout>
             </TableRow>
