@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
             public void run() {
                 runOnUiThread(action);
             }
-        }, 0, 1_000);
+        }, 1_000, 1_000);
     }
 
     public void licencia(View v) {
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements OnTimeUpdate {
             hasSyncedWithServer = false;
             counter = 0;
             dateFormat = new SimpleDateFormat(
-                    "yyyy 'M'MM dd, EEE HH:mm:ss ZZZZ",
+                    "EEEE, dd MMMM yyyy HH:mm:ss",
                     Locale.getDefault()
             );
             dateFormat.setTimeZone(TimeZone.getTimeZone("America/Bogota"));
